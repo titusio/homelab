@@ -9,6 +9,7 @@
     ./disk-config.nix
     ./firewall.nix
     ./auto-update.nix
+    ./secrets.nix
   ];
 
   boot.loader.grub = {

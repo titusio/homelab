@@ -10,11 +10,39 @@ Here it is used as a reverse proxy to route traffic to the various services runn
 
 ### Install
 
-Boot the target into a live installer, then run:
+On first-time setup, generate a dedicated age key for corellian and encrypt it with your personal key:
 
 ```shell
-nix run github:nix-community/nixos-anywhere -- --flake .#corellian root@<server-ip>
+# Generate age key (one time only)
+age-keygen -o secrets/corellian-age.key
+
+# Get the public key and update .sops.yaml with it
+age-keygen -y secrets/corellian-age.key
+
+# Encrypt it
+sops --encrypt secrets/corellian-age.key > secrets/corellian-age.enc.txt
+rm secrets/corellian-age.key
+
+# Create and encrypt the secrets file
+sops secrets/secrets.yaml
 ```
+
+To deploy:
+
+```shell
+# Decrypt the age key and stage it for nixos-anywhere
+mkdir -p .deploy/root/.config/sops/age
+sops --decrypt secrets/corellian-age.enc.txt \
+  > .deploy/root/.config/sops/age/keys.txt
+chmod 600 .deploy/root/.config/sops/age/keys.txt
+
+# Deploy
+nix run github:nix-community/nixos-anywhere -- \
+  --extra-files .deploy \
+  --flake .#corellian root@<server-ip>
+```
+
+> The `--extra-files` flag provisions the age key onto the server before activation. The files mirror the target filesystem, so `.deploy/root/.config/sops/age/keys.txt` is placed at `/root/.config/sops/age/keys.txt` on the server, allowing sops-nix to decrypt secrets on first boot.
 
 ### Update
 
