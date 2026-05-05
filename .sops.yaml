@@ -1,5 +1,5 @@
 keys:
-  - &corellian age1PLACEHOLDER  # ssh-keyscan <server-ip> | ssh-to-age
+  - &corellian age1zvea0a0g9xkzgc0umprter9kd8c9f7je57psgnkjuvv963x5u55su5s80s
   - &titus age1kuexhy3nw8mjjhp68h0lv99vp3v8eefvv5cpv8e29gyw4u0mucfqw6tkks
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
@@ -7,7 +7,7 @@ creation_rules:
     - age:
       - *corellian
       - *titus
-  - path_regex: secrets/[^/]+\.enc\.txt$
+  - path_regex: secrets/[^/]+\.(enc\.txt|key|age)$
     key_groups:
     - age:
       - *titus

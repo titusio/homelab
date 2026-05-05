@@ -14,14 +14,14 @@ On first-time setup, generate a dedicated age key for corellian and encrypt it w
 
 ```shell
 # Generate age key (one time only)
-age-keygen -o secrets/corellian-age.key
+age-keygen -o secrets/corellian.age
 
 # Get the public key and update .sops.yaml with it
-age-keygen -y secrets/corellian-age.key
+age-keygen -y secrets/corellian.age
 
 # Encrypt it
-sops --encrypt secrets/corellian-age.key > secrets/corellian-age.enc.txt
-rm secrets/corellian-age.key
+sops -e secrets/corellian.age > secrets/corellian.enc.age
+rm secrets/corellian.age
 
 # Create and encrypt the secrets file
 sops secrets/secrets.yaml
@@ -32,7 +32,7 @@ To deploy:
 ```shell
 # Decrypt the age key and stage it for nixos-anywhere
 mkdir -p .deploy/root/.config/sops/age
-sops --decrypt secrets/corellian-age.enc.txt \
+sops -d secrets/corellian.enc.age \
   > .deploy/root/.config/sops/age/keys.txt
 chmod 600 .deploy/root/.config/sops/age/keys.txt
 

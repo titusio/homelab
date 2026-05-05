@@ -1,2 +1,4 @@
 .deploy/
 secrets/*.key
+secrets/*.age
+!secrets/*.enc.age
