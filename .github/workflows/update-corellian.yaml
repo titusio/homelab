@@ -20,6 +20,5 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}  
           tags: tag:ci
-          ephemeral: true
       - name: Trigger NixOS rebuild
         run: curl -X POST http://corellian:9000/hooks/nixos-rebuild
