@@ -10,6 +10,7 @@
     ./firewall.nix
     ./auto-update.nix
     ./secrets.nix
+    ./nix-storage.nix
   ];
 
   boot.loader.grub = {
@@ -55,6 +56,13 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "prohibit-password";
+  };
+
+  programs.ssh.knownHosts = {
+    github = {
+      hostNames = ["github.com"];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+    };
   };
 
   system.stateVersion = "26.05";
