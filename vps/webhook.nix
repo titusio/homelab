@@ -11,7 +11,7 @@
   security.sudo.extraRules = [{
     users = ["webhook"];
     commands = [{
-      command = "/run/current-system/sw/bin/systemctl start nixos-rebuild-webhook";
+      command = "/run/current-system/sw/bin/systemctl start nixos-rebuild-webhook.service";
       options = ["NOPASSWD"];
     }];
   }];
@@ -20,11 +20,11 @@
     enable = true;
     hooks = {
       nixos-rebuild = {
-        execute-command = "/run/current-system/sw/bin/sudo";
+        execute-command = "/run/wrappers/bin/sudo";
         pass-arguments-to-command = [
-          { source = "string"; name = "systemctl"; }
+          { source = "string"; name = "/run/current-system/sw/bin/systemctl"; }
           { source = "string"; name = "start"; }
-          { source = "string"; name = "nixos-rebuild-webhook"; }
+          { source = "string"; name = "nixos-rebuild-webhook.service"; }
         ];
       };
     };
