@@ -44,6 +44,14 @@ nix run github:nix-community/nixos-anywhere -- \
 
 > The `--extra-files` flag provisions the age key onto the server before activation. The files mirror the target filesystem, so `.deploy/root/.config/sops/age/keys.txt` is placed at `/root/.config/sops/age/keys.txt` on the server, allowing sops-nix to decrypt secrets on first boot.
 
+### GitHub Deploy Key
+
+Add the following public key as a read-only deploy key on this repository:
+
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFMXPWiXNrbprHK4uh8yODytutGfNXmpqON43t4xckga corellian
+```
+
 ### Update
 
 ```shell

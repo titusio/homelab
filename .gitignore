@@ -1,4 +1,6 @@
 .deploy/
 secrets/*.key
 secrets/*.age
+secrets/*.yaml
 !secrets/*.enc.age
+!secrets/*.enc.yaml

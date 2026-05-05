@@ -1,6 +1,6 @@
 {config, ...}: {
   sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFile = ../secrets/corellian.enc.yaml;
     age.keyFile = "/root/.config/sops/age/keys.txt";
 
     secrets = {

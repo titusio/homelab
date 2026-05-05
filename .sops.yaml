@@ -1,13 +1,13 @@
 keys:
   - &corellian age1zvea0a0g9xkzgc0umprter9kd8c9f7je57psgnkjuvv963x5u55su5s80s
-  - &titus age1kuexhy3nw8mjjhp68h0lv99vp3v8eefvv5cpv8e29gyw4u0mucfqw6tkks
+  - &titus age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/corellian\.enc\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *corellian
       - *titus
-  - path_regex: secrets/[^/]+\.(enc\.txt|key|age)$
+  - path_regex: secrets/[^/]+\.(enc\.yaml|enc\.json|enc\.env|enc\.ini|enc\.txt|key|age)$
     key_groups:
     - age:
       - *titus
