@@ -11,6 +11,7 @@
     ./auto-update.nix
     ./secrets.nix
     ./nix-storage.nix
+    ./tailscale.nix
   ];
 
   boot.loader.grub = {
