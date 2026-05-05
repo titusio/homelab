@@ -1,10 +1,8 @@
 {...}: {
   system.autoUpgrade = {
     enable = true;
-    flake = "github:titusio/homelab#corellian";
+    flake = "git+ssh://git@github.com/titusio/homelab#corellian";
     flags = [
-      "--print-build-logs"
-      "--commit-lock-file" # If you want to automatically commit the updated flake.lock
     ];
     rebootWindow = {
       lower = "01:00";
