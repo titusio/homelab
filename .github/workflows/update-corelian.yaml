@@ -1,0 +1,25 @@
+name: CI
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "vps/*.nix"
+      - "secrets/*"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    permissions:
+        packages: write
+    steps:
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:devrel-ci
+
+      - name: Trigger NixOS rebuild
+        run: curl -X POST http://corellian:9000/hooks/nixos-rebuild
