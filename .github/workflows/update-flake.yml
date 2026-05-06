@@ -7,7 +7,9 @@ on:
 jobs:
   update-flake-lock:
     runs-on: ubuntu-latest
-    environment: production
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # - name: Access private repository
       #   uses: webfactory/ssh-agent@master
