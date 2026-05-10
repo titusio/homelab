@@ -6,6 +6,8 @@ Configuration files for my kubernetes cluster at home.
 
 See [talos/README.md](talos/README.md) for how to update the cluster.
 
+For bootstrapping Flux and Cilium on a fresh cluster, see [kubernetes/README.md](kubernetes/README.md).
+
 ## Corellian
 
 The Corellian Run was a super-hyperroute that ran throughout the various regions of the galaxy, starting at the planet Coruscant in the Core Worlds and ending at Naos and Lamaredd. The hyperroute also passed through the Hetzal and Ab Dalis systems.
