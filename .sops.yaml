@@ -1,6 +1,7 @@
 keys:
   - &corellian age1zvea0a0g9xkzgc0umprter9kd8c9f7je57psgnkjuvv963x5u55su5s80s
   - &titus age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
+  - &coreWorld age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
 creation_rules:
   - path_regex: secrets/corellian\.enc\.(yaml|json|env|ini)$
     key_groups:
@@ -14,4 +15,9 @@ creation_rules:
   - path_regex: talsecret\.sops\.yaml$
     key_groups:
     - age:
+      - *titus
+  - path_regex: kubernetes/.*\.enc.yaml$
+    encrypted_regex: ^(data|stringData)$
+    age: 
+      - *coreWorld
       - *titus
