@@ -22,7 +22,7 @@
     efiInstallAsRemovable = true;
   };
 
-  networking.hostName = "corellian";
+  networking.hostName = "corellian-run";
 
   users.users.root = {
     hashedPassword = "$y$j9T$sm19yaRkje0AOBwW/pTRt.$MntXjJC6P.rGgdG64rvTOKATAxDoggPXyIADTBFx8B.";

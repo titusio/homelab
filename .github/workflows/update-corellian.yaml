@@ -21,4 +21,4 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}  
           tags: tag:ci
       - name: Trigger NixOS rebuild
-        run: curl -X POST http://corellian:9000/hooks/nixos-rebuild
+        run: curl -X POST http://corellian-run:9000/hooks/nixos-rebuild
