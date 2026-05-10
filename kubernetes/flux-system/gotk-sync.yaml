@@ -27,4 +27,5 @@ spec:
     name: flux-system
   decryption:
     provider: sops
-    secretRef: sops-age
+    secretRef: 
+      name: sops-age
