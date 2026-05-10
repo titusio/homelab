@@ -13,8 +13,7 @@ Secrets encrypted with SOPS + age.
 
 ### 1. Make changes
 
-Edit `talconfig.yaml` or the patch files (`longhorn-extension-patch.yaml`,
-`tailscale-extension-patch.yaml`) as needed.
+Edit `talconfig.yaml` or the patch files (`tailscale-extension-patch.yaml`) as needed.
 
 To bump the Talos version, update `talosVersion` in `talconfig.yaml`.
 
@@ -43,8 +42,10 @@ talosctl apply-config --nodes 10.0.40.11 --file clusterconfig/core-worlds-corell
 After bumping `talosVersion` and regenerating:
 
 ```bash
-talhelper gencommand upgrade | bash
+talhelper gencommand upgrade --extra-flags="--preserve" | bash
 ```
+
+`--preserve` keeps data on disk intact during the upgrade. Always use it.
 
 ### Adding a Tailscale auth key
 

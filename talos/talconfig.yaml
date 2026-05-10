@@ -1,12 +1,13 @@
 clusterName: core-worlds
 talosVersion: v1.12.6
+# Image includes: siderolabs/iscsi-tools, siderolabs/tailscale, siderolabs/util-linux-tools
+talosImageURL: factory.talos.dev/installer/708747e350d604ae9e57227d8dcf274091453ddb1097b765d4ea8884f1992c1f
 endpoint: https://cluster.tituslab.dev:6443
 secretsFile: talsecret.sops.yaml
 
 controlPlane:
   noSchedule: false
   patches:
-    - "@./longhorn-extension-patch.yaml"
     - "@./tailscale-extension-patch.yaml"
 
 nodes:
