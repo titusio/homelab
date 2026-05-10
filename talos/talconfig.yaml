@@ -1,0 +1,24 @@
+clusterName: core-worlds
+talosVersion: v1.12.6
+endpoint: https://cluster.tituslab.dev:6443
+secretsFile: talsecret.sops.yaml
+
+controlPlane:
+  noSchedule: false
+  patches:
+    - "@./longhorn-extension-patch.yaml"
+    - "@./tailscale-extension-patch.yaml"
+
+nodes:
+  - hostname: corellia
+    ipAddress: 10.0.40.11
+    controlPlane: true
+    installDisk: /dev/sda
+  - hostname: chandrila
+    ipAddress: 10.0.40.12
+    controlPlane: true
+    installDisk: /dev/sda
+  - hostname: kuat
+    ipAddress: 10.0.40.13
+    controlPlane: true
+    installDisk: /dev/sda

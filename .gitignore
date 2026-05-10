@@ -4,5 +4,3 @@ secrets/*.age
 secrets/*.yaml
 !secrets/*.enc.age
 !secrets/*.enc.yaml
-talos/secrets.yaml
-talos/talosconfig
