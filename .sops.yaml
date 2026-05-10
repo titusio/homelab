@@ -11,3 +11,11 @@ creation_rules:
     key_groups:
     - age:
       - *titus
+  - path_regex: talos/secrets\.yaml$
+    key_groups:
+    - age:
+      - *titus
+  - path_regex: talos/talosconfig$
+    key_groups:
+    - age:
+      - *titus
