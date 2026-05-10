@@ -43,6 +43,7 @@
           kubernetes-helm
           cilium-cli
           kubectl
+          talhelper
         ];
         shellHook = "exec zsh";
       };
