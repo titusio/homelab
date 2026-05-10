@@ -8,6 +8,7 @@ secretsFile: talsecret.sops.yaml
 controlPlane:
   noSchedule: false
   patches:
+    - "@./cert-sans-patch.yaml"
     - "@./tailscale-extension-patch.yaml"
 
 nodes:
