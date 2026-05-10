@@ -9,7 +9,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: longhorn/longhorn
+      chart: longhorn
       version: '1.11.2'
       sourceRef:
         kind: HelmRepository
