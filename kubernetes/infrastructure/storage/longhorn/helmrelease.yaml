@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: podinfo
-      version: '6.5.*'
+      version: '1.11.2'
       sourceRef:
         kind: HelmRepository
         name: longhorn-repository
