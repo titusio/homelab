@@ -1,7 +1,6 @@
 clusterName: core-worlds
 talosVersion: v1.12.6
 # Image includes: siderolabs/iscsi-tools, siderolabs/tailscale, siderolabs/util-linux-tools
-talosImageURL: factory.talos.dev/installer/708747e350d604ae9e57227d8dcf274091453ddb1097b765d4ea8884f1992c1f
 endpoint: https://cluster.tituslab.dev:6443
 secretsFile: talsecret.sops.yaml
 
@@ -17,11 +16,14 @@ nodes:
     ipAddress: 10.0.40.11
     controlPlane: true
     installDisk: /dev/sda
+    talosImageURL: factory.talos.dev/installer/3fd91d15e6d15abdbdfccc77644f6a023dcd4d52d356947038ce7efcdbd60505
   - hostname: chandrila
     ipAddress: 10.0.40.12
     controlPlane: true
     installDisk: /dev/sda
+    talosImageURL: factory.talos.dev/installer/3fd91d15e6d15abdbdfccc77644f6a023dcd4d52d356947038ce7efcdbd60505
   - hostname: kuat
     ipAddress: 10.0.40.13
     controlPlane: true
     installDisk: /dev/sda
+    talosImageURL: factory.talos.dev/installer/3fd91d15e6d15abdbdfccc77644f6a023dcd4d52d356947038ce7efcdbd60505
