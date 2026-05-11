@@ -16,11 +16,13 @@ spec:
   values:
     serviceDns:
       type: LoadBalancer
+      externalTrafficPolicy: Cluster
       annotations:
         lbipam.cilium.io/ips: "10.0.40.100"
         lbipam.cilium.io/sharing-key: pihole-svc
     serviceWeb:
       type: LoadBalancer
+      externalTrafficPolicy: Cluster
       annotations:
         "lbipam.cilium.io/ips": "10.0.40.100"
         lbipam.cilium.io/sharing-key: pihole-svc
