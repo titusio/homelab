@@ -7,7 +7,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: pihole
+      chart: cert-manager-webhook-hetzner
       version: 0.7.0 
       sourceRef:
         kind: HelmRepository
