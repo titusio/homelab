@@ -28,6 +28,8 @@ spec:
               secretKeyRef:
                 name: hetzner-credentials
                 key: api-key
+          - name: USE_CLOUD_API
+            value: "true"
         livenessProbe:
           httpGet:
             path: /health
