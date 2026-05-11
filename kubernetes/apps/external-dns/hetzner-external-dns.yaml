@@ -58,3 +58,11 @@ spec:
             - get
             - watch
             - list
+        - apiGroups:
+            - ""
+          resources:
+            - namespaces
+          verbs:
+            - get
+            - watch
+            - list
