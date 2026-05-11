@@ -90,6 +90,9 @@ spec:
             - kind: Secret
               name: traefik-tls
               group: ""
+            - kind: Secret
+              name: pihole-tls
+              group: ""
 
     service:
       annotations:

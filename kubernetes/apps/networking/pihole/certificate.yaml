@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pihole-tls
+  namespace: traefik
+spec:
+  secretName: pihole-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - pihole.tituslab.dev
