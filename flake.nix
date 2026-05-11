@@ -44,6 +44,7 @@
           cilium-cli
           kubectl
           talhelper
+          flux
         ];
         shellHook = "exec zsh";
       };
