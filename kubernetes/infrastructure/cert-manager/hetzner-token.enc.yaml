@@ -3,29 +3,29 @@ kind: Secret
 metadata:
     name: hetzner-api-key
     namespace: cert-manager
-data:
-    hetzner-api-key: ENC[AES256_GCM,data:PN4qZQYhFVKDLDwnVi0boNrMNR9wOyMK5Yes/r0Db0tA+Aqh5qkCoHgekR7uIujTIqkL5AUxg23X0PD9x8cy5Q==,iv:HolwvJRsgpO46zq4ylbahmER3XruAC4t4LcJSfjcgQI=,tag:zOHn5xpnv3V1URvgcrRe2w==,type:str]
+stringData:
+    hetzner-api-key: ENC[AES256_GCM,data:EvJUEzz4t5ZWmogqnpApYarE+H7Cq1P9ZNwJoCuXR3Gi+NUIfcfaRVst3mzh58lIstQzwB5KeueBUy/ROtJYDw==,iv:SXZRxdwD7ICqUDh6jk1NDLy7tTJGQT/Gz86Y/RMKEKY=,tag:B+Ms75BMCEIlKozV9NUOsQ==,type:str]
 sops:
     age:
         - recipient: age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmVW4xYmJMQjJmTTRlZUJw
-            anBYQUU5eE1zOWoyeSt0TWdVVTFkMmo5SkRBCnFJNlFvY0N5YWtIb1RvUTRFTjdo
-            eHhqeEIzdWtPSUI1a2tvbUNJc1NUUVUKLS0tIFVjbDZ4TnRhTm9FQVZqUFVtQnUv
-            ZGZzcUc3MlB2cEo0RmlIcGRVSzlRSWMKENY9yraG/5pdo6ntc5awSMrnVt7VzZyP
-            8kMR9PAybpk5Nf5nIjTWQknDMgLX0IW8WX08TQl51K0BEPLHxrYveQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsdEhKb2dWWHczWUNIcmUr
+            djg0SkVJcEdJZlo0Z1Z6Q0V4bTJrcTh5WEUwClEzSGtYNStiVy9RcU9WcllOREo4
+            V0pPQTMwbm1pdTF6OGExRTZxNEt2Y2sKLS0tIHFMcm9BanNZUDdwRHUvQUxWSk95
+            anM0R2JLZ0FRbjB0TndlVStURjd5T1UK0IcValGBb7frRclLCwKdODZHNBm62yJq
+            HHN0QgMnFEgvP0Bbb3JxX7d51I5L43sjTjMpHIPXPb6p5w1pD9S+zg==
             -----END AGE ENCRYPTED FILE-----
         - recipient: age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQTUJENDArQTF3RU9uMmE2
-            Z2cvK2xtM0pzOFYxMjdBUUUrZEs0ZlVXVmxJCjllWjVQdXRIc2RtTEtGTEkzNU5K
-            TkNkVnNyZkJibElGeTVzVHd4ZFNSbXcKLS0tIEtjMGw3VjZkeGduVSs4SGgxT1o4
-            clBLbmRybnlFbXRIc09NdnhyQ3dBVHMKNXky5pINTJpZEjoLJVFhqcwFoo//c0Ua
-            0cgx6Fu7RyjkmxgRAEC8UfYkYu0K6JifgJCEp6uq+GIhr7IJ8nw8dg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXQUZDb2VzS0JyVHIrOHdz
+            OEJjYWI0WU5Qa0dhQXlTZGY0dDBabGx0UnhFCmU0YWNqTUVRak9tYzZ5cDZNeG96
+            Nk92aFFpei9hRTNvRzZzOVQvTTd6TEkKLS0tIHpCY2NIQm9ReDlBZ3ZSZ2ljUGdh
+            UHZnOEp0aXkrNkswekx5MjRaSXh2QmsKnV3pMktnrNWvcyNQG1CMLBWgDM+QbP5P
+            IIlHfe/n47bQ9BcAVcR5QqCU5PZCadVV4xKoU55j80GZ55xi/5giwQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-05-11T17:13:39Z"
-    mac: ENC[AES256_GCM,data:v6nA/DY3uI3Io34bNGheR0aya5WDg0kF0Ei9UJ8goxYGUkK+KAWjkgjvcg27mYTzomxTuwPFdoWRqGtJhMqG+6+FjTThCNsGLjZodDf0kKls2yePGBJknHHRxugq6QGrss4pwHPyUquLbzGpmguJbQpxOqoPnxfMN4P4Jnu041I=,iv:H89uTGl9zrigpux508sMJnGM3a5mZEtVjjOADyQpe74=,tag:ZXnh0KQz3uhTXTC3FPKgoQ==,type:str]
+    lastmodified: "2026-05-11T18:01:22Z"
+    mac: ENC[AES256_GCM,data:h/o00CEW0B0fe6oGJuHDWIOSxKaH6WVKX61OHa2QDqAgI4C0FMgApdkmVH+0poOEKwP7ilv0rxKBMVHVARAetWeZWOtAtkFfxkzjUCjON+iq4uoM/ijgI3tPDVjFSDpsppjZu/KUCdCb0fX+V45OlSiVlajYZCEcquUUUtTpAtc=,iv:4sX0nnEUbnEAcNqXJotxvURr/ioTMLGkzveCWq/CBA8=,tag:YyGqMBF8G+rIAMg1E7NT1g==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.12.2
