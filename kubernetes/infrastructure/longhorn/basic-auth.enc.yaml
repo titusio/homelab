@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: basic-auth
+    namespace: longhorn-system
+stringData:
+    auth: ENC[AES256_GCM,data:5KFiVGEQp01xrJVmZhrHnSEw4HoKT4mbY6tVcPK1a3/V3sKHNcUsBWSDyw==,iv:obT2447ha+oNToYu9LodOwPsck5LKMvHFB8IH3pNUXg=,tag:Kr5uFC6x4oIkM9qMjxyQbA==,type:str]
+sops:
+    age:
+        - recipient: age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvcExBRWxsTlJsK3poNVFi
+            NmVCSGtnalg4ZkhaaVVLNS9la214Z3hRcVRvCmpQUU40VFc4Mm9GMlFaZDVwTEpj
+            dUcwM0l4b3ZsUm5uSXhUaXNvQ3JodTQKLS0tIG5ZeHpOTFNlOFJCSGlQbEMxREUr
+            SzVRK2pSTU83dEd0M2J1UG9jWkhUQTQKm5vIi7kVPD670USFbOk7TdEeygnV2E8D
+            pzEay3aUEJwULcuClbm64/f7p6elsxs1N2pFmc81N3SOVnNbenKLGQ==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLSUVsbGNNOC9WV2dtNGpk
+            WjRaSU5KOFFPTk9zYjREb2cyWTlZcHdaV1dZCnhMOGczMHFKWTZFd1NQUEF5NGRk
+            TW92VUtIK2lvcGowZ25kb0J3KzVhdlUKLS0tIEsxdENlZ2FBL0xYVmpsZGRISjNW
+            ZW9yZkxrQTg1TGpCR3l1dkRqYW85VW8KjcQY/FRk8SGxOLvUy6j+tWeFAq7yqayh
+            rftlmx+GQomZpdJ5FkYemjouqCPZ5P7LuwzZwOZQQ6CLKkAdqe77KQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-05-12T09:10:28Z"
+    mac: ENC[AES256_GCM,data:OOVDCA3d6UGrMyD1UU6NYUydCW1HBzlg5qOc6m+V4cgNfgGHIgZFoOrzKLyS4B2R8qzRwTiTuMVaOXB5oi3cSa6qZa5/+34hTJDD96P5Lidq/hqBUBc7i65jUrcI+OvzPHu/cNJZRkRTuA5DBOw5n4nGsWTU3hnBx/372H63pzg=,iv:652QL39f8aVbLRObJeqdu4a1uvUGHzYA2dIJ3pePx+I=,tag:KPwlN6bp1GUEKu1p6ZMyWQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.12.1

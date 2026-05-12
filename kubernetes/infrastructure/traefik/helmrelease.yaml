@@ -93,6 +93,9 @@ spec:
             - kind: Secret
               name: pihole-tls
               group: ""
+            - kind: Secret
+              name: longhorn-tls
+              group: ""
 
     service:
       annotations:
