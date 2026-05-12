@@ -96,6 +96,9 @@ spec:
             - kind: Secret
               name: longhorn-tls
               group: ""
+            - kind: Secret
+              name: mealie-tls
+              group: ""
 
     service:
       annotations:

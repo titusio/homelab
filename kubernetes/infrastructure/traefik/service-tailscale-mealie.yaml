@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mealie-tailscale
-  namespace: home
+  namespace: traefik
   annotations:
     external-dns.alpha.kubernetes.io/hostname: mealie.tituslab.dev
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
   selector:
-    app.kubernetes.io/name: mealie
+    app.kubernetes.io/name: traefik
   ports:
-    - port: 9000
-      targetPort: 9000
+    - port: 443
+      targetPort: 443
