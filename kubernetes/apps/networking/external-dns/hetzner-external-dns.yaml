@@ -46,6 +46,7 @@ spec:
     extraArgs:
       - "--txt-prefix=reg-%{record_type}."
       - "--source=gateway-httproute"
+      - "--source=service"
 
     rbac:
       additionalPermissions:

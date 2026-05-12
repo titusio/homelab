@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: mealie-tailscale
   namespace: home
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: mealie.tituslab.dev
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
