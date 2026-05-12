@@ -14,16 +14,6 @@ spec:
         name: mealie
         namespace: home
   values:
-    service:
-      main:
-        controller: main
-        type: LoadBalancer
-        loadBalancerClass: tailscale
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: mealie.tituslab.dev
-        ports:
-          http:
-            port: 9000
     # use the cnpg operator
     cluster:
       enabled: true
