@@ -1,8 +1,0 @@
-apiVersion: tailscale.com/v1alpha1
-kind: ProxyGroupPolicy
-metadata:
-  name: home
-  namespace: home
-spec:
-  ingress:
-    - homelab
