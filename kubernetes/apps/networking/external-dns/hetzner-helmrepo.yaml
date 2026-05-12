@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: hetzner-external-dns
-  namespace: external-dns
+  namespace: networking
 spec:
   interval: 24h
   url: https://kubernetes-sigs.github.io/external-dns/
