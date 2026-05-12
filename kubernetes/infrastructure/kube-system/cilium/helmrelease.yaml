@@ -43,3 +43,8 @@ spec:
     k8sServicePort: 7445
     l2announcements:
       enabled: true
+    # See 
+    # https://tailscale.com/docs/features/kubernetes-operator#cilium-in-kube-proxy-replacement-mode
+    socketLB:
+      hostNamespaceOnly: true
+    devices: eno+
