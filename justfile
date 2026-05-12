@@ -4,3 +4,8 @@ create-sops-secret:
         kubectl create secret generic sops-age \
             --namespace=flux-system \
             --from-file=age.agekey=/dev/stdin
+
+
+# Encrypts a secret in place
+encrypt secret:
+    @sops -i -e {{secret}}
