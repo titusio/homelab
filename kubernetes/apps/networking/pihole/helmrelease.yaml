@@ -14,6 +14,7 @@ spec:
         name: pihole-repo
         namespace: networking
   values:
+    hostname: "Pihole"
     serviceDns:
       type: LoadBalancer
       externalTrafficPolicy: Cluster
