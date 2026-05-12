@@ -17,8 +17,3 @@ spec:
     # use the cnpg operator
     cluster:
       enabled: true
-      cluster:
-        bootstrap:
-          initdb:
-            postInitApplicationSQL:
-              - "ALTER ROLE mealie SUPERUSER;"
