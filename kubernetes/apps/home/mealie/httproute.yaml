@@ -3,6 +3,8 @@ kind: HTTPRoute
 metadata:
   name: mealie
   namespace: home
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
 spec:
   parentRefs:
     - name: traefik-gateway
