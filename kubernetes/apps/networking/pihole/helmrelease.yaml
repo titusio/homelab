@@ -29,5 +29,5 @@ spec:
     persistenceVolumeClaim:
       enabled: true
     admin:
-      existringSecret: "pihole-admin-password"
+      existingSecret: "pihole-admin-password"
       passwordKey: "password"
