@@ -28,3 +28,6 @@ spec:
         lbipam.cilium.io/sharing-key: pihole-svc
     persistenceVolumeClaim:
       enabled: true
+    admin:
+      existringSecret: "pihole-admin-password"
+      passwordKey: "password"
