@@ -17,15 +17,8 @@ spec:
     # use the cnpg operator
     cluster:
       enabled: true
-    env:
-      # superuser required for backup restore (SET session_replication_role = 'replica')
-      - name: POSTGRES_USER
-        valueFrom:
-          secretKeyRef:
-            name: mealie-cluster-superuser
-            key: username
-      - name: POSTGRES_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: mealie-cluster-superuser
-            key: password
+      cluster:
+        bootstrap:
+          initdb:
+            postInitApplicationSQL:
+              - "ALTER ROLE mealie SUPERUSER;"
