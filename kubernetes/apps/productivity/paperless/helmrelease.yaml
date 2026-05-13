@@ -17,6 +17,7 @@ spec:
     valkey:
       fullnameOverride: paperless-paperless-ngx-valkey
     config:
+      url: https://paperless.tituslab.dev
       database:
         host: postgres-database-rw
         name: paperless
