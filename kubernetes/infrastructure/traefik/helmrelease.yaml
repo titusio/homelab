@@ -99,6 +99,9 @@ spec:
             - kind: Secret
               name: mealie-tls
               group: ""
+            - kind: Secret
+              name: paperless-tls
+              group: ""
 
     service:
       annotations:
