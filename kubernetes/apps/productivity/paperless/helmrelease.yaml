@@ -14,7 +14,8 @@ spec:
         name: paperless
         namespace: productivity
   values:
-    nameOverride: paperless
+    valkey:
+      fullnameOverride: paperless-paperless-ngx-valkey
     config:
       database:
         host: postgres-database-rw
