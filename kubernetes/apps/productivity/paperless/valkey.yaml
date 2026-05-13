@@ -20,6 +20,3 @@ spec:
       aclUsers:
         default:
           permissions: "~* &* +@all"
-        readonly:
-          permissions: "~* -@all +@read +ping +info"
-          passwordKey: "password"  
