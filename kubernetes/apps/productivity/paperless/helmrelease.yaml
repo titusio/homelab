@@ -13,14 +13,7 @@ spec:
         kind: HelmRepository
         name: paperless
         namespace: productivity
-  valuesFrom:
-    - kind: Secret
-      name: paperless-cache-credentials
-      valuesKey: redisUrl
-      targetPath: config.redis.url
   values:
-    valkey:
-      internal: false
     config:
       database:
         host: postgres-database-rw
