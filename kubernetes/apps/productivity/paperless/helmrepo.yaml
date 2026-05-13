@@ -6,4 +6,4 @@ metadata:
 spec:
   type: oci
   interval: 1m0s
-  url: oci://codeberg.org/wrenix/helm-charts/paperless-ngx
+  url: oci://codeberg.org/wrenix/helm-charts
