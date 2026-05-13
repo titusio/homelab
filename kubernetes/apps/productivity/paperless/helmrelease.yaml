@@ -15,6 +15,8 @@ spec:
         namespace: productivity
   values:
     config:
+      redis:
+        url: redis://paperless-valkey:6379
       database:
         host: postgres-database-rw
         name: paperless
