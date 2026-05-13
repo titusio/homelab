@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: paperless-paperless-ngx
+        - name: karakeep-karakeep
           port: 80

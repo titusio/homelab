@@ -101,10 +101,10 @@ spec:
               group: ""
             - kind: Secret
               name: paperless-tls
+              group: ""
             - kind: Secret
               name: karakeep-tls
               group: ""
- group: ""
 
     service:
       annotations:
