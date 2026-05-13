@@ -15,7 +15,7 @@ spec:
         namespace: productivity
   valuesFrom:
     - kind: Secret
-      name: paperless-valkey-credentials
+      name: paperless-cache-credentials
       valuesKey: redisUrl
       targetPath: config.redis.url
   values:
