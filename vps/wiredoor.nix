@@ -8,8 +8,8 @@
   crowdsecExtras = "/etc/wiredoor/extras/crowdsec";
 in {
   sops.templates."wiredoor-env".content = ''
-    ADMIN_EMAIL=${config.sops.placeholders."wiredoor/adminEmail"}
-    ADMIN_PASSWORD=${config.sops.placeholders."wiredoor/adminPassword"}
+    ADMIN_EMAIL=${config.sops.placeholder."wiredoor/adminEmail"}
+    ADMIN_PASSWORD=${config.sops.placeholder."wiredoor/adminPassword"}
 
     VPN_HOST=204.168.137.124
     VPN_PORT=${toString port}
