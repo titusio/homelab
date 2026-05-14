@@ -25,12 +25,12 @@ spec:
           value: "true"
         - name: OAUTH_CLIENT_ID
           valueFrom:
-            secretRef: 
+            secretKeyRef: 
               name: karakeep-oidc-secret
               key: clientId
         - name: OAUTH_CLIENT_SECRET
           valueFrom:
-            secretRef: 
+            secretKeyRef: 
               name: karakeep-oidc-secret
               key: clientSecret
 
