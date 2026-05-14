@@ -5,4 +5,5 @@ metadata:
   namespace: gateway
 spec:
   interval: 1h
-  url: https://charts.wiredoor.net
+  # wiredoor helm chart domain is dead as of 2026-05-14, so we use github pages instead
+  url: https://raw.githubusercontent.com/wiredoor/charts/gh-pages
