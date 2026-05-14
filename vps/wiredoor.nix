@@ -7,11 +7,14 @@
   subnet = "10.10.0.0/24";
   crowdsecExtras = "/etc/wiredoor/extras/crowdsec";
 in {
+  sops.secrets."wiredoor/adminEmail" = {};
+  sops.secrets."wiredoor/adminPassword" = {};
+
   sops.templates."wiredoor-env".content = ''
     ADMIN_EMAIL=${config.sops.placeholder."wiredoor/adminEmail"}
     ADMIN_PASSWORD=${config.sops.placeholder."wiredoor/adminPassword"}
 
-    VPN_HOST=204.168.137.124
+    VPN_HOST=door.tituscloud.dev
     VPN_PORT=${toString port}
     VPN_SUBNET=${subnet}
 
