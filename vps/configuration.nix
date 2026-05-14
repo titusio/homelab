@@ -13,6 +13,7 @@
     ./secrets.nix
     ./nix-storage.nix
     ./tailscale.nix
+    ./wiredoor.nix
   ];
 
   boot.loader.grub = {

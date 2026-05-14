@@ -12,6 +12,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    arion = {
+      url = "github:hercules-ci/arion";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -19,6 +23,7 @@
     flake-utils,
     disko,
     sops-nix,
+    arion,
     ...
   }:
     {
@@ -30,6 +35,7 @@
         modules = [
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
+          arion.nixosModules.arion
           ./vps/configuration.nix
         ];
       };
