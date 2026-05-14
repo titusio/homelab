@@ -28,13 +28,6 @@ in {
 
       networks.wiredoor = {};
 
-      volumes = {
-        "wiredoor-data" = {};
-        "wiredoor-certbot" = {};
-        "wiredoor-logs" = {};
-        "crowdsec-data" = {};
-      };
-
       services.wiredoor.service = {
         image = "wiredoor/wiredoor:latest";
         container_name = "wiredoor";
