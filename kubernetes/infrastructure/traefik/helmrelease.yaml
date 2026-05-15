@@ -40,6 +40,8 @@ spec:
       wiredoor:
         port: 8088
         nodePort: 30002
+        expose:
+          default: true
 
     # Enables the dashboard in Secure Mode
     api:
