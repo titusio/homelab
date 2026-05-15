@@ -19,7 +19,7 @@ spec:
           # ExposeHTTP are printed as ERROR lines but the process always exits 0.
           # Until https://github.com/wiredoor/wiredoor-cli is fixed to use RunE,
           # we capture output and fail manually if any ERROR line is detected.
-          run() { out=$("$@" 2>&1); echo "$out"; echo "$out" | grep -vq "^ERROR"; }
+          run() { out=$("$@" 2>&1); echo "$out"; if echo "$out" | grep -q "^ERROR"; then return 1; fi; }
           wiredoor config --url=$WIREDOOR_URL --token=$WIREDOOR_TOKEN
           run wiredoor http nextcloud \
             --domain cloud.titusio.net \
