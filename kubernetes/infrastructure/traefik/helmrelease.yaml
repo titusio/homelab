@@ -35,6 +35,12 @@ spec:
         port: 443
         nodePort: 30001
 
+      # Entrypoint for wiredoor reverse-tunnel traffic — no HTTP→HTTPS redirect
+      # so wiredoor's plain-HTTP backend connection doesn't loop
+      wiredoor:
+        port: 8088
+        nodePort: 30002
+
     # Enables the dashboard in Secure Mode
     api:
       dashboard: true
@@ -76,6 +82,12 @@ spec:
       listeners:
         web:           # HTTP listener that matches entryPoint `web`
           port: 80
+          protocol: HTTP
+          namespacePolicy:
+            from: All
+
+        wiredoor:          # HTTP listener for wiredoor tunnel traffic (no redirect)
+          port: 8088
           protocol: HTTP
           namespacePolicy:
             from: All

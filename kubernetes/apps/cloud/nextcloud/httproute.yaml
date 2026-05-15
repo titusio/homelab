@@ -10,6 +10,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
+      sectionName: wiredoor
   hostnames:
     - cloud.titusio.net
   rules:
@@ -80,6 +81,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
+      sectionName: wiredoor
   hostnames:
     - office.titusio.net
   rules:

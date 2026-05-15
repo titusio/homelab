@@ -18,11 +18,11 @@ spec:
           wiredoor http nextcloud \
             --domain cloud.titusio.net \
             --backendHost traefik.traefik.svc.cluster.local \
-            --port 80 --proto http
+            --port 8088 --proto http
           wiredoor http collabora \
             --domain office.titusio.net \
             --backendHost traefik.traefik.svc.cluster.local \
-            --port 80 --proto http
+            --port 8088 --proto http
         env:
         - name: WIREDOOR_URL
           valueFrom:
