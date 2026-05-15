@@ -8,11 +8,9 @@ spec:
     customResponseHeaders:
       X-Powered-By: ""
       Server: ""
+      Strict-Transport-Security: "max-age=15552000; includeSubDomains"
     contentTypeNosniff: true
     browserXssFilter: true
-    forceSTSHeader: true
-    stsSeconds: 15552000
-    stsIncludeSubdomains: true
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
