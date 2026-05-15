@@ -5,6 +5,7 @@ metadata:
   namespace: cloud
   annotations:
     traefik.io/router.middlewares: "cloud-nextcloud-headers@kubernetescrd,cloud-nextcloud-host-meta@kubernetescrd"
+    external-dns.alpha.kubernetes.io/controller: "ignore"
 spec:
   parentRefs:
     - name: traefik-gateway
@@ -73,6 +74,8 @@ kind: HTTPRoute
 metadata:
   name: collabora
   namespace: cloud
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
 spec:
   parentRefs:
     - name: traefik-gateway
