@@ -21,6 +21,18 @@ spec:
       host: cloud.titusio.net
       trustedDomains:
         - cloud.titusio.net
+      configs:
+        proxy.config.php: |-
+          <?php
+          $CONFIG = array(
+            'trusted_proxies' => array('10.0.0.0/8'),
+            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+            'overwrite.cli.url' => 'https://cloud.titusio.net',
+            'overwriteprotocol' => 'https',
+            'overwritehost' => 'cloud.titusio.net',
+            'maintenance_window_start' => 1,
+            'default_phone_region' => 'DE',
+          );
       existingSecret:
         enabled: true
         secretName: nextcloud-admin-credentials
