@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-headers
+  namespace: cloud
+spec:
+  headers:
+    customResponseHeaders:
+      X-Powered-By: ""
+      Server: ""
+    contentTypeNosniff: true
+    browserXssFilter: true
+    forceSTSHeader: true
+    stsSeconds: 15552000
+    stsIncludeSubdomains: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-host-meta
+  namespace: cloud
+spec:
+  replacePathRegex:
+    regex: ^/.well-known/host-meta(.*)
+    replacement: /public.php?service=host-meta$1

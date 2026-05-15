@@ -67,3 +67,10 @@ spec:
             - get
             - watch
             - list
+        # allow dns enpoint definition
+        - apiGroups: ["externaldns.k8s.io"]
+          resources: ["dnsendpoints"]
+          verbs: ["get", "watch", "list"]
+        - apiGroups: ["externaldns.k8s.io"]
+          resources: ["dnsendpoints/status"]
+          verbs: ["update", "patch"]

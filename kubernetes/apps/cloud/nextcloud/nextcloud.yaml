@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: cloud
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: nextcloud
+      version: 9.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: nextcloud
+        namespace: cloud
+  values:
+    service:
+      annotations:
+        traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    nextcloud:
+      host: cloud.titusio.net
+      trustedDomains:
+        - cloud.titusio.net
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-admin-credentials
+        usernameKey: username
+        passwordKey: password
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: true
+      type: postgresql
+      host: nextcloud-db-rw:5432
+      database: nextcloud
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-db-credentials
+        usernameKey: username
+        passwordKey: password
+    cronjob:
+      enabled: true
+    persistence:
+      enabled: true
+      nextcloudData:
+        size: 50Gi
+    collabora:
+      enabled: true
+      collabora:
+        aliasgroups:
+          - host: "https://cloud.titusio.net:443"
+        server_name: office.titusio.net
+        extra_params: --o:ssl.enable=false --o:ssl.termination=true
+        existingSecret:
+          enabled: true
+          secretName: nextcloud-admin-credentials
+          usernameKey: username
+          passwordKey: password
+    redis:
+      enabled: true
+      auth:
+        enabled: true
+        existingSecret: nextcloud-redis-credentials
+        existingSecretPasswordKey: redis-password
+
