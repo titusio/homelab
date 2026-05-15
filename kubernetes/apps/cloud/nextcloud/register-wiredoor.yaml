@@ -14,18 +14,12 @@ spec:
         - sh
         - -c
         - |
-          set -e
-          # wiredoor-cli uses cobra's Run instead of RunE, so failures inside
-          # ExposeHTTP are printed as ERROR lines but the process always exits 0.
-          # Until https://github.com/wiredoor/wiredoor-cli is fixed to use RunE,
-          # we capture output and fail manually if any ERROR line is detected.
-          run() { out=$("$@" 2>&1); echo "$out"; if echo "$out" | grep -q "^ERROR"; then return 1; fi; }
           wiredoor config --url=$WIREDOOR_URL --token=$WIREDOOR_TOKEN
-          run wiredoor http nextcloud \
+          wiredoor http nextcloud \
             --domain cloud.titusio.net \
             --backendHost traefik.traefik.svc.cluster.local \
             --port 80 --proto http
-          run wiredoor http collabora \
+          wiredoor http collabora \
             --domain office.titusio.net \
             --backendHost traefik.traefik.svc.cluster.local \
             --port 80 --proto http
