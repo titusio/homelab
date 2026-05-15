@@ -13,6 +13,7 @@ spec:
         - sh
         - -c
         - |
+          set -e
           wiredoor config --url=$WIREDOOR_URL --token=$WIREDOOR_TOKEN
           wiredoor http nextcloud \
             --domain cloud.titusio.net \
