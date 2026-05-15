@@ -47,6 +47,7 @@ spec:
       - "--txt-prefix=reg-%{record_type}."
       - "--source=gateway-httproute"
       - "--source=service"
+      - "--source=crd"
 
     rbac:
       additionalPermissions:
