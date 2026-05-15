@@ -4,6 +4,7 @@ metadata:
   name: wiredoor-register-nextcloud
   namespace: gateway
 spec:
+  ttlSecondsAfterFinished: 120
   template:
     spec:
       containers:
