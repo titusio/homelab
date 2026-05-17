@@ -55,8 +55,7 @@ spec:
       enabled: true
     persistence:
       enabled: true
-      nextcloudData:
-        size: 50Gi
+      size: 70Gi
     collabora:
       enabled: true
       collabora:
