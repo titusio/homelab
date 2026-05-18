@@ -9,7 +9,7 @@ reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   numberOfReplicas: "1"
-  dataLocality: "strict-local"
+  dataLocality: "best-effort"
   fsType: "ext4"
   dataEngine: "v1"
   disableRevisionCounter: "true"
