@@ -22,8 +22,11 @@ spec:
         config:
           persistentVolumeClaim:
             name: radarr-config
-          downloads:
-            nfs:
-          film:
-            nfs:
+        downloads:
+          persistentVolumeClaim:
+            name: downloads
+        film:
+          nfs:
+            server: "10.0.10.10"
+            path: "/export/media/tv"
 
