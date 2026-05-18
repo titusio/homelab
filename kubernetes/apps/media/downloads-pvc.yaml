@@ -7,7 +7,6 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-ephemeral
   resources:
     requests:
-      storage: 200Gi
+      storage: 100Gi
