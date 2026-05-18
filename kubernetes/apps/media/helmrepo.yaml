@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: media-servarr
+  namespace: media
+spec:
+  interval: 1h
+  url: https://media-servarr.shw.al/charts
+
+
