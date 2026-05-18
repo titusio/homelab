@@ -21,10 +21,10 @@ spec:
       volumes:
         config:
           persistentVolumeClaim:
-            name: radarr-config
+            claimName: radarr-config
         downloads:
           persistentVolumeClaim:
-            name: downloads
+            claimName: downloads
         film:
           nfs:
             server: "10.0.10.10"
