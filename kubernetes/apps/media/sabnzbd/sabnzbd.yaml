@@ -25,5 +25,5 @@ spec:
           downloads:
             persistentVolumeClaim:
               claimName: downloads
-
-        
+    metrics:
+      enabled: false
