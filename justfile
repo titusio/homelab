@@ -9,3 +9,7 @@ create-sops-secret:
 # Encrypts a secret in place
 encrypt secret:
     @sops -i -e {{secret}}
+
+# Decrypts a secret in place
+decrypt secret:
+    @sops -i -d {{secret}}
