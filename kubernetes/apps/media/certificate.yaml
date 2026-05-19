@@ -11,3 +11,4 @@ spec:
   dnsNames:
     - radarr.tituslab.dev
     - sonarr.tituslab.dev
+    - prowlarr.tituslab.dev
