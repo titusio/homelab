@@ -38,8 +38,8 @@ spec:
           host_whitelist = sabnzbd.tituslab.dev
           [servers]
           [[Eweka]]
-          name = Eweka
-          displayname = CHANGEME_DISPLAYNAME
+          name = eweka
+          displayname = Eweka
           host = news.eweka.nl
           port = 443
           username = $newsreaderServerUsername
