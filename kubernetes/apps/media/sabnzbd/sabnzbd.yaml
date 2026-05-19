@@ -22,8 +22,8 @@ spec:
         config:
           persistentVolumeClaim:
             claimName: sabnzbd-config
-          downloads:
-            persistentVolumeClaim:
-              claimName: downloads
+        downloads:
+          persistentVolumeClaim:
+            claimName: downloads
     metrics:
       enabled: false
