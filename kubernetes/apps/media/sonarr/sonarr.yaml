@@ -21,7 +21,7 @@ spec:
       volumes:
         config:
           persistentVolumeClaim:
-            claimName: radarr-config
+            claimName: sonarr-config
         downloads:
           persistentVolumeClaim:
             claimName: downloads
