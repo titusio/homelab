@@ -12,3 +12,4 @@ spec:
     - radarr.tituslab.dev
     - sonarr.tituslab.dev
     - prowlarr.tituslab.dev
+    - sabnzbd.tituslab.dev
