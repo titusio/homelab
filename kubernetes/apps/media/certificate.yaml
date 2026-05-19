@@ -10,3 +10,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - radarr.tituslab.dev
+    - sonarr.tituslab.dev
