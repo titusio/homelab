@@ -16,7 +16,7 @@ spec:
   values:
     secrets:
       - name: apiKey
-        ref: prowlarr-api-secret
+        ref: sabnzbd-api-secret
     deployment:
       volumes:
         config:
