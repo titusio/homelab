@@ -16,7 +16,39 @@ spec:
   values:
     secrets:
       - name: apiKey
-        ref: sabnzbd-api-secret
+        ref: sabnzbd-credentials
+      - name: nzbKey
+        ref: sabnzbd-credentials
+      - name: newsreaderServerUsername
+        ref: sabnzbd-credentials
+      - name: newsreaderServerPassword
+        ref: sabnzbd-credentials
+    application:
+      config:
+        secrets: ['apiKey', 'nzbKey', 'newsreaderServerUsername', 'newsreaderServerPassword']
+        contents: |
+          [misc]
+          language = en
+          queue_limit = 20
+          port = 8080
+          api_key = $apiKey
+          nzb_key = $nzbKey
+          download_dir = Downloads/incomplete
+          complete_dir = Downloads/complete
+          host_whitelist =
+          [servers]
+          [[Eweka]]
+          name = Eweka
+          displayname = CHANGEME_DISPLAYNAME
+          host = news.eweka.nl
+          port = 443
+          username = $newsreaderServerUsername
+          password = $newsreaderServerPassword
+          connections = 50
+          ssl = 1
+          ssl_verify = 2
+          enable = 1
+          priority = 0
     deployment:
       volumes:
         config:
