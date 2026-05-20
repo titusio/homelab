@@ -7,19 +7,26 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: bdclark
+      chart: audiobookshelf
       version: 0.1.1
       sourceRef:
         kind: HelmRepository
         name: bdclark
         namespace: media
   values:
-    mediaMounts:
+    env:
+      TZ: "Europe/Berlin"
+    extraVolumes:
       - name: audiobooks
-        existingClaim: media-audiobooks
-        mountPath: /
-        readOnly: true
+        nfs:
+          server: "10.0.10.10"
+          path: "/export/media/audiobooks"
       - name: podcasts
-        existingClaim: media-podcasts
+        nfs:
+          server: "10.0.10.10"
+          path: "/export/media/podcasts"
+    extraVolumeMounts:
+      - name: audiobooks
+        mountPath: /audiobooks
+      - name: podcasts
         mountPath: /podcasts
-        readOnly: true

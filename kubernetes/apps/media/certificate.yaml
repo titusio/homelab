@@ -9,7 +9,10 @@ spec:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
+    # arr stack
     - radarr.tituslab.dev
     - sonarr.tituslab.dev
     - prowlarr.tituslab.dev
     - sabnzbd.tituslab.dev
+    # audiobookshelf certificates
+    - shelf.tituslab.dev
