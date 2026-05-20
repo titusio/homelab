@@ -6,5 +6,12 @@ metadata:
 spec:
   interval: 1h
   url: https://media-servarr.shw.al/charts
-
-
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: bdclark
+  namespace: media
+spec:
+  interval: 1h
+  url: https://bdclark.github.io/helm-charts
