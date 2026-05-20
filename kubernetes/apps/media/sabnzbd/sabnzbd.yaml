@@ -33,8 +33,8 @@ spec:
           port = 8080
           api_key = $apiKey
           nzb_key = $nzbKey
-          download_dir = Downloads/incomplete
-          complete_dir = Downloads/complete
+          download_dir = /downloads/incomplete
+          complete_dir = /downloads/complete
           host_whitelist = sabnzbd.tituslab.dev
           [servers]
           [[Eweka]]
@@ -50,6 +50,10 @@ spec:
           enable = 1
           priority = 0
     deployment:
+      container:
+        volumeMounts:
+          - name: 'downloads'
+            mountPath: '/downloads'
       volumes:
         config:
           persistentVolumeClaim:
