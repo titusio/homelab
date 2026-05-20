@@ -16,3 +16,6 @@ spec:
     - sabnzbd.tituslab.dev
     # audiobookshelf certificates
     - shelf.tituslab.dev
+    - abs.tituslab.dev
+    - audiobooks.tituslab.dev
+    - audiobookshelf.tituslab.dev
