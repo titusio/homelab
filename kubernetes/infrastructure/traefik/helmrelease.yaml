@@ -42,6 +42,8 @@ spec:
         nodePort: 30002
         expose:
           default: true
+        forwardedHeaders:
+          insecure: true
 
     # Enables the dashboard in Secure Mode
     api:
