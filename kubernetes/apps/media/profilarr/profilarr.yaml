@@ -22,6 +22,8 @@ spec:
         env:
           - name: 'AUTH'
             value: 'off'
+          - name: 'ORIGIN'
+            value: 'https://profiles.tituslab.dev'
       volumes:
         config:
           persistentVolumeClaim:
