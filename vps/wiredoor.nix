@@ -10,7 +10,9 @@ in {
   sops.secrets."wiredoor/adminEmail" = {};
   sops.secrets."wiredoor/adminPassword" = {};
 
-  sops.templates."wiredoor-env".content = ''
+  sops.templates."wiredoor-env" = {
+    restartUnits = ["wiredoor.service"];
+    content = ''
     ADMIN_EMAIL=${config.sops.placeholder."wiredoor/adminEmail"}
     ADMIN_PASSWORD=${config.sops.placeholder."wiredoor/adminPassword"}
 
@@ -20,6 +22,7 @@ in {
 
     TZ=Europe/Berlin
   '';
+  };
 
   environment.etc = {
     "wiredoor/docker-compose.yml".text = ''
@@ -41,6 +44,9 @@ in {
             - 443:443/tcp
             - 443:443/udp
             - ${toString port}:${toString port}/udp
+            # matrix ports
+            - 30001:30001/tcp
+            - 30002:30002/tcp
           dns:
             - 1.1.1.1
             - 1.0.0.1
@@ -99,6 +105,10 @@ in {
     requires = ["docker.service"];
     wants = ["network-online.target"];
     wantedBy = ["multi-user.target"];
+    restartTriggers = [
+      config.environment.etc."wiredoor/docker-compose.yml".text
+      config.sops.templates."wiredoor-env".content
+    ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
