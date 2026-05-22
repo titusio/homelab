@@ -15,6 +15,9 @@ spec:
         namespace: traefik
   # values are taken from https://doc.traefik.io/traefik/setup/kubernetes/
   values:
+    persistence:
+      enabled: true
+     
     # Configure Network Ports and EntryPoints
     # EntryPoints are the network listeners for incoming traffic.
     ports:
