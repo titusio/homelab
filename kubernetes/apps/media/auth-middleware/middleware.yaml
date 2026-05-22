@@ -11,7 +11,7 @@ spec:
         Url: "urn:k8s:secret:media-oidc-auth:providerUrl"
         ClientId: "urn:k8s:secret:media-oidc-auth:clientId"
         ClientSecret: "urn:k8s:secret:media-oidc-auth:clientSecret"
-      Scopes: ["openid", "profile", "email"]
+      Scopes: ["openid", "profile", "email", "groups"]
       Authorization:
         AssertClaims:
           - Name: groups
