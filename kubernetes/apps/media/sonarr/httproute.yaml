@@ -16,6 +16,12 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      filters:
+        - type: ExtensionRef
+          extensionRef:
+            group: traefik.io
+            kind: Middleware
+            name: media-oidc-auth
       backendRefs:
         - name: sonarr
           port: 8989
