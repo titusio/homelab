@@ -54,6 +54,3 @@ spec:
     matrixRTC:
       enabled: false
 
-    wellKnownDelegation:
-      ingress:
-        host: titusio.net
