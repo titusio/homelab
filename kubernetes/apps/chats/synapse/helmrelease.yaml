@@ -40,6 +40,9 @@ spec:
           config: |
             passwords:
               enabled: false
+        smtp:
+          configSecret: mas-smtp-config
+          configSecretKey: config.yaml
 
       ingress:
         host: maccount.titusio.net
