@@ -32,6 +32,15 @@ spec:
         sslMode: require
 
     matrixAuthenticationService:
+      additional:
+        oidc:
+          configSecret: mas-oidc-config
+          configSecretKey: config.yaml
+        passwords:
+          config: |
+            passwords:
+              enabled: false
+
       ingress:
         host: maccount.titusio.net
       postgres:
