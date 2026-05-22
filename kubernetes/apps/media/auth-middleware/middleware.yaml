@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: media-oidc-auth
+  namespace: traefik
+spec:
+  plugin:
+    traefik-oidc-auth:
+      Secret: "urn:k8s:secret:oidc-secret:pluginSecret"
+      Provider:
+        Url: "urn:k8s:secret:oidc-secret:providerUrl"
+        ClientId: "urn:k8s:secret:oidc-secret:clientId"
+        ClientSecret: "urn:k8s:secret:oidc-secret:clientSecret"
+      Scopes: ["openid", "profile", "email"]
+      Authorization:
+        AssertClaims:
+          - Name: groups
+            AnyOf: ["media-admin"]
