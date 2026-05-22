@@ -1,0 +1,37 @@
+piVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: synapse-domains
+  namespace: chats
+spec:
+  endpoints:
+  - dnsName: matrix.titusio.net
+    recordTTL: 300
+    recordType: A
+    targets:
+    - 204.168.137.124
+  - dnsName: maccount.titusio.net
+    recordTTL: 300
+    recordType: A
+    targets:
+    - 204.168.137.124
+  - dnsName: mrtc.titusio.net
+    recordTTL: 300
+    recordType: A
+    targets:
+    - 204.168.137.124
+  - dnsName: madmin.titusio.net
+    recordTTL: 300
+    recordType: A
+    targets:
+    - 204.168.137.124
+  - dnsName: chat.titusio.net
+    recordTTL: 300
+    recordType: A
+    targets:
+    - 204.168.137.124
+  - dnsName: titusio.net
+    recordTTL: 300
+    recordType: A
+    targets:
+    - 204.168.137.124
