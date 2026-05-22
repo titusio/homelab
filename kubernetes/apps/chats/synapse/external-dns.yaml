@@ -15,11 +15,6 @@ spec:
     recordType: A
     targets:
     - 204.168.137.124
-  - dnsName: mrtc.titusio.net
-    recordTTL: 300
-    recordType: A
-    targets:
-    - 204.168.137.124
   - dnsName: madmin.titusio.net
     recordTTL: 300
     recordType: A

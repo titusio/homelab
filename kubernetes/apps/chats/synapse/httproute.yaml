@@ -1,0 +1,114 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: synapse-matrix
+  namespace: chats
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: wiredoor
+  hostnames:
+    - matrix.titusio.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: synapse-synapse
+          port: 8008
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: synapse-maccount
+  namespace: chats
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: wiredoor
+  hostnames:
+    - maccount.titusio.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: synapse-matrix-authentication-service
+          port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: synapse-chat
+  namespace: chats
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: wiredoor
+  hostnames:
+    - chat.titusio.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: synapse-element-web
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: synapse-madmin
+  namespace: chats
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: wiredoor
+  hostnames:
+    - madmin.titusio.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: synapse-element-admin
+          port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: synapse-well-known
+  namespace: chats
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: wiredoor
+  hostnames:
+    - titusio.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: synapse-well-known
+          port: 8010
