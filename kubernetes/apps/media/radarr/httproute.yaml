@@ -21,7 +21,7 @@ spec:
           extensionRef:
             group: traefik.io
             kind: Middleware
-            name: oidc-auth
+            name: media-oidc-auth
       backendRefs:
         - name: radarr
           port: 7878
