@@ -122,6 +122,9 @@ spec:
             - kind: Secret
               name: media-tls
               group: ""
+            - kind: Secret
+              name: monitoring-tls
+              group: ""
 
     service:
       annotations:
