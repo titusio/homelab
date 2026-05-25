@@ -19,6 +19,10 @@ spec:
     ingress:
       tlsEnabled: false
 
+    wellKnownDelegation:
+      additional:
+        client: '{"org.matrix.msc2965.authentication": {"issuer": "https://maccount.titusio.net/", "account": "https://maccount.titusio.net/account/"}}'
+
     synapse:
       ingress:
         host: matrix.titusio.net
