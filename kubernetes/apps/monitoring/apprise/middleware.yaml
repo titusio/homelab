@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: monitoring-oidc-auth
+  namespace: monitoring
+spec:
+  plugin:
+    traefik-oidc-auth:
+      Secret: "urn:k8s:secret:monitoring-oidc-auth:pluginSecret"
+      Provider:
+        Url: "urn:k8s:secret:monitoring-oidc-auth:providerUrl"
+        ClientId: "urn:k8s:secret:monitoring-oidc-auth:clientId"
+        ClientSecret: "urn:k8s:secret:monitoring-oidc-auth:clientSecret"
+      Scopes: ["openid", "profile", "email", "groups"]
+      Authorization:
+        AssertClaims:
+          - Name: groups
+            AnyOf: ["homelab-monitoring"]
