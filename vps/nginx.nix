@@ -2,19 +2,17 @@
   services.nginx = {
     enable = true;
     streamConfig = ''
-      upstream k8s_https {
-        server traefik-vps-ingress-tailscale.donkey-betta.ts.net:443;
-      }
-      upstream k8s_http {
-        server traefik-vps-ingress-tailscale.donkey-betta.ts.net:80;
-      }
+      resolver 100.100.100.100 valid=30s;
+
       server {
         listen 443;
-        proxy_pass k8s_https;
+        set $upstream traefik-vps-ingress-tailscale.donkey-betta.ts.net:443;
+        proxy_pass $upstream;
       }
       server {
         listen 80;
-        proxy_pass k8s_http;
+        set $upstream traefik-vps-ingress-tailscale.donkey-betta.ts.net:80;
+        proxy_pass $upstream;
       }
     '';
   };
