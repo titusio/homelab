@@ -20,6 +20,11 @@ spec:
           secretKeyRef:
             name: apprise-matrix-tokens
             key: MATRIX_TOKEN_UPTIME
+      - name: POSTGRES_URL
+        valueFrom:
+          secretKeyRef:
+            name: gatus-db-credentials
+            key: POSTGRES_URL
     gateway:
       route:
         enabled: true
