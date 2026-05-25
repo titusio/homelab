@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: apprise-matrix-tokens
+    namespace: monitoring
+type: Opaque
+stringData:
+    MATRIX_TOKEN_UPTIME: ENC[AES256_GCM,data:tTVIIvMZ5P6KDDDjssw14hZI5x02PjUbg0MLI9UtMujC33GUpsLgSko=,iv:4ojHWHLCBPyEE7z8vq1NNX/RtFXvDsDVOXx+ggL3E1I=,tag:KyN1loqqEWdtUuh7iTBv9w==,type:str]
+    MATRIX_TOKEN_MEDIA: ENC[AES256_GCM,data:/E5P7KvbOZI=,iv:1k9Mhq+nUNr973Z2RqmoUDZ46SufyqxAndEgt9wbTJ8=,tag:uFXRNZD+oGB/ZuziQCpAJA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBncFdZamhPY2VTZStTUlJl
+            dy9zZ2d6MUViNTBiMDZZUDhCYlFmRXJjelZZCnIwMkRZZFdDdzd6aks0ZHpEV01j
+            R2t6YnhhSG0zMWRyRXF1YkUyemZ2bUEKLS0tIGc0TWc4V3RodVlTc0U5TlBFUkky
+            d1BPVWUwalFxdi9JbWI5bXc0ZjJpV3MKmGEJy9nnc8H4pG1QbyTlByWxcjMYvPSM
+            m9hMNlgsnpANk/91kPbnpnKtLVhTBhNsqlRmqfyWIHdH6gTEHXgivQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmYmpVVnp1RldDM21FYXFJ
+            WElhcHlKbG1NVTZhSkRYbXJVdURCcCtONFN3CnVIQkV6cHpaV1ljbjZKeVdic1pP
+            RmoybHdjbS9ZS1I0YWd5a1F2akloNmsKLS0tIHJhS2Fyb0lMWm9UVTQ2S3piKytW
+            clM1N0lzaExGZFZyOXlUcDlFdkpaRUEKSOvIbDOI5nuH1yZGzq409uiISq2s++za
+            yIhN+r76AWuHxKJcaWTdHEWAo9SdGU0tLNx+beEFkWtRWtfaD5xibA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-05-25T15:54:24Z"
+    mac: ENC[AES256_GCM,data:/at27XP7vxSNOCcEN03nh5LBBD5w+4NJRNLe0a67JzMvEIPwak+wy3maAXXvH2RonJGlUn/qjkM6m9F06/M1llsN6rI26LPGNaMByx2dvtybHBfKI3VQbd7qfTlJeZgQkScHWT/leXSDkXe1liU0T1y8C7dSX2ch9YaY0tjBDIs=,iv:PwfDpBricvF05gEppv+z+qwcP/EH2Ty8Zc6lI48M3pE=,tag:qGC12UuiOVZm8v7a+2MCMQ==,type:str]
+    version: 3.13.0

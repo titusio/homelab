@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apprise-config-template
+  namespace: monitoring
+data:
+  uptime.yml: |
+    urls:
+      - matrixs://${MATRIX_TOKEN_UPTIME}@titusio.net/!ygIqnMragzuwEXJMxY:titusio.net
+  media.yml: |
+    urls:
+      - matrixs://${MATRIX_TOKEN_MEDIA}@titusio.net/!CHANGEME:titusio.net
