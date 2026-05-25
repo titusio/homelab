@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gatus
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: gatus
+      version: 1.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: gatus
+        namespace: monitoring
+  values:
+    env:
+      - name: MATRIX_ACCESS_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: apprise-matrix-tokens
+            key: MATRIX_TOKEN_UPTIME
+    gateway:
+      route:
+        enabled: true
+        parentRefs:
+          - name: traefik-gateway
+            namespace: traefik
+        hosts:
+          - uptime.tituslab.dev
+        annotations:
+          external-dns.alpha.kubernetes.io/controller: "ignore"
+    config:
+      storage:
+        type: postgres
+        path: ${POSTGRES_URL}
+      endpoints:
+        - name: "Audiobookshelf"
+          url: "https://audiobooks.tituslab.dev"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Audiobookshelf is down"
+        - name: "Audiobooks External Access"
+          url: "https://audiobooks.tituscloud.dev"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Audiobookshelf external access is down"
+      alerting:
+        matrix:
+          server-url: "https://matrix.titusio.net"
+          access-token: ${MATRIX_ACCESS_TOKEN}
+          internal-room-id: "!VwFqlRnvLbETnPgWqI:titusio.net"
