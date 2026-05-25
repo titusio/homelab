@@ -15,6 +15,16 @@ spec:
     - matches:
         - path:
             type: PathPrefix
+            value: /notify/
+        - path:
+            type: PathPrefix
+            value: /get/
+      backendRefs:
+        - name: apprise
+          port: 8000
+    - matches:
+        - path:
+            type: PathPrefix
             value: /
       filters:
         - type: ExtensionRef
