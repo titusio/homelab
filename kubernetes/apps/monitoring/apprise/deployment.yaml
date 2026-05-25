@@ -62,7 +62,7 @@ spec:
             readOnlyRootFilesystem: true
           env:
             - name: APPRISE_STATEFUL_MODE
-              value: simple
+              value: disabled
             - name: APPRISE_WORKER_COUNT
               value: "1"
             - name: APPRISE_ADMIN
