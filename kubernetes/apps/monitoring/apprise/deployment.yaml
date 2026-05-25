@@ -89,7 +89,6 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-              readOnly: true
             - name: plugin
               mountPath: /plugin
             - name: attach
