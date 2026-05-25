@@ -50,8 +50,8 @@ spec:
       containers:
         - name: apprise
           # can't pin the tag because on dockerhub only the latest tag seems to be updated
-          # for now we always pull the latest image to get the latest security updates, 
-          # but in the future we might want to pin the tag to a specific version and 
+          # for now we always pull the latest image to get the latest security updates,
+          # but in the future we might want to pin the tag to a specific version and
           # update it manually when needed
           image: caronc/apprise:latest
           imagePullPolicy: Always
