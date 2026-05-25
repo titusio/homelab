@@ -6,6 +6,10 @@ create-sops-secret:
             --from-file=age.agekey=/dev/stdin
 
 
+# Issues a Matrix compatibility token for a MAS bot account
+mas-bot-token username:
+    @kubectl exec -n chats deployment/synapse-matrix-authentication-service -- mas-cli manage issue-compatibility-token {{username}} 2>&1 | grep -oP 'mct_\S+'
+
 # Encrypts a secret in place
 encrypt secret:
     @sops -i -e {{secret}}

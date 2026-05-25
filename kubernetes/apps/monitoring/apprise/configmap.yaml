@@ -6,7 +6,7 @@ metadata:
 data:
   uptime.yml: |
     urls:
-      - matrixs://${MATRIX_TOKEN_UPTIME}@titusio.net/!eItdOGHTBQOKIwDykQ:titusio.net
+      - matrixs://${MATRIX_TOKEN_UPTIME}@titusio.net/!hteFKWOiWMdmJtyUsX:titusio.net
   media.yml: |
     urls:
-      - matrixs://${MATRIX_TOKEN_MEDIA}@titusio.net/!CHANGEME:titusio.net
+      - matrixs://${MATRIX_TOKEN_MEDIA}@titusio.net/!fbSEwoaQdVaPePjujw:titusio.net
