@@ -20,3 +20,5 @@ spec:
     - abs.tituslab.dev
     - audiobooks.tituslab.dev
     - audiobookshelf.tituslab.dev
+    - abs.tituscloud.dev
+    - audiobooks.tituscloud.dev

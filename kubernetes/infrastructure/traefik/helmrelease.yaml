@@ -46,17 +46,7 @@ spec:
         port: 443
         nodePort: 30001
 
-      # Entrypoint for wiredoor reverse-tunnel traffic — no HTTP→HTTPS redirect
-      # so wiredoor's plain-HTTP backend connection doesn't loop
-      wiredoor:
-        port: 8088
-        nodePort: 30002
-        expose:
-          default: true
-        forwardedHeaders:
-          insecure: true
-
-    # Enables the dashboard in Secure Mode
+# Enables the dashboard in Secure Mode
     api:
       dashboard: true
       insecure: false
@@ -101,12 +91,6 @@ spec:
           namespacePolicy:
             from: All
 
-        wiredoor:          # HTTP listener for wiredoor tunnel traffic (no redirect)
-          port: 8088
-          protocol: HTTP
-          namespacePolicy:
-            from: All
-
         websecure:         # HTTPS listener that matches entryPoint `websecure`
           port: 443
           protocol: HTTPS  # TLS terminates inside Traefik
@@ -122,6 +106,9 @@ spec:
               group: ""
             - kind: Secret
               name: longhorn-tls
+              group: ""
+            - kind: Secret
+              name: titusio-tls
               group: ""
             - kind: Secret
               name: mealie-tls

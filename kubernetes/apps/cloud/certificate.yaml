@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: titusio-tls
+  namespace: traefik
+spec:
+  secretName: titusio-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - titusio.net
+    - matrix.titusio.net
+    - maccount.titusio.net
+    - chat.titusio.net
+    - madmin.titusio.net
+    - cloud.titusio.net
+    - office.titusio.net

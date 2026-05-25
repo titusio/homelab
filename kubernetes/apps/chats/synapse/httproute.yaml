@@ -1,3 +1,28 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: matrix-cors
+  namespace: chats
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "*"
+    accessControlAllowMethods:
+      - GET
+      - HEAD
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    accessControlAllowHeaders:
+      - X-Requested-With
+      - Content-Type
+      - Authorization
+      - Date
+    accessControlExposeHeaders:
+      - Synapse-Trace-Id
+      - Server
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -9,14 +34,33 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      sectionName: wiredoor
+      sectionName: websecure
   hostnames:
     - matrix.titusio.net
   rules:
     - matches:
         - path:
+            type: Exact
+            value: /_matrix/client/v3/room_keys/version
+      backendRefs:
+        - name: room-keys-proxy
+          port: 8080
+    - matches:
+        - path:
             type: PathPrefix
             value: /
+      filters:
+        - type: ResponseHeaderModifier
+          responseHeaderModifier:
+            set:
+              - name: Access-Control-Allow-Origin
+                value: "*"
+              - name: Access-Control-Allow-Methods
+                value: "GET, HEAD, POST, PUT, DELETE, OPTIONS"
+              - name: Access-Control-Allow-Headers
+                value: "X-Requested-With, Content-Type, Authorization, Date"
+              - name: Access-Control-Expose-Headers
+                value: "Synapse-Trace-Id, Server"
       backendRefs:
         - name: synapse-synapse
           port: 8008
@@ -32,7 +76,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      sectionName: wiredoor
+      sectionName: websecure
   hostnames:
     - maccount.titusio.net
   rules:
@@ -55,7 +99,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      sectionName: wiredoor
+      sectionName: websecure
   hostnames:
     - chat.titusio.net
   rules:
@@ -78,7 +122,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      sectionName: wiredoor
+      sectionName: websecure
   hostnames:
     - madmin.titusio.net
   rules:
@@ -101,7 +145,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      sectionName: wiredoor
+      sectionName: websecure
   hostnames:
     - titusio.net
   rules:
