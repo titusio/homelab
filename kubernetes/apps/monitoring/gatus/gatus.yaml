@@ -175,6 +175,16 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Nextcloud is down"
+        - name: "✏️ Office"
+          group: "Cloud"
+          url: "https://office.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Nextcloud is down"
+
         - name: "🛡️ Pihole"
           group: "Networking"
           url: "https://pihole.tituslab.dev"
