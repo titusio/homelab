@@ -34,6 +34,8 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/controller: "ignore"
     config:
+      ui:
+        default-sort-by: group
       storage:
         type: postgres
         path: ${POSTGRES_URL}
