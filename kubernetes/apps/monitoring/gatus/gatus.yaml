@@ -38,7 +38,7 @@ spec:
         type: postgres
         path: ${POSTGRES_URL}
       endpoints:
-        - name: "Audiobookshelf"
+        - name: "🎧 Audiobookshelf"
           url: "https://audiobooks.tituslab.dev"
           conditions:
             - "[STATUS] == 200"
@@ -46,7 +46,7 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Audiobookshelf is down"
-        - name: "Audiobooks External Access"
+        - name: "🌍 Audiobooks External Access"
           url: "https://audiobooks.tituscloud.dev"
           conditions:
             - "[STATUS] == 200"
@@ -54,6 +54,118 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Audiobookshelf external access is down"
+        - name: "🍽️ Mealie"
+          url: "https://mealie.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Mealie is down"
+        - name: "🌍 Mealie External Access"
+          url: "https://mealie.tituscloud.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Mealie external access is down"
+        - name: "🔖 Karakeep"
+          url: "https://karakeep.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Karakeep is down"
+        - name: "📄 Paperless"
+          url: "https://paperless.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Paperless is down"
+        - name: "🎬 Radarr"
+          url: "https://radarr.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Radarr is down"
+        - name: "📺 Sonarr"
+          url: "https://sonarr.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Sonarr is down"
+        - name: "🔍 Prowlarr"
+          url: "https://prowlarr.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Prowlarr is down"
+        - name: "⬇️ SABnzbd"
+          url: "https://sabnzbd.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "SABnzbd is down"
+        - name: "🎛️ Profilarr"
+          url: "https://profiles.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Profilarr is down"
+        - name: "🛡️ Pihole"
+          url: "https://pihole.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Pihole is down"
+        - name: "💬 Matrix"
+          url: "https://matrix.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Matrix homeserver is down"
+        - name: "🟢 Element"
+          url: "https://chat.titusio.net"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Element is down"
+        - name: "👤 Matrix Account Management"
+          url: "https://maccount.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Matrix account management is down"
+        - name: "☁️ Nextcloud"
+          url: "https://cloud.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Nextcloud is down"
       alerting:
         matrix:
           server-url: "https://matrix.titusio.net"
