@@ -10,3 +10,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - mealie.tituslab.dev
+    - mealie.tituscloud.dev

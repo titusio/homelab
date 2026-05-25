@@ -11,6 +11,7 @@ spec:
       namespace: traefik
   hostnames:
     - mealie.tituslab.dev
+    - mealie.tituscloud.dev
   rules:
     - matches:
         - path:
