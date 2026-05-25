@@ -15,16 +15,14 @@ spec:
         namespace: monitoring
   values:
     env:
-      - name: MATRIX_ACCESS_TOKEN
+      MATRIX_ACCESS_TOKEN:
         valueFrom:
           secretKeyRef:
             name: apprise-matrix-tokens
             key: MATRIX_TOKEN_UPTIME
-      - name: POSTGRES_URL
-        valueFrom:
-          secretKeyRef:
-            name: gatus-db-credentials
-            key: POSTGRES_URL
+    envFrom:
+      - secretRef:
+          name: gatus-db-credentials
     gateway:
       route:
         enabled: true
