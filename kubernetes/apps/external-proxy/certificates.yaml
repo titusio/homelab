@@ -13,4 +13,5 @@ spec:
     - home.huebie.family
     - nextcloud.huebie.family
     - mail-archive.huebie.family
+    - paperless.huebie.family
 
