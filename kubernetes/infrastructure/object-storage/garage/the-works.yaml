@@ -14,7 +14,7 @@ spec:
       size: 10Gi
       storageClassName: longhorn-garage
     data:
-      size: 100Gi
+      size: 50Gi
       storageClassName: longhorn-garage
   gateway:
     replicas: 2
