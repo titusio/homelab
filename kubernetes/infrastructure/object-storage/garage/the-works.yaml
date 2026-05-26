@@ -1,0 +1,18 @@
+apiVersion: garage.rajsingh.info/v1beta2
+kind: GarageCluster
+metadata:
+  name: the-works
+  namespace: object-storage
+spec:
+  # industrial zone on the planet coruscant
+  zone: the-works
+  replication:
+    factor: 3
+  storage:
+    replicas: 3
+    metadata:
+      size: 10Gi
+    data:
+      size: 100Gi
+  gateway:
+    replicas: 2
