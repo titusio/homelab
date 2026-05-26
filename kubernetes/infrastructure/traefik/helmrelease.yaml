@@ -125,6 +125,9 @@ spec:
             - kind: Secret
               name: monitoring-tls
               group: ""
+            - kind: Secret
+              name: alderaan-tls
+              group: ""
 
     service:
       annotations:

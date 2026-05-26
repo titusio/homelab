@@ -1,0 +1,32 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: synapse-domains
+  namespace: chats
+spec:
+  endpoints:
+    - dnsName: immich.huebie.family
+      recordTTL: 300
+      recordType: A
+      targets:
+        - 204.168.137.124
+    - dnsName: home.huebie.family
+      recordTTL: 300
+      recordType: A
+      targets:
+        - 204.168.137.124
+    - dnsName: paperless.huebie.family
+      recordTTL: 300
+      recordType: A
+      targets:
+        - 204.168.137.124
+    - dnsName: nextcloud.huebie.family
+      recordTTL: 300
+      recordType: A
+      targets:
+        - 204.168.137.124
+    - dnsName: mail-archive.huebie.family
+      recordTTL: 300
+      recordType: A
+      targets:
+        - 204.168.137.124
