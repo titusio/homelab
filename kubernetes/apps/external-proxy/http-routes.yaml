@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: ts-alderaan-7zlz8.tailscale.svc.cluster.local
+        - name: alderaan
           port: 30070
