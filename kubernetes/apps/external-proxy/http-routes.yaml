@@ -20,3 +20,95 @@ spec:
         - name: alderaan-proxy
           namespace: tailscale
           port: 30070
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: immich-alderaan
+  namespace: external-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - immich.huebie.family
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: alderaan-proxy
+          namespace: tailscale
+          port: 30041
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: home-alderaan
+  namespace: external-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - home.huebie.family
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: alderaan-proxy
+          namespace: tailscale
+          port: 8123
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nextcloud-alderaan
+  namespace: external-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - nextcloud.huebie.family
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: alderaan-proxy
+          namespace: tailscale
+          port: 30027
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: mail-archive-alderaan
+  namespace: external-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - mail-archive.huebie.family
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: alderaan-proxy
+          namespace: tailscale
+          port: 30315

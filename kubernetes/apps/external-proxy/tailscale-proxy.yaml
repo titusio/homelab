@@ -9,8 +9,21 @@ spec:
     tailscale.com/parent-resource-ns: external-proxy
     tailscale.com/parent-resource-type: svc
   ports:
-    - port: 30070
+    - name: paperless
+      port: 30070
       targetPort: 30070
+    - name: immich
+      port: 30041
+      targetPort: 30041
+    - name: home
+      port: 8123
+      targetPort: 8123
+    - name: nextcloud
+      port: 30027
+      targetPort: 30027
+    - name: mail-archive
+      port: 30315
+      targetPort: 30315
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
