@@ -17,5 +17,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: alderaan
+        - name: alderaan-proxy
+          namespace: tailscale
           port: 30070
