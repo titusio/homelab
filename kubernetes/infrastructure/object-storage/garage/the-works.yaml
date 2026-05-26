@@ -12,8 +12,10 @@ spec:
     replicas: 3
     metadata:
       size: 10Gi
+      storageClassName: longhorn-garage
     data:
       size: 100Gi
+      storageClassName: longhorn-garage
   gateway:
     replicas: 2
   admin:
