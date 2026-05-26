@@ -16,3 +16,7 @@ spec:
       size: 100Gi
   gateway:
     replicas: 2
+  admin:
+    adminTokenSecretRef:
+      name: admin-secret
+      key: adminToken
