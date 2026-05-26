@@ -194,6 +194,51 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Pihole is down"
+        - name: "📄 Paperless (Parents)"
+          group: "External Proxy"
+          url: "https://paperless.huebie.family"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Parents Paperless is down"
+        - name: "📸 Immich (Parents)"
+          group: "External Proxy"
+          url: "https://immich.huebie.family"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Parents Immich is down"
+        - name: "🏠 Home Assistant (Parents)"
+          group: "External Proxy"
+          url: "https://home.huebie.family"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Parents Home Assistant is down"
+        - name: "☁️ Nextcloud (Parents)"
+          group: "External Proxy"
+          url: "https://nextcloud.huebie.family"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Parents Nextcloud is down"
+        - name: "📧 Mail Archive (Parents)"
+          group: "External Proxy"
+          url: "https://mail-archive.huebie.family"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Parents Mail Archive is down"
       alerting:
         matrix:
           server-url: "https://matrix.titusio.net"
