@@ -1,8 +1,8 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: synapse-domains
-  namespace: chats
+  name: alderaan-domains
+  namespace: external-proxy
 spec:
   endpoints:
     - dnsName: immich.huebie.family
