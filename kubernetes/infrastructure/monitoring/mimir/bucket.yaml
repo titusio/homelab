@@ -13,7 +13,7 @@ spec:
 apiVersion: garage.rajsingh.info/v1beta1
 kind: GarageKey
 metadata:
-  name: mimir-key
+  name: mimir-s3-key
   namespace: monitoring
 spec:
   clusterRef:
