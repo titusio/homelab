@@ -38,6 +38,10 @@ spec:
       structuredConfig:
         ingest_storage:
           enabled: false
+        alertmanager_storage:
+          storage_prefix: alertmanager
+        ruler_storage:
+          storage_prefix: ruler
         common:
           storage:
             backend: s3
