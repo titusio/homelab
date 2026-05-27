@@ -28,11 +28,7 @@ spec:
             secretKeyRef:
               name: mimir-s3-key
               key: secret-access-key
-        - name: S3_ENDPOINT
-          valueFrom:
-            secretKeyRef:
-              name: mimir-s3-key
-              key: endpoint
+
 
     mimir:
       structuredConfig:
@@ -47,11 +43,10 @@ spec:
             backend: s3
             s3:
               bucket_name: "mimir"
-              endpoint: "${S3_ENDPOINT}"
+              endpoint: "the-works.object-storage.svc.cluster.local:3900"
+              insecure: true
               access_key_id: "${S3_ACCESS_KEY_ID}"
               secret_access_key: "${S3_SECRET_ACCESS_KEY}"
-              http:
-                insecure_skip_verify: true
 
 
     kafka:
