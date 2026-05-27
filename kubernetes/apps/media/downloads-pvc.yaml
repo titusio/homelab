@@ -5,6 +5,7 @@ metadata:
   name: downloads
   namespace: media
 spec:
+  storageClassName: longhorn-single
   accessModes:
     - ReadWriteMany
   resources:
