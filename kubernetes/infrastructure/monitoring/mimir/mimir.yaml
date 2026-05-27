@@ -36,6 +36,8 @@ spec:
 
     mimir:
       structuredConfig:
+        ingest_storage:
+          enabled: false
         common:
           storage:
             backend: s3
