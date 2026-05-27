@@ -5,7 +5,7 @@ metadata:
   namespace: object-storage
 spec:
   from:
-    - kind: mimir-key
+    - kind: GarageKey
       namespace: monitoring
   to:
     - kind: GarageCluster
