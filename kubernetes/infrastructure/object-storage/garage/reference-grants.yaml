@@ -1,0 +1,12 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageReferenceGrant
+metadata:
+  name: allow-access
+  namespace: object-stroage
+spec:
+  from:
+    - kind: mimir-key
+      namespace: monitoring
+  to:
+    - kind: GarageCluster
+      name: the-works
