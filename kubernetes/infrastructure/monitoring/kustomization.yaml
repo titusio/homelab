@@ -7,3 +7,4 @@ resources:
   - service-tailscale-monitoring.yaml
   - apprise/
   - gatus/
+  - kube-stack/
