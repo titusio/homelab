@@ -4,3 +4,5 @@ resources:
   - helmrepo.yaml
   - kube-stack.yaml
   - httproutes.yaml
+  - grafana-database.yaml
+  - grafana-db-credentials.enc.yaml
