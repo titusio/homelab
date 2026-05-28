@@ -13,3 +13,4 @@ spec:
     - uptime.tituslab.dev
     - grafana.tituslab.dev
     - prometheus.tituslab.dev
+    - alertmanager.tituslab.dev
