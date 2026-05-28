@@ -4,7 +4,7 @@ metadata:
   name: immich-postgres
   namespace: photos
 spec:
-  instances: 3
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
   storage:
     size: 5Gi
@@ -27,6 +27,3 @@ spec:
       owner: immich
       secret:
         name: immich-db-credentials
-      postInitSQL:
-        - CREATE EXTENSION IF NOT EXISTS vectors;
-        - CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
