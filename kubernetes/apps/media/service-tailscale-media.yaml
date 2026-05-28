@@ -6,6 +6,7 @@ metadata:
   annotations:
     # add new home service hostnames here as comma-separated values
     external-dns.alpha.kubernetes.io/hostname: radarr.tituslab.dev,sonarr.tituslab.dev,prowlarr.tituslab.dev,sabnzbd.tituslab.dev,shelf.tituslab.dev,abs.tituslab.dev,audiobooks.tituslab.dev,audiobookshelf.tituslab.dev,profiles.tituslab.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale

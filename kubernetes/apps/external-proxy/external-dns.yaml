@@ -6,27 +6,27 @@ metadata:
 spec:
   endpoints:
     - dnsName: immich.huebie.family
-      recordTTL: 300
+      recordTTL: 60
       recordType: A
       targets:
         - 204.168.137.124
     - dnsName: home.huebie.family
-      recordTTL: 300
+      recordTTL: 60
       recordType: A
       targets:
         - 204.168.137.124
     - dnsName: paperless.huebie.family
-      recordTTL: 300
+      recordTTL: 60
       recordType: A
       targets:
         - 204.168.137.124
     - dnsName: nextcloud.huebie.family
-      recordTTL: 300
+      recordTTL: 60
       recordType: A
       targets:
         - 204.168.137.124
     - dnsName: mail-archive.huebie.family
-      recordTTL: 300
+      recordTTL: 60
       recordType: A
       targets:
         - 204.168.137.124

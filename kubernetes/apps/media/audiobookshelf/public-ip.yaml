@@ -7,9 +7,11 @@ spec:
   endpoints:
     - dnsName: "abs.tituscloud.dev"
       recordType: A
+      recordTTL: 60
       targets:
         - "204.168.137.124"
     - dnsName: "audiobooks.tituscloud.dev"
       recordType: A
+      recordTTL: 60
       targets:
         - "204.168.137.124"

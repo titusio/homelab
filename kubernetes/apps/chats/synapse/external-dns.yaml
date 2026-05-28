@@ -6,27 +6,27 @@ metadata:
 spec:
   endpoints:
   - dnsName: matrix.titusio.net
-    recordTTL: 300
+    recordTTL: 60
     recordType: A
     targets:
     - 204.168.137.124
   - dnsName: maccount.titusio.net
-    recordTTL: 300
+    recordTTL: 60
     recordType: A
     targets:
     - 204.168.137.124
   - dnsName: madmin.titusio.net
-    recordTTL: 300
+    recordTTL: 60
     recordType: A
     targets:
     - 204.168.137.124
   - dnsName: chat.titusio.net
-    recordTTL: 300
+    recordTTL: 60
     recordType: A
     targets:
     - 204.168.137.124
   - dnsName: titusio.net
-    recordTTL: 300
+    recordTTL: 60
     recordType: A
     targets:
     - 204.168.137.124

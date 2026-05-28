@@ -7,9 +7,11 @@ spec:
   endpoints:
     - dnsName: "cloud.titusio.net"
       recordType: A
+      recordTTL: 60
       targets:
         - "204.168.137.124"
     - dnsName: "office.titusio.net"
       recordType: A
+      recordTTL: 60
       targets:
         - "204.168.137.124"

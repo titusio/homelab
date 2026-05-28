@@ -6,6 +6,7 @@ metadata:
   annotations:
     # add new home service hostnames here as comma-separated values
     external-dns.alpha.kubernetes.io/hostname: mealie.tituslab.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
