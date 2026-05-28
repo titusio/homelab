@@ -25,4 +25,7 @@ spec:
         nfs:
           server: "10.0.10.10"
           path: "/export/media/tv"
-
+    persistentVolumeClaims:
+      jellyfin-config:
+        accessMode: 'ReadWriteOnce'
+        requestStorage: '10Gi'
