@@ -5,7 +5,7 @@ metadata:
   namespace: traefik
   annotations:
     # add new monitoring service hostnames here as comma-separated values
-    external-dns.alpha.kubernetes.io/hostname: uptime.tituslab.dev,apprise.tituslab.dev
+    external-dns.alpha.kubernetes.io/hostname: uptime.tituslab.dev,apprise.tituslab.dev,grafana.tituslab.dev,prometheus.tituslab.dev
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale

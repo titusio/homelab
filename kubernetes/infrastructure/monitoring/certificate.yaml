@@ -11,3 +11,5 @@ spec:
   dnsNames:
     - apprise.tituslab.dev
     - uptime.tituslab.dev
+    - grafana.tituslab.dev
+    - prometheus.tituslab.dev
