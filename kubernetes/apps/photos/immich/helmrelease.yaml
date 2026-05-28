@@ -41,31 +41,6 @@ spec:
                       name: immich-db-credentials
                       key: password
       persistence:
-        upload:
-          enabled: true
-          existingClaim: immich-upload
-          globalMounts:
-            - path: /data/upload
-        encoded-video:
-          enabled: true
-          existingClaim: immich-encoded-video
-          globalMounts:
-            - path: /data/encoded-video
-        backups:
-          enabled: true
-          existingClaim: immich-backups
-          globalMounts:
-            - path: /data/backups
-        library:
-          enabled: true
-          existingClaim: immich-library
-          globalMounts:
-            - path: /data/library
-        profile:
-          enabled: true
-          existingClaim: immich-profile
-          globalMounts:
-            - path: /data/profile
         thumbs:
           enabled: true
           existingClaim: immich-thumbs
