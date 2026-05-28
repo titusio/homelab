@@ -8,3 +8,4 @@ resources:
   - apprise/
   - gatus/
   - kube-stack/
+  - exporters/
