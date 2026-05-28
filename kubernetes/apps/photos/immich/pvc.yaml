@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: immich-library
+  name: immich-upload
 spec:
   capacity:
-    storage: 500Gi
+    storage: 200Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -15,16 +15,72 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: immich-library
+  name: immich-upload
   namespace: photos
 spec:
   storageClassName: ""
-  volumeName: immich-library
+  volumeName: immich-upload
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 500Gi
+      storage: 200Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-backups
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 10.0.10.10
+    path: /export/photos/backups
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-backups
+  namespace: photos
+spec:
+  storageClassName: ""
+  volumeName: immich-backups
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-encoded-video
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 10.0.10.10
+    path: /export/photos/transcodes
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-encoded-video
+  namespace: photos
+spec:
+  storageClassName: ""
+  volumeName: immich-encoded-video
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -37,6 +93,30 @@ spec:
   resources:
     requests:
       storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-library
+  namespace: photos
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-profile
+  namespace: photos
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
