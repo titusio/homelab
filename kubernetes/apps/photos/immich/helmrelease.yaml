@@ -24,6 +24,8 @@ spec:
         main:
           containers:
             main:
+              image:
+                tag: v2.7.5
               env:
                 DB_HOSTNAME: immich-postgres-rw
                 DB_PORT: "5432"
@@ -72,6 +74,12 @@ spec:
 
 
     machine-learning:
+      controllers:
+        main:
+          containers:
+            main:
+              image:
+                tag: v2.7.5
       persistence:
         cache:
           enabled: true
