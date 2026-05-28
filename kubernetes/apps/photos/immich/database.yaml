@@ -21,6 +21,14 @@ spec:
           - /usr/lib/postgresql/18/lib
         extension_control_path:
           - /usr/share/postgresql/18/
+  managed:
+    roles:
+      - name: immich
+        superuser: true
+        login: true
+        passwordSecret:
+          name: immich-db-credentials
+
   bootstrap:
     initdb:
       database: immich
