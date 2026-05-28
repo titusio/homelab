@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 10.0.10.10
-    path: /export/photos/uploads
+    path: /export/photos/uploads/upload
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
