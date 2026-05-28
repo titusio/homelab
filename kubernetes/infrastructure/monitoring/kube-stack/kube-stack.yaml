@@ -41,12 +41,11 @@ spec:
       replicas: 2
       persistence:
         enabled: false
-      env:
+      envValueFrom:
         GF_DATABASE_PASSWORD:
-          valueFrom:
-            secretKeyRef:
-              name: grafana-db-credentials
-              key: password
+          secretKeyRef:
+            name: grafana-db-credentials
+            key: password
       grafana.ini:
         database:
           type: postgres
