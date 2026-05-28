@@ -7,4 +7,3 @@ resources:
   - service-tailscale-monitoring.yaml
   - apprise/
   - gatus/
-  - mimir/flux-kustomization.yaml
