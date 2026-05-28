@@ -43,13 +43,12 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
 
-    registry: noop
-
     extraArgs:
       - "--txt-prefix=reg-%{record_type}."
       - "--source=gateway-httproute"
       - "--source=service"
       - "--source=crd"
+      - "--registry=noop"
 
     rbac:
       additionalPermissions:
