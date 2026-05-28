@@ -5,12 +5,22 @@ metadata:
   namespace: photos
 spec:
   instances: 3
-  imageName: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+  imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
   storage:
     size: 5Gi
   postgresql:
-    parameters:
-      shared_preload_libraries: "vectors.so"
+    shared_preload_libraries:
+      - "vchord.so"
+
+    # This extension is loaded via the Database CRD at cloudnative-pg-database.yaml
+    extensions:
+      - name: vchord
+        image:
+          reference: ghcr.io/tensorchord/vchord-scratch:pg18-v1.1.1
+        dynamic_library_path:
+          - /usr/lib/postgresql/18/lib
+        extension_control_path:
+          - /usr/share/postgresql/18/
   bootstrap:
     initdb:
       database: immich
