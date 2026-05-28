@@ -16,6 +16,15 @@ spec:
   values:
     valkey:
       fullnameOverride: paperless-paperless-ngx-valkey
+    postgresql:
+      primary:
+        resources:
+          limits:
+            cpu: 500m
+            memory: 192Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
     config:
       url: https://paperless.tituslab.dev
       database:
