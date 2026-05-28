@@ -1,0 +1,11 @@
+cluster:
+  # Cilium runs with kube-proxy-replacement: true, so kube-proxy is redundant
+  proxy:
+    disabled: true
+  # Default bind address is 127.0.0.1, which Prometheus cannot scrape from outside the node
+  controllerManager:
+    extraArgs:
+      bind-address: "0.0.0.0"
+  scheduler:
+    extraArgs:
+      bind-address: "0.0.0.0"
