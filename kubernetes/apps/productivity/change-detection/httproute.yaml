@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: change-detection
-          port: 5000
+        - name: change-detection-changedetection
+          port: 80
