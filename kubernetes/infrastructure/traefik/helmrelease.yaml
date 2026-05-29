@@ -114,12 +114,6 @@ spec:
               name: mealie-tls
               group: ""
             - kind: Secret
-              name: paperless-tls
-              group: ""
-            - kind: Secret
-              name: karakeep-tls
-              group: ""
-            - kind: Secret
               name: media-tls
               group: ""
             - kind: Secret
@@ -131,6 +125,10 @@ spec:
             - kind: Secret
               name: photos-tls
               group: ""
+            - kind: Secret
+              name: productivity-tls
+              group: ""
+
 
     service:
       annotations:

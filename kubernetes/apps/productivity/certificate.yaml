@@ -1,12 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: karakeep-tls
+  name: productivity-tls
   namespace: traefik
 spec:
-  secretName: karakeep-tls
+  secretName: productivity-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
     - karakeep.tituslab.dev
+    - changes.tituslab.dev
+    - paperless.tituslab.dev
