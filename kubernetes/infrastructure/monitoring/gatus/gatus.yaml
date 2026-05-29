@@ -139,6 +139,15 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Paperless is down"
+        - name: "🔍 Change Detection"
+          group: "Productivity"
+          url: "https://changes.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Change Detection is down"
         - name: "💬 Matrix"
           group: "Communication"
           url: "https://matrix.titusio.net"
@@ -244,6 +253,10 @@ spec:
           url: "https://pixelfed.whiled.net"
           conditions:
             - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Pixelfed is down"
       alerting:
         matrix:
           server-url: "https://matrix.titusio.net"
