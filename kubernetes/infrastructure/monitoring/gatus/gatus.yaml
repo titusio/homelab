@@ -239,6 +239,11 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Parents Mail Archive is down"
+        - name: "📸 Pixelfed (External)"
+          group: "External Services"
+          url: "https://pixelfed.whiled.net"
+          conditions:
+            - "[STATUS] < 500"
       alerting:
         matrix:
           server-url: "https://matrix.titusio.net"
