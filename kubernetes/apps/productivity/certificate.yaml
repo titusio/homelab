@@ -9,6 +9,7 @@ spec:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
+    - search.tituslab.dev
     - karakeep.tituslab.dev
     - changes.tituslab.dev
     - paperless.tituslab.dev
