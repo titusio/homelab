@@ -20,11 +20,11 @@ spec:
       - name: audiobooks
         nfs:
           server: "10.0.10.10"
-          path: "/export/media/audiobooks"
+          path: "/mnt/media/audio/audiobooks"
       - name: podcasts
         nfs:
           server: "10.0.10.10"
-          path: "/export/media/podcasts"
+          path: "/mnt/media/audio/podcasts"
     extraVolumeMounts:
       - name: audiobooks
         mountPath: /audiobooks

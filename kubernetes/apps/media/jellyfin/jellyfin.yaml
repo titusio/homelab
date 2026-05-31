@@ -20,11 +20,11 @@ spec:
       film:
         nfs:
           server: "10.0.10.10"
-          path: "/export/media/movies"
+          path: "/mnt/media/video/movies"
       television:
         nfs:
           server: "10.0.10.10"
-          path: "/export/media/tv"
+          path: "/mnt/media/video/tv"
     persistentVolumeClaims:
       jellyfin-config:
         accessMode: 'ReadWriteOnce'
