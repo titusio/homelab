@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: valkey-users
+    namespace: productivity
+type: Opaque
+stringData:
+    default-password: ENC[AES256_GCM,data:1pKS8g8Mn3QTCVKTmapnJCuepC1plrFS43z3tXcZupm2YzNizmhtkxzPKfTpmlFF,iv:C9Jj60qiP1ymjojHn65jFVZLYMM1BI+LI9tXXSGeuYs=,tag:qymuMs6EQGBXEa1/cHPzDA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0V01PRmRUbSsvSytvaTJM
+            UktkS3IvdW1SR3BEWDQycG05c3IydG11ekZFCm5ad0hqLzRYZEV3SXhJalBvcXAz
+            dTlReURJN1FVcUw0RzBvY0JxREQ4OHcKLS0tIFZWQllsbFNhNlpmY3I4QTRiMFl2
+            a0Q4V2MrV1c1dkhsTmZ6S3VmV2Q3WGsK3QrODHMYkD7esoIXIfNbU7QfNY1mYE/0
+            DqPNX+Ct21C6kDk6e9/5t64oa47I2Sy/dEfYDxUdoMGNqxf3OIrgpg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIZFprQndLVjhpNnlGd2xF
+            WTdjZXNSL013S0tsYXNsVXNVdG5paUlzczFzCjBaYTBoaCtLSFczNzdjVGMwVzk2
+            ZFZURFVQNW9yVVo1SUhQdk1BRGRaajgKLS0tIHQyMGxrbHRmbUx3Z0dtcXMyVm9O
+            YzVHaiswbCt6SFprekhCSGJjTzE4MW8KEVlFBvhQy+LFi9t9LSsbefcls5NT+6eA
+            3wmLwKLUPNxgYqFBss92qGZeN9eiwY1Krtzvtab/iHGjPAhx0l3Xfg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-05-31T11:24:08Z"
+    mac: ENC[AES256_GCM,data:81uc+l22SeD7QRBrCxAmmJvmmO+QWVcsdjbdLMzD0zbMAw7IC4T71/Lbxm5x1R+1FtSMGF49LyLdGCVPH/Frn7Xvj8nRNCdMxUot8BsMTl+KatjYuOs54K0vTEX5UVP8Jyy7wj8stXRytFfacBc/sCYfoTitnP9zek/k8hgAKgk=,iv:SsuPAODeTlsUYZGYycyHT6dfNuNvO3i3+wYreunRBPg=,tag:Pv03+T3YRV71HrZ7vaFf0g==,type:str]
+    version: 3.13.1
