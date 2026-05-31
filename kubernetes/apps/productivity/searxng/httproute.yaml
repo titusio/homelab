@@ -11,6 +11,8 @@ spec:
       namespace: traefik
   hostnames:
     - search.tituslab.dev
+    - searxng.tituslab.dev
+    - searx.tituslab.dev
   rules:
     - matches:
         - path:
