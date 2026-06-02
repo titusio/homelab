@@ -14,7 +14,7 @@ spec:
         name: pihole-repo
         namespace: networking
   values:
-    hostname: "Pihole"
+    hostname: "pihole"
     DNS1: "9.9.9.9" # Quad9
     DNS2: "194.242.2.2" # https://mullvad.net/en/help/dns-over-https-and-dns-over-tls#server-locations
     serviceDns:
