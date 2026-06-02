@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: forgejo-db-config
+    namespace: source-control
+stringData:
+    database: ENC[AES256_GCM,data:JzlCzAgh+CO23OFoINwc/zOB0qFrqBUhu7jat9lOjLVb2LNPmmSpwzLGcbxE4gH15X0uLQLx48Qop+pC8hHGX/urJwSQFNM/Gp4utd8lPB7cm4IT1fIVuowcvaHGsy/OqqRc9oCWhNOOf6U=,iv:JyYomMUgdPr7ojyUO8mGFLRU/1nFWp7eETwkbRQ8Zko=,tag:5lc2+855F4jH3sCwCVPfHA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwL0dlUkxhcTlZNDVadm1h
+            M3IvYUh6WTk4bStHOWh6alhmaEFTZnBLL1M4CkNjUm5YN08rUlFOU1E4UVFNdkgr
+            MjhLYlZpQ2l3RzFnclJQbmduWjQxdWsKLS0tIFpnZUpqbHVwVEFVSHlVc2Qva1FT
+            SGRxRFJtU0RvakZodTV3aCtwdm9uRUEKTx7wyHXtLKov4AB45pGe36zb9rIpxl9a
+            oFGdEjZHm53hSsVtTX5/oDrjNCz9rJpHmQw9BXDzXrTRpOSB7yctYQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhMDF0RzIrUnUra0JNSUQy
+            M0FjckgwTlNHUFlMY1liRXNKUFUxS3dydTJnCkF3R0RCZ3I0bVNWQ1FXOFNwT0h5
+            alR0YVF2azVLeDNYVjlGY2pJTzhhVWsKLS0tIFRhYjRVR0JiaHlua0tqUmFzcXRV
+            RTdBd0RFSkQ1UEFiTHJjL2dTMHVYczgKkGuZvzbiNIQxJrNu79bMyFrCLVbegkmp
+            wYndxERQlbNtYxDY3IWLHxlFkQVn4nQijuaM26X9Jx8R2pAw+0ZfZA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-06-02T15:06:30Z"
+    mac: ENC[AES256_GCM,data:W6jE7kSb8d4Cu4oAvyvCoSXbhqpze6K1Pa822HX+7nKPTH/oVsnyFzvVqzrgYy/W0HQVVV0pfhuzZqAwGNDu1Fx/dSoDpYxiVyaPtDbI5KnXK8kyLs92XEp34xMTptzKbgslxaPr+MB8VSYI16RFlyJMlZTiE/+XZULu1ADYmGU=,iv:Tx2NMtMG1KbG19VT2olB3u7IdEpIGIs91Og4u5TyOWk=,tag:DmUsXJuG6w66zpqDJTw5ZQ==,type:str]
+    version: 3.13.1
