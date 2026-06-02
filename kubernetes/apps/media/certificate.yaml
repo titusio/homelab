@@ -22,4 +22,8 @@ spec:
     - audiobookshelf.tituslab.dev
     - abs.tituscloud.dev
     - audiobooks.tituscloud.dev
+    
+    - audiobooks.titushome.dev
+
+    # jellyfin
     - jellyfin.tituslab.dev
