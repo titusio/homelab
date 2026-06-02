@@ -14,6 +14,11 @@
         set $upstream traefik-vps-ingress-tailscale.donkey-betta.ts.net:80;
         proxy_pass $upstream;
       }
+      server {
+        listen 22;
+        set $upstream traefik-vps-ingress-tailscale.donkey-betta.ts.net:22;
+        proxy_pass $upstream;
+      }
     '';
   };
 }

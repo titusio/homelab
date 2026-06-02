@@ -59,6 +59,8 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "prohibit-password";
+    # we proxy 22 to the cluster because forgejo needs it.
+    ports = [20022];
   };
 
   programs.ssh.knownHosts = {
