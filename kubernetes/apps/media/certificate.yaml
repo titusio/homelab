@@ -27,3 +27,4 @@ spec:
 
     # jellyfin
     - jellyfin.tituslab.dev
+    - jellyfin.titushome.dev

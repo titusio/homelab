@@ -19,4 +19,27 @@ spec:
       backendRefs:
         - name: jellyfin
           port: 80
+---
+# local route
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: jellyfin-local
+  namespace: media
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: "ignore"
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - jellyfin.titushome.dev
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: jellyfin
+          port: 80
 
