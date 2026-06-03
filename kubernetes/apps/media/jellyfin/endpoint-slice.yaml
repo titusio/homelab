@@ -1,0 +1,17 @@
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: jellyfin
+  namespace: media
+  labels:
+    kubernetes.io/service-name: jellyfin
+    endpointslice.kubernetes.io/managed-by: cluster-admins
+addressType: IPv4
+endpoints:
+  - addresses:
+      - 10.0.10.10 # scarif domain
+    conditions:
+      ready: true
+ports:
+  - name: http
+    port: 8096
