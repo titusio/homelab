@@ -40,6 +40,15 @@ spec:
         type: postgres
         path: ${POSTGRES_URL}
       endpoints:
+        - name: "🎬 Jellyfin"
+          group: "Media"
+          url: "https://jellyfin.tituslab.dev/health"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Jellyfin is down"
         - name: "🎧 Audiobookshelf"
           group: "Media"
           url: "https://audiobooks.tituslab.dev"
