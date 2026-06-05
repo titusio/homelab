@@ -9,6 +9,10 @@ spec:
       namespace: monitoring
     - kind: GarageBucket
       namespace: monitoring
+    - kind: GarageKey
+      namespace: cloud
+    - kind: GarageBucket
+      namespace: cloud
   to:
     - kind: GarageCluster
       name: the-works

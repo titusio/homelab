@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: plik
+  namespace: cloud
+spec:
+  interval: 1h
+  url: https://root-gg.github.io/plik
+

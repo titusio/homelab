@@ -1,0 +1,32 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: plik
+  namespace: cloud
+spec:
+  clusterRef:
+    name: the-works
+    namespace: object-storage
+  keyPermissions:
+    - keyRef:
+        name: plik-s3-key
+      read: true
+      write: true
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: plik-s3-key
+  namespace: cloud
+spec:
+  clusterRef:
+    name: the-works
+    namespace: object-storage
+  name: plik
+  secretTemplate:
+    name: plik-s3-key
+  bucketPermissions:
+    - bucketRef:
+        name: plik
+      read: true
+      write: true

@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: plik
+  namespace: cloud
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: plik
+      version: 1.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: plik
+        namespace: cloud
+  valuesFrom:
+    - kind: Secret
+      name: plik-s3-key
+      valuesKey: access-key-id
+      targetPath: secrets.dataBackend.AccessKeyID
+    - kind: Secret
+      name: plik-s3-key
+      valuesKey: secret-access-key
+      targetPath: secrets.dataBackend.SecretAccessKey
+    - kind: Secret
+      name: plik-oidc-secret
+      valuesKey: oidc-client-secret
+      targetPath: secrets.oidcClientSecret
+    - kind: Secret
+      name: plik-db-app
+      valuesKey: uri
+      targetPath: plikd.MetadataBackendConfig.ConnectionString
+  values:
+    replicaCount: 3
+    plikd:
+      PlikDomain: "https://files.titusio.net"
+      MetadataBackendConfig:
+        Driver: postgres
+      # odic config
+      OIDCClientID: "d9c30708-7085-4295-80ce-0a651a69f0a0"
+      OIDCProviderName: "AStA IDP"
+      OIDCProviderURL: "https://id.titusio.net"
+      # accounts
+      FeatureLocalLogin: disabled
+      FeatureAuthentication: forced
+      # data
+      DataBackend: s3
+      DataBackendConfig:
+        Endpoint: the-works.object-storage.svc.cluster.local:3900
+        Bucket: plik
+        Location: garage
+        UseSSL: false
+        BucketLookup: path
+    podSecurityContext:
+      fsGroup: 1000

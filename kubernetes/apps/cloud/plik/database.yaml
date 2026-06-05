@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: plik-db
+  namespace: cloud
+spec:
+  instances: 3
+  storage:
+    size: 5Gi
+  bootstrap:
+    initdb:
+      database: plik
+      owner: plik
