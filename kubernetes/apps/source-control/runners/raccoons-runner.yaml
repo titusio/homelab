@@ -1,26 +1,52 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: raccoons-runner
   namespace: source-control
 spec:
-  interval: 5m
-  chart:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: raccoons-runner
+  template:
+    metadata:
+      labels:
+        app: raccoons-runner
     spec:
-      chart: forgejo-runner
-      version: 0.7.6
-      sourceRef:
-        kind: HelmRepository
-        name: wrenix
-        namespace: source-control
-  values:
-    knownLastVersion: true
-    runner:
-      config:
-        existingInitSecret: "raccoons-runner-secret"
-        create: true
-        file:
-          runner:
-            labels:
-              - "ubuntu-22.04:docker://node:16-bullseye"
-
+      containers:
+        - name: runner
+          image: code.forgejo.org/forgejo/runner:12.10.2
+          command: ["/bin/forgejo-runner", "daemon", "--config", "/etc/runner/config.yaml"]
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2376
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+          volumeMounts:
+            - name: runner-config
+              mountPath: /etc/runner
+              readOnly: true
+            - name: docker-certs
+              mountPath: /certs
+        - name: dind
+          image: docker:29.3.1-dind
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+          volumeMounts:
+            - name: docker-certs
+              mountPath: /certs
+      volumes:
+        - name: runner-config
+          secret:
+            secretName: raccoons-runner-secret
+        - name: docker-certs
+          emptyDir: {}
