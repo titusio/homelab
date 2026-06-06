@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: plik-domains
+  namespace: cloud
+spec:
+  endpoints:
+    - dnsName: files.titusio.net
+      recordTTL: 60
+      recordType: A
+      targets:
+        - 204.168.137.124
