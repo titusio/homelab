@@ -38,7 +38,7 @@ spec:
         Driver: postgres
       # odic config
       OIDCClientID: "d9c30708-7085-4295-80ce-0a651a69f0a0"
-      OIDCProviderName: "AStA IDP"
+      OIDCProviderName: "Pocket Id"
       OIDCProviderURL: "https://id.titusio.net"
       # accounts
       FeatureLocalLogin: disabled
