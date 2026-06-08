@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: truenas
+  namespace: nas
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: local-nas
+  namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nas.titushome.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
+    "lbipam.cilium.io/ips": "10.0.40.104"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - port: 443
+      targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nas-tailscale
+  namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nas.tituslab.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - port: 443
+      targetPort: 443

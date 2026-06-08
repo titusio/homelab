@@ -141,7 +141,9 @@ spec:
             - kind: Secret
               name: git-tls
               group: ""
-
+            - kind: Secret
+              name: nas-tls
+              group: ""
 
     service:
       annotations:

@@ -1,0 +1,17 @@
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: truenas
+  namespace: nas
+  labels:
+    kubernetes.io/service-name: truenas
+    endpointslice.kubernetes.io/managed-by: cluster-admins
+addressType: IPv4
+endpoints:
+  - addresses:
+      - 10.0.10.10 # scarif domain
+    conditions:
+      ready: true
+ports:
+  - name: http
+    port: 80
