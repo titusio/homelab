@@ -7,11 +7,13 @@ spec:
   replication:
     factor: 1        
   gateway:
-    replicas: 3
-    # Optional: when set, this address is written into the gateway pods'
-    # garage.toml as rpc_public_addr so peers in other regions can dial them by
-    # hostname. Purely cosmetic for in-cluster gateways.
-    # rpcPublicAddr: "10.0.10.10:30286"
+    replicas: 1
+  network:
+    rpcPublicAddr: "10.0.40.105:3901"
+    service:
+      type: LoadBalancer
+      annotations:
+        lbipam.cilium.io/ips: 10.0.40.105
   connectTo:
     rpcSecretRef:
       name: garage-personal-nas-secret
@@ -20,8 +22,10 @@ spec:
     adminTokenSecretRef:
       name: garage-personal-nas-secret
       key: adminToken
+  layoutManagement:
+    autoApply: true
   admin:
     adminTokenSecretRef:
       name: garage-personal-nas-secret
       key: adminToken
-  
+

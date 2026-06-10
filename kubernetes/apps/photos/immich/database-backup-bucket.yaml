@@ -1,0 +1,33 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: immich-db-backup
+  namespace: photos
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  globalAlias: immich-db-backup
+  quotas:
+    maxSize: 30Gi
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: immich-db-backup-key
+  namespace: photos
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  bucketPermissions:
+    - bucketRef:
+        name: immich-db-backup
+      read: true
+      write: true
+  secretTemplate:
+    name: immich-db-backup-ssd-s3
+    accessKeyIdKey: ACCESS_KEY_ID
+    secretAccessKeyKey: ACCESS_SECRET_KEY
+    regionKey: REGION
+
