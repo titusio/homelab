@@ -1,0 +1,27 @@
+apiVersion: garage.rajsingh.info/v1beta2
+kind: GarageCluster
+metadata:
+  name: scarif-depot
+  namespace: object-storage
+spec:
+  replication:
+    factor: 1        
+  gateway:
+    replicas: 3
+    # Optional: when set, this address is written into the gateway pods'
+    # garage.toml as rpc_public_addr so peers in other regions can dial them by
+    # hostname. Purely cosmetic for in-cluster gateways.
+    # rpcPublicAddr: "10.0.10.10:30286"
+  connectTo:
+    rpcSecretRef:
+      name: garage-personal-nas-secret
+      key: rpcSecret
+    adminApiEndpoint: "http://10.0.10.10:30290"
+    adminTokenSecretRef:
+      name: garage-personal-nas-secret
+      key: adminToken
+  admin:
+    adminTokenSecretRef:
+      name: garage-personal-nas-secret
+      key: adminToken
+  
