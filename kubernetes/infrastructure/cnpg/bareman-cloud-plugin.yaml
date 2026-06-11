@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: bareman-cloud-plugin
+  namespace: cnpg-system
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: plugin-barman-cloud
+      version: 0.7.0
+      sourceRef:
+        kind: HelmRepository
+        name: cnpg
+        namespace: home
+
+
