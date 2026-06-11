@@ -24,6 +24,13 @@ spec:
         client: '{"org.matrix.msc2965.authentication": {"issuer": "https://maccount.titusio.net/", "account": "https://maccount.titusio.net/account/"}}'
 
     synapse:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 512Mi
+        limits:
+          cpu: 2000m
+          memory: 2Gi
       ingress:
         host: matrix.titusio.net
       postgres:
@@ -36,6 +43,13 @@ spec:
         sslMode: require
 
     matrixAuthenticationService:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
       additional:
         oidc:
           configSecret: mas-oidc-config

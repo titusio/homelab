@@ -14,6 +14,13 @@ spec:
         name: mealie
         namespace: home
   values:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
     # use the cnpg operator
     cluster:
       enabled: true

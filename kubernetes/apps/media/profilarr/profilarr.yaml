@@ -16,6 +16,13 @@ spec:
   values:
     deployment:
       container:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
         image:
           repository: ghcr.io/dictionarry-hub/profilarr
           tag: 2.0.4

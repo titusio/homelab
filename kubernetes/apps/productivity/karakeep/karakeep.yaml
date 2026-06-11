@@ -16,6 +16,29 @@ spec:
   values:
     karakeep:
       nextAuthUrl: "https://karakeep.tituslab.dev"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+    meilisearch:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+    chromium:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          cpu: 1000m
+          memory: 2Gi
       extraEnv:
         - name: OAUTH_WELLKNOWN_URL
           value: "https://id.titusio.net/.well-known/openid-configuration"

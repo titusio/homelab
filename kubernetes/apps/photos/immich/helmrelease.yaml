@@ -26,6 +26,13 @@ spec:
             main:
               image:
                 tag: v2.7.5
+              resources:
+                requests:
+                  cpu: 200m
+                  memory: 256Mi
+                limits:
+                  cpu: 1000m
+                  memory: 1Gi
               env:
                 DB_HOSTNAME: immich-postgres-rw
                 DB_PORT: "5432"
@@ -55,6 +62,13 @@ spec:
             main:
               image:
                 tag: v2.7.5
+              resources:
+                requests:
+                  cpu: 500m
+                  memory: 512Mi
+                limits:
+                  cpu: 2000m
+                  memory: 2Gi
       persistence:
         cache:
           enabled: true

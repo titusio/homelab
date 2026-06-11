@@ -19,6 +19,13 @@ spec:
           command: ["/bin/forgejo-runner", "daemon", "--config", "/etc/runner/config.yaml"]
           securityContext:
             privileged: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
           env:
             - name: DOCKER_HOST
               value: tcp://localhost:2376
@@ -38,6 +45,13 @@ spec:
           image: docker:29.3.1-dind
           securityContext:
             privileged: true
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 4000m
+              memory: 8Gi
           env:
             - name: DOCKER_TLS_CERTDIR
               value: /certs

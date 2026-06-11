@@ -14,6 +14,13 @@ spec:
         name: kubitodev
         namespace: productivity
   values:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
     replicaCount: 3
     env:
       - name: SEARXNG_VALKEY_URL

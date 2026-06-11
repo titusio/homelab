@@ -51,6 +51,13 @@ spec:
           priority = 0
     deployment:
       container:
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
         volumeMounts:
           - name: 'downloads'
             mountPath: '/downloads'

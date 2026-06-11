@@ -14,7 +14,14 @@ spec:
         name: external-dns
         namespace: networking
   values:
-    provider: 
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+    provider:
       name: pihole
     env:
       - name: EXTERNAL_DNS_PIHOLE_PASSWORD

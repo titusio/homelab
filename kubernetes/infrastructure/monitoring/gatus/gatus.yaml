@@ -14,6 +14,13 @@ spec:
         name: gatus
         namespace: monitoring
   values:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
     env:
       MATRIX_ACCESS_TOKEN:
         valueFrom:
