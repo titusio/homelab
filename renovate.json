@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits"
+  ],
+  "flux": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Disable nix — handled by update-flake.yml",
+      "matchManagers": ["nix"],
+      "enabled": false
+    },
+    {
+      "description": "Group infrastructure chart updates into one PR",
+      "matchPaths": ["kubernetes/infrastructure/**"],
+      "groupName": "infrastructure",
+      "groupSlug": "infrastructure"
+    },
+    {
+      "description": "Auto-merge GitHub Actions digest/patch bumps",
+      "matchManagers": ["github-actions"],
+      "automerge": true,
+      "automergeType": "pr",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    }
+  ],
+  "labels": ["renovate"],
+  "commitMessagePrefix": "chore(deps):"
+}
