@@ -38,7 +38,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: s3://outline-db-backup
+      destinationPath: s3://immich-db-backup
       endpointURL: http://scarif-depot.object-storage.svc.cluster.local:3900
       s3Credentials:
         accessKeyId:
@@ -48,5 +48,5 @@ spec:
           name: immich-db-backup-ssd-s3
           key: ACCESS_SECRET_KEY
         region:
-          name: outline-db-backup-ssd-s3
+          name: immich-db-backup-ssd-s3
           key: REGION
