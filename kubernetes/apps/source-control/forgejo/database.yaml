@@ -13,3 +13,8 @@ spec:
       owner: forgejo
       secret:
         name: forgejo-db-credentials
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: forgejo-db-backup

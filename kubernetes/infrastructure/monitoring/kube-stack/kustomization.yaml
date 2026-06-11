@@ -5,4 +5,5 @@ resources:
   - kube-stack.yaml
   - httproutes.yaml
   - grafana-database.yaml
+  - grafana-database-backup-bucket.yaml
   - grafana-db-credentials.enc.yaml

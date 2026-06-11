@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - database-password.enc.yaml
   - database.yaml
+  - database-backup-bucket.yaml
   - gatus.yaml
   - helmrepol.yaml

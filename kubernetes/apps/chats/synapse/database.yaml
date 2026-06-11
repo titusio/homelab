@@ -13,6 +13,11 @@ spec:
       owner: synapse
       secret:
         name: synapse-db-credentials
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: synapse-db-backup
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -29,3 +34,8 @@ spec:
       owner: mas
       secret:
         name: mas-db-credentials
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: mas-db-backup

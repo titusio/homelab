@@ -11,3 +11,8 @@ spec:
     initdb:
       database: plik
       owner: plik
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: plik-db-backup

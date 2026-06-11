@@ -13,3 +13,8 @@ spec:
       owner: grafana
       secret:
         name: grafana-db-credentials
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: grafana-db-backup

@@ -9,6 +9,26 @@ spec:
       namespace: photos
     - kind: GarageBucket
       namespace: photos
+    - kind: GarageKey
+      namespace: chats
+    - kind: GarageBucket
+      namespace: chats
+    - kind: GarageKey
+      namespace: cloud
+    - kind: GarageBucket
+      namespace: cloud
+    - kind: GarageKey
+      namespace: productivity
+    - kind: GarageBucket
+      namespace: productivity
+    - kind: GarageKey
+      namespace: source-control
+    - kind: GarageBucket
+      namespace: source-control
+    - kind: GarageKey
+      namespace: monitoring
+    - kind: GarageBucket
+      namespace: monitoring
   to:
     - kind: GarageCluster
       name: scarif-depot

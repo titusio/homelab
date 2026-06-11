@@ -1,0 +1,103 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: synapse-db-backup
+  namespace: chats
+spec:
+  configuration:
+    destinationPath: s3://synapse-db-backup/
+    endpointURL: http://scarif-depot.object-storage.svc.cluster.local:3900
+    s3Credentials:
+      accessKeyId:
+        name: synapse-db-backup-ssd-s3
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: synapse-db-backup-ssd-s3
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: synapse-db-backup
+  namespace: chats
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  globalAlias: synapse-db-backup
+  quotas:
+    maxSize: 30Gi
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: synapse-db-backup-key
+  namespace: chats
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  bucketPermissions:
+    - bucketRef:
+        name: synapse-db-backup
+      read: true
+      write: true
+  secretTemplate:
+    name: synapse-db-backup-ssd-s3
+    accessKeyIdKey: ACCESS_KEY_ID
+    secretAccessKeyKey: ACCESS_SECRET_KEY
+    regionKey: REGION
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: mas-db-backup
+  namespace: chats
+spec:
+  configuration:
+    destinationPath: s3://mas-db-backup/
+    endpointURL: http://scarif-depot.object-storage.svc.cluster.local:3900
+    s3Credentials:
+      accessKeyId:
+        name: mas-db-backup-ssd-s3
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: mas-db-backup-ssd-s3
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: mas-db-backup
+  namespace: chats
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  globalAlias: mas-db-backup
+  quotas:
+    maxSize: 30Gi
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: mas-db-backup-key
+  namespace: chats
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  bucketPermissions:
+    - bucketRef:
+        name: mas-db-backup
+      read: true
+      write: true
+  secretTemplate:
+    name: mas-db-backup-ssd-s3
+    accessKeyIdKey: ACCESS_KEY_ID
+    secretAccessKeyKey: ACCESS_SECRET_KEY
+    regionKey: REGION
