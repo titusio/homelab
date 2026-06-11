@@ -7,13 +7,16 @@ spec:
   replication:
     factor: 1        
   gateway:
-    replicas: 1
+    replicas: 2
   network:
-    rpcPublicAddr: "10.0.40.105:3901"
     service:
       type: LoadBalancer
-      annotations:
-        lbipam.cilium.io/ips: 10.0.40.105
+      # annotations:
+      #   lbipam.cilium.io/ips: 10.0.40.105
+  publicEndpoint:
+    type: LoadBalancer
+    loadBalancer:
+      perNode: true
   connectTo:
     rpcSecretRef:
       name: garage-personal-nas-secret
@@ -22,8 +25,8 @@ spec:
     adminTokenSecretRef:
       name: garage-personal-nas-secret
       key: adminToken
-  layoutManagement:
-    autoApply: true
+  # layoutManagement:
+  #   autoApply: true
   admin:
     adminTokenSecretRef:
       name: garage-personal-nas-secret
