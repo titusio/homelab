@@ -6,7 +6,10 @@
     ":semanticCommits"
   ],
   "flux": {
-    "enabled": true
+    "enabled": true,
+    "managerFilePatterns": [
+      "/kubernetes/.+\\.ya?ml$/"
+    ]
   },
   "packageRules": [
     {
