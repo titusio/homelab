@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: garage-depot
+  namespace: object-storage
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 30286
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: garage-vector
+  namespace: object-storage
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 30186
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: local-garage-depot
+  namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: garage-depot.titushome.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
+    lbipam.cilium.io/ips: "10.0.40.107"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - port: 443
+      targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: garage-depot-tailscale
+  namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: garage-depot.tituslab.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - port: 443
+      targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: local-garage-vector
+  namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: garage-vector.titushome.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
+    lbipam.cilium.io/ips: "10.0.40.108"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - port: 443
+      targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: garage-vector-tailscale
+  namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: garage-vector.tituslab.dev
+    external-dns.alpha.kubernetes.io/ttl: "60"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - port: 443
+      targetPort: 443

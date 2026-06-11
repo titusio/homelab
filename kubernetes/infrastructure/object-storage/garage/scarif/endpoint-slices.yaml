@@ -1,0 +1,35 @@
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: garage-depot
+  namespace: object-storage
+  labels:
+    kubernetes.io/service-name: garage-depot
+    endpointslice.kubernetes.io/managed-by: cluster-admins
+addressType: IPv4
+endpoints:
+  - addresses:
+      - 10.0.10.10
+    conditions:
+      ready: true
+ports:
+  - name: http
+    port: 30286
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: garage-vector
+  namespace: object-storage
+  labels:
+    kubernetes.io/service-name: garage-vector
+    endpointslice.kubernetes.io/managed-by: cluster-admins
+addressType: IPv4
+endpoints:
+  - addresses:
+      - 10.0.10.10
+    conditions:
+      ready: true
+ports:
+  - name: http
+    port: 30186

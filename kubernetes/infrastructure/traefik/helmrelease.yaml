@@ -144,6 +144,9 @@ spec:
             - kind: Secret
               name: nas-tls
               group: ""
+            - kind: Secret
+              name: garage-tls
+              group: ""
 
     service:
       annotations:
