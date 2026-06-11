@@ -1,0 +1,14 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageReferenceGrant
+metadata:
+  name: allow-access-scarif-vector
+  namespace: object-storage
+spec:
+  from:
+    - kind: GarageKey
+      namespace: photos
+    - kind: GarageBucket
+      namespace: photos
+  to:
+    - kind: GarageCluster
+      name: scarif-vector

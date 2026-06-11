@@ -1,0 +1,31 @@
+apiVersion: garage.rajsingh.info/v1beta2
+kind: GarageCluster
+metadata:
+  name: scarif-vector
+  namespace: object-storage
+spec:
+  replication:
+    factor: 1
+  gateway:
+    replicas: 1
+  network:
+    service:
+      type: LoadBalancer
+  publicEndpoint:
+    type: LoadBalancer
+    loadBalancer:
+      perNode: true
+  layoutManagement:
+    autoApply: false
+  connectTo:
+    rpcSecretRef:
+      name: scarif-vector-secret
+      key: rpcSecret
+    adminApiEndpoint: "http://10.0.10.10:30190"
+    adminTokenSecretRef:
+      name: scarif-vector-secret
+      key: adminToken
+  admin:
+    adminTokenSecretRef:
+      name: scarif-vector-secret
+      key: adminToken
