@@ -21,6 +21,18 @@ spec:
       requests:
         cpu: 250m
         memory: 512Mi
+    startupProbe:
+      httpGet:
+        path: /
+        port: http
+      failureThreshold: 30
+      periodSeconds: 10
+    livenessProbe:
+      httpGet:
+        path: /
+        port: http
+      failureThreshold: 5
+      periodSeconds: 20
     valkey:
       fullnameOverride: paperless-paperless-ngx-valkey
     postgresql:
