@@ -31,6 +31,8 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     }
   ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
   "labels": ["renovate"],
   "commitMessagePrefix": "chore(deps):"
 }
