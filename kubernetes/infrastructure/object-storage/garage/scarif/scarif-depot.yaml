@@ -18,7 +18,7 @@ spec:
     loadBalancer:
       perNode: true
   layoutManagement:
-    autoApply: true
+    autoApply: false
   connectTo:
     rpcSecretRef:
       name: garage-personal-nas-secret
