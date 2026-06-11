@@ -36,17 +36,8 @@ spec:
       secret:
         name: immich-db-credentials
 
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://immich-db-backup
-      endpointURL: http://scarif-depot.object-storage.svc.cluster.local:3900
-      s3Credentials:
-        accessKeyId:
-          name: immich-db-backup-ssd-s3
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: immich-db-backup-ssd-s3
-          key: ACCESS_SECRET_KEY
-        region:
-          name: immich-db-backup-ssd-s3
-          key: REGION
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: immich-db-backup
