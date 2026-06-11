@@ -5,9 +5,9 @@ metadata:
   namespace: object-storage
 spec:
   replication:
-    factor: 1        
+    factor: 1
   gateway:
-    replicas: 2
+    replicas: 1
   network:
     service:
       type: LoadBalancer
@@ -25,10 +25,7 @@ spec:
     adminTokenSecretRef:
       name: garage-personal-nas-secret
       key: adminToken
-  # layoutManagement:
-  #   autoApply: true
   admin:
     adminTokenSecretRef:
       name: garage-personal-nas-secret
       key: adminToken
-
