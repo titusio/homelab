@@ -7,7 +7,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: seer-chart
+      chart: seerr-chart
       version: 3.7.0
       sourceRef:
         kind: HelmRepository
