@@ -29,6 +29,10 @@ spec:
       namespace: monitoring
     - kind: GarageBucket
       namespace: monitoring
+    - kind: GarageKey
+      namespace: media
+    - kind: GarageBucket
+      namespace: media
   to:
     - kind: GarageCluster
       name: scarif-depot

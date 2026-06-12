@@ -13,4 +13,27 @@ spec:
         kind: HelmRepository
         name: seerr
         namespace: media
-
+  values:
+    extraEnv:
+      - name: DB_TYPE
+        value: postgres
+      - name: DB_HOST
+        value: seerr-db-rw
+      - name: DB_PORT
+        value: "5432"
+      - name: DB_NAME
+        value: seerr
+      - name: DB_POOL_SIZE
+        value: "10"
+      - name: DB_LOG_QUERIES
+        value: "false"
+      - name: DB_USER
+        valueFrom:
+          secretKeyRef:
+            name: seerr-db-app
+            key: username
+      - name: DB_PASS
+        valueFrom:
+          secretKeyRef:
+            name: seerr-db-app
+            key: password
