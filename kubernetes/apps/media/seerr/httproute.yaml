@@ -11,12 +11,12 @@ spec:
       namespace: traefik
   hostnames:
     - requests.tituslab.dev
-    - requests.tituscloud.dev
+    - requests.titushome.dev
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: seer-seer
+        - name: seerr-seerr-chart
           port: 80
