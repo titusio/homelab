@@ -15,3 +15,6 @@ spec:
     - karakeep.tituslab.dev
     - changes.tituslab.dev
     - paperless.tituslab.dev
+    # linkwarden
+    - links.tituslab.dev
+    - links.titushome.dev

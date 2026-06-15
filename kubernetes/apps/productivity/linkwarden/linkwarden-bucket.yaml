@@ -1,0 +1,33 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: linkwarden
+  namespace: productivity
+spec:
+  clusterRef:
+    name: the-works
+    namespace: object-storage
+  globalAlias: linkwarden
+  keyPermissions:
+    - keyRef:
+        name: linkwarden-s3-key
+      read: true
+      write: true
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: linkwarden-s3-key
+  namespace: productivity
+spec:
+  clusterRef:
+    name: the-works
+    namespace: object-storage
+  name: linkwarden
+  secretTemplate:
+    name: linkwarden-s3-key
+  bucketPermissions:
+    - bucketRef:
+        name: linkwarden
+      read: true
+      write: true

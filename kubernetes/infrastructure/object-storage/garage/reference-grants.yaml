@@ -13,6 +13,11 @@ spec:
       namespace: cloud
     - kind: GarageBucket
       namespace: cloud
+    - kind: GarageKey
+      namespace: productivity
+    - kind: GarageBucket
+      namespace: productivity
+
   to:
     - kind: GarageCluster
       name: the-works
