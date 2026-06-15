@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hugo-runner
+  namespace: source-control
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hugo-runner
+  template:
+    metadata:
+      labels:
+        app: hugo-runner
+    spec:
+      containers:
+        - name: runner
+          image: code.forgejo.org/forgejo/runner:12.10.2
+          command: ["/bin/forgejo-runner", "daemon", "--config", "/etc/runner/config.yaml"]
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2376
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+          volumeMounts:
+            - name: runner-config
+              mountPath: /etc/runner
+              readOnly: true
+            - name: docker-certs
+              mountPath: /certs
+        - name: dind
+          image: docker:29.3.1-dind
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 4000m
+              memory: 8Gi
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+          volumeMounts:
+            - name: docker-certs
+              mountPath: /certs
+      volumes:
+        - name: runner-config
+          secret:
+            secretName: hugo-runner-secret
+        - name: docker-certs
+          emptyDir: {}
