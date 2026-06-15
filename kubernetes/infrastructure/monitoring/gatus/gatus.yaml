@@ -56,6 +56,15 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Jellyfin is down"
+        - name: "🎫 Seerr"
+          group: "Media"
+          url: "https://requests.tituslab.dev/api/v1/status"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Seerr is down"
         - name: "🎧 Audiobookshelf"
           group: "Media"
           url: "https://audiobooks.tituslab.dev"
@@ -137,6 +146,15 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Mealie external access is down"
+        - name: "📸 Immich"
+          group: "Photos"
+          url: "https://photos.tituslab.dev/api/server/ping"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Immich is down"
         - name: "🔖 Karakeep"
           group: "Productivity"
           url: "https://karakeep.tituslab.dev"
@@ -164,6 +182,24 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Change Detection is down"
+        - name: "🔎 Searxng"
+          group: "Productivity"
+          url: "https://search.tituslab.dev"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Searxng is down"
+        - name: "🔐 Synapse Admin"
+          group: "Communication"
+          url: "https://madmin.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Synapse Admin is down"
         - name: "💬 Matrix"
           group: "Communication"
           url: "https://matrix.titusio.net"
@@ -191,6 +227,15 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Matrix account management is down"
+        - name: "📁 Plik"
+          group: "Cloud"
+          url: "https://files.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Plik is down"
         - name: "☁️ Nextcloud"
           group: "Cloud"
           url: "https://cloud.titusio.net"
@@ -210,6 +255,24 @@ spec:
               send-on-resolve: true
               description: "Nextcloud is down"
 
+        - name: "🔑 Pocket ID"
+          group: "Authentication"
+          url: "https://it.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Pocket ID is down"
+        - name: "🗄️ NAS"
+          group: "Networking"
+          url: "icmp://10.0.10.10"
+          conditions:
+            - "[CONNECTED] == true"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "NAS is down"
         - name: "🛡️ Pihole"
           group: "Networking"
           url: "https://pihole.tituslab.dev"
@@ -219,6 +282,15 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Pihole is down"
+        - name: "🐙 Forgejo"
+          group: "Source Control"
+          url: "https://git.titusio.net"
+          conditions:
+            - "[STATUS] < 500"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Forgejo is down"
         - name: "📄 Paperless (Parents)"
           group: "External Proxy"
           url: "https://paperless.huebie.family"
