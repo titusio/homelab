@@ -16,6 +16,9 @@ spec:
         - path:
             type: Exact
             value: /ping
+        - path:
+            type: Exact
+            value: /prowlarr/ping
       backendRefs:
         - name: prowlarr
           port: 9696

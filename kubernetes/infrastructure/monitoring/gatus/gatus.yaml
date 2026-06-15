@@ -76,7 +76,7 @@ spec:
               description: "Audiobookshelf external access is down"
         - name: "🎬 Radarr"
           group: "Media"
-          url: "https://radarr.tituslab.dev/ping"
+          url: "https://radarr.tituslab.dev/radarr/ping"
           conditions:
             - "[STATUS] == 200"
           alerts:
@@ -85,7 +85,7 @@ spec:
               description: "Radarr is down"
         - name: "📺 Sonarr"
           group: "Media"
-          url: "https://sonarr.tituslab.dev/ping"
+          url: "https://sonarr.tituslab.dev/sonarr/ping"
           conditions:
             - "[STATUS] == 200"
           alerts:
@@ -94,7 +94,7 @@ spec:
               description: "Sonarr is down"
         - name: "🔍 Prowlarr"
           group: "Media"
-          url: "https://prowlarr.tituslab.dev/ping"
+          url: "https://prowlarr.tituslab.dev/prowlarr/ping"
           conditions:
             - "[STATUS] == 200"
           alerts:
