@@ -1,0 +1,46 @@
+name: Build obsidian-cli
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "containerfiles/obsidian-cli/Containerfile"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract version from Containerfile
+        id: version
+        run: |
+          version=$(grep -oP '(?<=OBSIDIAN_HEADLESS_VERSION=)\S+' containerfiles/obsidian-cli/Containerfile)
+          echo "value=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: containerfiles/obsidian-cli
+          file: containerfiles/obsidian-cli/Containerfile
+          push: true
+          tags: |
+            ghcr.io/titusio/obsidian-cli:${{ steps.version.outputs.value }}
+            ghcr.io/titusio/obsidian-cli:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

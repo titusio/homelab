@@ -5,6 +5,11 @@
     ":dependencyDashboard",
     ":semanticCommits"
   ],
+  "dockerfile": {
+    "managerFilePatterns": [
+      "/(^|/)Containerfile[^/]*$/"
+    ]
+  },
   "flux": {
     "enabled": true,
     "managerFilePatterns": [
