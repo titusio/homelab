@@ -21,5 +21,5 @@ data:
           uuid: 28ee3535-168f-4083-8d59-ca3befeea509
           token_url: file:/etc/runner-token/token
           labels:
-            - "docker:docker://docker:latest"
+            - "docker:docker://ghcr.io/titusio/forgejo-runner-image:latest"
             - "ubuntu-22.04:docker://node:16-bullseye"
