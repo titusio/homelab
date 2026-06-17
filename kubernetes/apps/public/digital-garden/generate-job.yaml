@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: digital-garden-generator
+  namespace: public
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: digital-garden-generator
+              image: git.titusio.net/titus/digital-garden:0.0.6
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -e
+                  python3 obsidian_to_hugo.py /vault/BigBrain/Digital\ Garden/Plants
+                  hugo build --destination /public
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                limits:
+                  cpu: 500m
+                  memory: 256Mi
+              volumeMounts:
+                - name: vault
+                  mountPath: /vault
+                - name: static-site
+                  mountPath: /public
+          volumes:
+            - name: vault
+              persistentVolumeClaim:
+                claimName: obsidian-cli-vault
+            - name: static-site
+              persistentVolumeClaim:
+                claimName: digital-garden-static
+          restartPolicy: OnFailure

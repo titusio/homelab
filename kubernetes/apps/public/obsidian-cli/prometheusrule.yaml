@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: obsidian-sync
+  namespace: public
+spec:
+  groups:
+    - name: obsidian-sync
+      rules:
+        - alert: ObsidianSyncFailed
+          expr: kube_job_failed{namespace="public", job_name=~"obsidian-sync-.+"} > 0
+          for: 0m
+          labels:
+            severity: warning
+          annotations:
+            summary: Obsidian sync job failed
+            description: "Job {{ $labels.job_name }} in namespace {{ $labels.namespace }} has failed."

@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: obsidian-sync
+  namespace: public
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: obsidian-cli
+              image: ghcr.io/titusio/obsidian-cli:latest
+              command: ["ob", "sync", "--path", "/vault/BigBrain"]
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                limits:
+                  cpu: 500m
+                  memory: 256Mi
+              volumeMounts:
+                - name: home
+                  mountPath: /root
+                - name: vault
+                  mountPath: /vault
+          volumes:
+            - name: home
+              persistentVolumeClaim:
+                claimName: obsidian-cli-home
+            - name: vault
+              persistentVolumeClaim:
+                claimName: obsidian-cli-vault
+          restartPolicy: OnFailure
