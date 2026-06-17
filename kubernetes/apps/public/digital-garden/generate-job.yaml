@@ -12,7 +12,7 @@ spec:
         spec:
           containers:
             - name: digital-garden-generator
-              image: git.titusio.net/titus/digital-garden:0.0.6
+              image: git.titusio.net/titus/digital-garden:0.0.7
               command: ["/bin/sh", "-c"]
               args:
                 - |
