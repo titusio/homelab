@@ -34,7 +34,7 @@ jobs:
           echo "value=${version}" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: containerfiles/obsidian-cli
           file: containerfiles/obsidian-cli/Containerfile
