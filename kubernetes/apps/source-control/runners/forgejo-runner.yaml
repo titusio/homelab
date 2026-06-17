@@ -39,6 +39,9 @@ spec:
             - name: runner-config
               mountPath: /etc/runner
               readOnly: true
+            - name: runner-token
+              mountPath: /etc/runner-token
+              readOnly: true
             - name: docker-certs
               mountPath: /certs
         - name: dind
@@ -60,6 +63,9 @@ spec:
               mountPath: /certs
       volumes:
         - name: runner-config
+          configMap:
+            name: forgejo-runner-config
+        - name: runner-token
           secret:
             secretName: forgejo-runner-secret
         - name: docker-certs
