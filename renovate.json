@@ -36,6 +36,12 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     }
   ],
+  "hostRules": [
+    {
+      "matchHost": "git.titusio.net",
+      "hostType": "docker"
+    }
+  ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "labels": ["renovate"],
