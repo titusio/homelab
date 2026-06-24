@@ -25,7 +25,7 @@ spec:
             memory: 1Gi
         image:
           repository: ghcr.io/dictionarry-hub/profilarr
-          tag: 2.0.8
+          tag: 2.0.9
         env:
           - name: 'AUTH'
             value: 'off'
