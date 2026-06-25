@@ -1,0 +1,18 @@
+name: Validate HelmRelease values
+
+on:
+  pull_request:
+    paths:
+      - 'kubernetes/**'
+
+jobs:
+  helm-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HelmReleases
+        uses: allenporter/flux-local/actions/test@v7
+        with:
+          enable-helm: true
+          path: kubernetes
