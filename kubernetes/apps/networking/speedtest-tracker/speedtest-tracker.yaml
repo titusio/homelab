@@ -62,6 +62,13 @@ spec:
                   initialDelaySeconds: 30
                   periodSeconds: 30
                   failureThreshold: 3
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /config
     service:
       main:
         controller: main
