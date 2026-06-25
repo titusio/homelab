@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate HelmReleases
-        uses: allenporter/flux-local/actions/test@v7
+        uses: allenporter/flux-local/actions/test@8.3.0
         with:
           enable-helm: true
           path: kubernetes
