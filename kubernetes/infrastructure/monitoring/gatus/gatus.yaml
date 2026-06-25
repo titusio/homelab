@@ -282,6 +282,15 @@ spec:
             - type: "matrix"
               send-on-resolve: true
               description: "Pihole is down"
+        - name: "📶 Speedtest Tracker"
+          group: "Networking"
+          url: "https://speed.tituslab.dev/api/healthcheck"
+          conditions:
+            - "[STATUS] == 200"
+          alerts:
+            - type: "matrix"
+              send-on-resolve: true
+              description: "Speedtest Tracker is down"
         - name: "🐙 Forgejo"
           group: "Source Control"
           url: "https://git.titusio.net"
