@@ -15,6 +15,11 @@ spec:
       version: 1.12.0
   interval: 1m0s
   values:
+    metrics:
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          release: prometheus
     persistence:
       defaultDataLocality: "best-effort"
       defaultClassReplicaCount: 2
