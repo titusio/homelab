@@ -50,6 +50,7 @@ spec:
                     name: speedtest-tracker-db-app
                     key: password
               DB_HOST: speedtest-tracker-db-rw.networking.svc.cluster.local
+              SPEEDTEST_SCHEDULE: "*/10 * * * *"
             probes:
               liveness:
                 enabled: true
