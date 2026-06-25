@@ -20,6 +20,9 @@ spec:
 
     prometheus:
       prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
         resources:
           requests:
             cpu: 200m
