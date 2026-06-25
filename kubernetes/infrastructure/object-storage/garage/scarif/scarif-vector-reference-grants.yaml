@@ -5,10 +5,16 @@ metadata:
   namespace: object-storage
 spec:
   from:
+    # photos
     - kind: GarageKey
       namespace: photos
     - kind: GarageBucket
       namespace: photos
+    # photos
+    - kind: GarageKey
+      namespace: cloud
+    - kind: GarageBucket
+      namespace: cloud
   to:
     - kind: GarageCluster
       name: scarif-vector

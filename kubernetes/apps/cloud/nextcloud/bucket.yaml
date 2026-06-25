@@ -1,0 +1,32 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: nextcloud
+  namespace: cloud
+spec:
+  clusterRef:
+    name: scarif-vector
+    namespace: object-storage
+  keyPermissions:
+    - keyRef:
+        name: nextcloud-s3-key
+      read: true
+      write: true
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: nextcloud-s3-key
+  namespace: cloud
+spec:
+  clusterRef:
+    name: scarif-vector
+    namespace: object-storage
+  name: plik
+  secretTemplate:
+    name: nextcloud-s3-key
+  bucketPermissions:
+    - bucketRef:
+        name: nextcloud
+      read: true
+      write: true
