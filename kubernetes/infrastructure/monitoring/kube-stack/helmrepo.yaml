@@ -6,4 +6,4 @@ metadata:
 spec:
   interval: 1h
   type: oci
-  url: oci://ghcr.io/prometheus-community/charts/
+  url: oci://ghcr.io/prometheus-community/charts
