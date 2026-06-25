@@ -5,34 +5,46 @@ metadata:
   namespace: object-storage
 spec:
   from:
+    # Photos
     - kind: GarageKey
       namespace: photos
     - kind: GarageBucket
       namespace: photos
+    # Chats
     - kind: GarageKey
       namespace: chats
     - kind: GarageBucket
       namespace: chats
+    # Cloud
     - kind: GarageKey
       namespace: cloud
     - kind: GarageBucket
       namespace: cloud
+    # productivity
     - kind: GarageKey
       namespace: productivity
     - kind: GarageBucket
       namespace: productivity
+    # source-control
     - kind: GarageKey
       namespace: source-control
     - kind: GarageBucket
       namespace: source-control
+    # monitoring
     - kind: GarageKey
       namespace: monitoring
     - kind: GarageBucket
       namespace: monitoring
+    # media
     - kind: GarageKey
       namespace: media
     - kind: GarageBucket
       namespace: media
+    # networking
+    - kind: GarageKey
+      namespace: networking
+    - kind: GarageBucket
+      namespace: networking
   to:
     - kind: GarageCluster
       name: scarif-depot

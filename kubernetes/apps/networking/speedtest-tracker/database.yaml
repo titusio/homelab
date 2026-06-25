@@ -1,0 +1,18 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: speedtest-tracker-db
+  namespace: networking
+spec:
+  instances: 3
+  storage:
+    size: 3Gi
+  bootstrap:
+    initdb:
+      database: speedtest-tracker
+      owner: speedtest-tracker
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: speedtest-tracker-db-backup

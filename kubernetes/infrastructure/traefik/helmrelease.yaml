@@ -147,6 +147,10 @@ spec:
             - kind: Secret
               name: garage-tls
               group: ""
+            - kind: Secret
+              name: networking-tls
+              group: ""
+
 
     service:
       annotations:
