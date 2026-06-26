@@ -185,7 +185,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /
+            value: /.well-known/matrix/
       backendRefs:
         - name: synapse-well-known
           port: 8010
