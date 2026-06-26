@@ -25,6 +25,12 @@ spec:
   name: plik
   secretTemplate:
     name: nextcloud-s3-key
+    # name
+    includeBucketName: true
+    bucketNameKey: bucket    
+    # access key
+    accessKeyIdKey: accessKeyId
+    secretAccessKeyKey: secretAccessKey
   bucketPermissions:
     - bucketRef:
         name: nextcloud
