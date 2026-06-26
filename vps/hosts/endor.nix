@@ -16,7 +16,7 @@ in {
       domain = "status.titusio.net";
       auth = {
         enable = true;
-        clientId = ""; # register app in Pocket ID and paste client ID here
+        clientId = "faa246bf-1c4f-49a6-98a3-db3ae538800b";
       };
       settings = {};
     };
