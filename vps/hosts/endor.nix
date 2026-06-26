@@ -7,10 +7,10 @@
   sshKeys = import ../ssh-keys.nix;
 in {
   vps = {
-    nixosFlakeHost = "corellian";
-    secrets.sopsFile = ../secrets/corellian.enc.yaml;
+    nixosFlakeHost = "endor";
+    secrets.sopsFile = ../secrets/endor.enc.yaml;
     nixStorage.enable = true;
-    nginx.enable = true;
+    pocketId.enable = true;
   };
 
   networking.firewall.allowedTCPPorts = [22 80 443];
@@ -22,10 +22,9 @@ in {
     efiInstallAsRemovable = true;
   };
 
-  networking.hostName = "corellian-run";
+  networking.hostName = "endor";
 
   users.users.root = {
-    hashedPassword = "$y$j9T$sm19yaRkje0AOBwW/pTRt.$MntXjJC6P.rGgdG64rvTOKATAxDoggPXyIADTBFx8B.";
     openssh.authorizedKeys.keys = sshKeys;
   };
 
@@ -34,7 +33,6 @@ in {
     description = "titus";
     extraGroups = ["networkmanager" "wheel"];
     openssh.authorizedKeys.keys = sshKeys;
-    hashedPassword = "$y$j9T$b4Dv7lAK98k1KzH7Ef1QM.$79C6YqFZCeA9.Zz5e6uO2TKmSjzqIttFDv6wbIDSMm9";
   };
 
   system.stateVersion = "26.05";

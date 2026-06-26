@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nextcloud-pvc-to-s3-migration
+  namespace: cloud
+spec:
+  ttlSecondsAfterFinished: 86400
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      volumes:
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: nextcloud-nextcloud
+      containers:
+        - name: rclone
+          image: rclone/rclone:1.68
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              OBSCURED=$(rclone obscure "$WEBDAV_PASS")
+              rclone sync "/data/${TARGET_USER}/files/" \
+                ":webdav,url=http://nextcloud.cloud.svc.cluster.local/remote.php/dav/files/${TARGET_USER}/,vendor=nextcloud,user=${WEBDAV_USER},pass=${OBSCURED}:" \
+                --progress \
+                --transfers=4 \
+                --checkers=8 \
+                --log-level=INFO
+          env:
+            - name: TARGET_USER
+              value: "89f19c1e96a141db4c29d3a61e42dce93f9240d2a9451db83d9096aeeb69058b"
+            - name: WEBDAV_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-admin-credentials
+                  key: username
+            - name: WEBDAV_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-admin-credentials
+                  key: password
+          volumeMounts:
+            - name: nextcloud-data
+              mountPath: /data
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

@@ -65,6 +65,19 @@ spec:
     persistence:
       enabled: true
       size: 70Gi
+    objectStore:
+      s3:
+        enabled: true
+        host: scarif-vector.object-storage.svc.cluster.local
+        port: 3900
+        ssl: false
+        usePathStyle: true
+        region: garage
+        existingSecret: nextcloud-s3-key
+        secretKeys:
+          accessKey: accessKeyId
+          secretKey: secretAccessKey
+          bucket: bucket
     collabora:
       enabled: true
       resources:
