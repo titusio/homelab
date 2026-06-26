@@ -7,14 +7,12 @@
   sshKeys = import ../ssh-keys.nix;
 in {
   vps = {
-    firewall.enable = true;
-    autoUpdate.enable = true;
-    webhook.enable = true;
-    secrets.enable = true;
+    nixosFlakeHost = "corellian";
     nixStorage.enable = true;
-    tailscale.enable = true;
     nginx.enable = true;
   };
+
+  networking.firewall.allowedTCPPorts = [22 80 443];
 
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -36,30 +34,6 @@ in {
     extraGroups = ["networkmanager" "wheel"];
     openssh.authorizedKeys.keys = sshKeys;
     hashedPassword = "$y$j9T$b4Dv7lAK98k1KzH7Ef1QM.$79C6YqFZCeA9.Zz5e6uO2TKmSjzqIttFDv6wbIDSMm9";
-  };
-
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    lazygit
-    neovim
-    git
-  ];
-
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "prohibit-password";
-    # we proxy 22 to the cluster because forgejo needs it.
-    ports = [20022];
-  };
-
-  programs.ssh.knownHosts = {
-    github = {
-      hostNames = ["github.com"];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-    };
   };
 
   system.stateVersion = "26.05";

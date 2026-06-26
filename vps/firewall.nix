@@ -8,9 +8,6 @@ in {
   options.vps.firewall.enable = lib.mkEnableOption "VPS firewall";
 
   config = lib.mkIf cfg.enable {
-    networking.firewall = {
-      enable = true;
-      allowedTCPPorts = [22 443 80 20022];
-    };
+    networking.firewall.enable = true;
   };
 }

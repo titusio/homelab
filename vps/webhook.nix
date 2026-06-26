@@ -12,7 +12,7 @@ in {
       description = "NixOS rebuild triggered by webhook";
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake git+ssh://git@github.com/titusio/homelab#corellian --refresh";
+        ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake git+ssh://git@github.com/titusio/homelab#${config.vps.nixosFlakeHost} --refresh";
         Environment = "HOME=/root PATH=/run/current-system/sw/bin";
       };
     };
