@@ -51,16 +51,7 @@ in {
     services.caddy.virtualHosts.${cfg.domain}.extraConfig =
       if cfg.auth.enable
       then ''
-        route /oauth2/* {
-          reverse_proxy localhost:4180
-        }
-        route {
-          forward_auth localhost:4180 {
-            uri /oauth2/auth
-            copy_headers X-Auth-Request-User X-Auth-Request-Email
-          }
-          reverse_proxy localhost:8080
-        }
+        reverse_proxy localhost:4180
       ''
       else ''
         reverse_proxy localhost:8080
