@@ -4,17 +4,15 @@
   lib,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
-    ./disk-config.nix
-    ./firewall.nix
-    ./auto-update.nix
-    ./webhook.nix
-    ./secrets.nix
-    ./nix-storage.nix
-    ./tailscale.nix
-    ./nginx.nix
-  ];
+  vps = {
+    firewall.enable = true;
+    autoUpdate.enable = true;
+    webhook.enable = true;
+    secrets.enable = true;
+    nixStorage.enable = true;
+    tailscale.enable = true;
+    nginx.enable = true;
+  };
 
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already

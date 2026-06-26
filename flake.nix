@@ -30,7 +30,8 @@
         modules = [
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
-          ./vps/configuration.nix
+          ./vps
+          ./vps/hosts/corellian-run.nix
         ];
       };
     }
