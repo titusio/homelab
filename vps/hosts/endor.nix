@@ -18,7 +18,18 @@ in {
         enable = true;
         clientId = "faa246bf-1c4f-49a6-98a3-db3ae538800b";
       };
-      settings = {};
+      settings = {
+        endpoints = [
+          {
+            name = "titusio.net";
+            url = "https://titusio.net";
+            conditions = [
+              "[STATUS] == 200"
+              "[BODY] == I was hoping for Kenobi"
+            ];
+          }
+        ];
+      };
     };
   };
 
