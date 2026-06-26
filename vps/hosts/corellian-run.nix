@@ -8,7 +8,7 @@
 in {
   vps = {
     nixosFlakeHost = "corellian";
-    secrets.sopsFile = ../secrets/corellian.enc.yaml;
+    secrets.sopsFile = ../../secrets/corellian.enc.yaml;
     nixStorage.enable = true;
     nginx.enable = true;
   };

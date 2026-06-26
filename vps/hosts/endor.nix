@@ -8,7 +8,7 @@
 in {
   vps = {
     nixosFlakeHost = "endor";
-    secrets.sopsFile = ../secrets/endor.enc.yaml;
+    secrets.sopsFile = ../../secrets/endor.enc.yaml;
     nixStorage.enable = true;
     pocketId.enable = true;
   };
