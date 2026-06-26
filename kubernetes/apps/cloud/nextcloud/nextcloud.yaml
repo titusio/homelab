@@ -28,6 +28,7 @@ spec:
       host: cloud.titusio.net
       trustedDomains:
         - cloud.titusio.net
+        - home.cloud.titusio.net
       configs:
         proxy.config.php: |-
           <?php

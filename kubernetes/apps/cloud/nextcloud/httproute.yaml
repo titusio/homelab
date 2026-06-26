@@ -13,6 +13,7 @@ spec:
       sectionName: websecure
   hostnames:
     - cloud.titusio.net
+    - home.cloud.titusio.net
   rules:
     - matches:
         - path:
