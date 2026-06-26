@@ -65,3 +65,53 @@ nixos-rebuild switch --flake .#corellian --target-host root@<server-ip>
 ```
 
 The flake is updated daily at midnight UTC via a GitHub Actions workflow, which opens and auto-merges a PR. The server then picks up the changes automatically at 04:00 UTC via `system.autoUpgrade`.
+
+## Endor
+
+Endor hosts [Pocket ID](https://github.com/pocket-id/pocket-id), an OIDC provider.
+
+### GitHub Deploy Key
+
+Add the following public key as a read-only deploy key on this repository:
+
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhnCqfm3j0JVl/JSTzfGtpX28TklBKxuIP85WgMk8f+ endor@homelab
+```
+
+### Install
+
+```shell
+# Generate age key (one time only)
+age-keygen -o secrets/endor.age
+
+# Get the public key and update .sops.yaml with it
+age-keygen -y secrets/endor.age
+
+# Encrypt it
+sops -e secrets/endor.age > secrets/endor.enc.age
+rm secrets/endor.age
+
+# Create and encrypt the secrets file
+sops secrets/endor.enc.yaml
+```
+
+To deploy:
+
+```shell
+# Decrypt the age key and stage it for nixos-anywhere
+mkdir -p .deploy/root/.config/sops/age
+sops -d secrets/endor.enc.age \
+  > .deploy/root/.config/sops/age/keys.txt
+chmod 600 .deploy/root/.config/sops/age/keys.txt
+
+# Deploy
+nix run github:nix-community/nixos-anywhere -- \
+  --extra-files .deploy \
+  --flake .#endor root@<server-ip>
+```
+
+### Update
+
+```shell
+nixos-rebuild switch --flake .#endor --target-host root@<server-ip>
+```
