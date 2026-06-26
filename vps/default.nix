@@ -15,6 +15,7 @@
     ./nginx.nix
     ./openssh.nix
     ./pocket-id.nix
+    ./gatus.nix
   ];
 
   vps = {

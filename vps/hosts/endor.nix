@@ -11,6 +11,15 @@ in {
     secrets.sopsFile = ../../secrets/endor.enc.yaml;
     nixStorage.enable = true;
     pocketId.enable = true;
+    gatus = {
+      enable = true;
+      domain = "status.titusio.net";
+      auth = {
+        enable = true;
+        clientId = ""; # register app in Pocket ID and paste client ID here
+      };
+      settings = {};
+    };
   };
 
   networking.firewall.allowedTCPPorts = [22 80 443];
