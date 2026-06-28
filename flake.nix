@@ -49,16 +49,28 @@
     }
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+      longhornctl = pkgs.buildGoModule {
+        pname = "longhornctl";
+        version = "1.10.2";
+        src = pkgs.fetchFromGitHub {
+          owner = "longhorn";
+          repo = "cli";
+          rev = "v1.10.2";
+          hash = "sha256-9A3GYiujRscoj1ivzBsCOQcqczgP1JS6u3KodRhgtPw=";
+        };
+        vendorHash = null;
+      };
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           talosctl
-          kubernetes-helm
+          # kubernetes-helm
           cilium-cli
           kubectl
           talhelper
           fluxcd
           just
+          longhornctl
         ];
         shellHook = "exec zsh";
       };
