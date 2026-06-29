@@ -14,7 +14,7 @@ spec:
       size: 10Gi
       storageClassName: longhorn-single
     data:
-      size: 50Gi
+      size: 10Gi
       storageClassName: longhorn-single
   gateway:
     replicas: 2
