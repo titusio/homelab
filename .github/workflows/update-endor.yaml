@@ -1,0 +1,24 @@
+name: Update Endor
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "vps/*.nix"
+      - "secrets/*"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    permissions:
+        packages: write
+    steps:
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
+          tags: tag:ci
+      - name: Trigger NixOS rebuild
+        run: curl -X POST http://endor:9000/hooks/nixos-rebuild
