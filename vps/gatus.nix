@@ -23,12 +23,43 @@ in {
         description = "OAuth2 client ID registered in Pocket ID";
       };
     };
+    ntfy = {
+      enable = lib.mkEnableOption "ntfy.sh alerting";
+      priority = lib.mkOption {
+        type = lib.types.int;
+        default = 2;
+        description = "ntfy message priority (1-5)";
+      };
+      failureThreshold = lib.mkOption {
+        type = lib.types.int;
+        default = 3;
+        description = "Number of consecutive failures before alerting";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets."gatus/ntfyUrl" = lib.mkIf cfg.ntfy.enable {};
+
+    sops.templates."gatus-env" = lib.mkIf cfg.ntfy.enable {
+      content = "NTFY_URL=${config.sops.placeholder."gatus/ntfyUrl"}\n";
+    };
+
+    systemd.services.gatus.serviceConfig.EnvironmentFiles =
+      lib.mkIf cfg.ntfy.enable [config.sops.templates."gatus-env".path];
+
     services.gatus = {
       enable = true;
-      settings = cfg.settings;
+      settings = lib.recursiveUpdate cfg.settings (lib.optionalAttrs cfg.ntfy.enable {
+        alerting.ntfy = {
+          topic = "\"$ENV{NTFY_URL}\"";
+          priority = cfg.ntfy.priority;
+          default-alert = {
+            failure-threshold = cfg.ntfy.failureThreshold;
+            send-on-resolved = true;
+          };
+        };
+      });
     };
 
     sops.secrets."gatus/oauth2ClientSecret" = lib.mkIf cfg.auth.enable {};
