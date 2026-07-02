@@ -14,6 +14,9 @@ spec:
       secretAccessKey:
         name: linkwarden-db-backup-ssd-s3
         key: ACCESS_SECRET_KEY
+      region:
+        name: linkwarden-db-backup-ssd-s3
+        key: REGION
     wal:
       compression: gzip
 ---

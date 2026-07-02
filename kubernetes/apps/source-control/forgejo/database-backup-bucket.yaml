@@ -14,6 +14,9 @@ spec:
       secretAccessKey:
         name: forgejo-db-backup-ssd-s3
         key: ACCESS_SECRET_KEY
+      region:
+        name: forgejo-db-backup-ssd-s3
+        key: REGION
     wal:
       compression: gzip
 ---

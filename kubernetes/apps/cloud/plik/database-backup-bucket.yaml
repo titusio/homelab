@@ -14,6 +14,9 @@ spec:
       secretAccessKey:
         name: plik-db-backup-ssd-s3
         key: ACCESS_SECRET_KEY
+      region:
+        name: plik-db-backup-ssd-s3
+        key: REGION
     wal:
       compression: gzip
 ---
