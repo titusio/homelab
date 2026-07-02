@@ -23,3 +23,14 @@ spec:
     persistence:
       defaultDataLocality: "best-effort"
       defaultClassReplicaCount: 2
+    # Tuning for budget SATA SSDs shared with etcd: keep a node reboot from
+    # triggering a self-sustaining replica rebuild storm.
+    defaultSettings:
+      # Tolerate multi-second write stalls instead of faulting replicas
+      # (default 8s is too low for these disks under load).
+      engineReplicaTimeout: 30
+      # One rebuild at a time per node so rebuild I/O doesn't saturate the
+      # disk and fault live replicas. Do NOT raise this.
+      concurrentReplicaRebuildPerNodeLimit: 1
+      # Skip snapshot checksum reads (extra I/O amplification during rebuilds).
+      snapshotDataIntegrity: disabled
