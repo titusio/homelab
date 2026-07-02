@@ -17,6 +17,7 @@ spec:
                 values:
                   - corellia
   storage:
+    storageClass: longhorn-single
     size: 5Gi
   bootstrap:
     initdb:
