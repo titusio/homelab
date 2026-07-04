@@ -20,6 +20,9 @@ spec:
 
     prometheus:
       prometheusSpec:
+        retention: 7d
+        # Safety cap so the TSDB can never fill the volume (whichever limit hits first)
+        retentionSize: 40GB
         serviceMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelector: {}
         serviceMonitorNamespaceSelector: {}
