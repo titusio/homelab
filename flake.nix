@@ -103,6 +103,7 @@
           just
           longhornctl
           k9s
+          kubectl-cnpg
         ];
         shellHook = "exec zsh";
       };
