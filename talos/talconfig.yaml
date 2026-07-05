@@ -1,5 +1,6 @@
 clusterName: core-worlds
 talosVersion: v1.13.5
+kubernetesVersion: v1.36.2
 # Image includes: siderolabs/iscsi-tools, siderolabs/tailscale, siderolabs/util-linux-tools
 endpoint: https://cluster.tituslab.dev:6443
 secretsFile: talsecret.sops.yaml
