@@ -102,6 +102,7 @@
           fluxcd
           just
           longhornctl
+          k9s
         ];
         shellHook = "exec zsh";
       };
