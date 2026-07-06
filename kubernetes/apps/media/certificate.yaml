@@ -15,6 +15,7 @@ spec:
     - prowlarr.tituslab.dev
     - sabnzbd.tituslab.dev
     - profiles.tituslab.dev
+    - lidarr.tituslab.dev
     # audiobookshelf certificates
     - shelf.tituslab.dev
     - abs.tituslab.dev
