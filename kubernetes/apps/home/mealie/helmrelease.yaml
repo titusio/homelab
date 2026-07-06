@@ -24,3 +24,5 @@ spec:
     # use the cnpg operator
     cluster:
       enabled: true
+      cluster:
+        instances: 3
