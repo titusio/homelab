@@ -35,3 +35,7 @@ spec:
     # seer
     - requests.tituslab.dev
     - requests.titushome.dev
+
+    # navidrome
+    - music.tituslab.dev
+    - music.titushome.dev
