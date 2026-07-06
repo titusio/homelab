@@ -4,8 +4,9 @@ metadata:
   name: grafana-db
   namespace: monitoring
 spec:
-  instances: 1
+  instances: 3
   storage:
+    storageClass: longhorn-single
     size: 1Gi
   bootstrap:
     initdb:

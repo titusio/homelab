@@ -4,21 +4,10 @@ metadata:
   name: gatus-db
   namespace: monitoring
 spec:
-  instances: 2
+  instances: 3
   storage:
     storageClass: longhorn-single
     size: 4Gi
-  affinity:
-    # corellia's cached postgresql:18.3 image is corrupt (exec format / I/O
-    # errors); exclude it until the node's containerd cache is cleaned.
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - corellia
   bootstrap:
     initdb:
       database: gatus
