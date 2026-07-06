@@ -25,6 +25,9 @@ spec:
     
     - audiobooks.titushome.dev
 
+    # achew
+    - audio-chapters.tituslab.dev
+
     # jellyfin
     - jellyfin.tituslab.dev
     - jellyfin.titushome.dev
