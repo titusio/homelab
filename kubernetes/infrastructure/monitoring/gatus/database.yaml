@@ -7,7 +7,7 @@ spec:
   instances: 2
   storage:
     storageClass: longhorn-single
-    size: 1Gi
+    size: 4Gi
   affinity:
     # corellia's cached postgresql:18.3 image is corrupt (exec format / I/O
     # errors); exclude it until the node's containerd cache is cleaned.
