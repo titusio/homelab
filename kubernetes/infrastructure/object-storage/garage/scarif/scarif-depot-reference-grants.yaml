@@ -45,6 +45,11 @@ spec:
       namespace: networking
     - kind: GarageBucket
       namespace: networking
+    # longhorn backups
+    - kind: GarageKey
+      namespace: longhorn-system
+    - kind: GarageBucket
+      namespace: longhorn-system
   to:
     - kind: GarageCluster
       name: scarif-depot

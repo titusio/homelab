@@ -34,3 +34,7 @@ spec:
       concurrentReplicaRebuildPerNodeLimit: 1
       # Skip snapshot checksum reads (extra I/O amplification during rebuilds).
       snapshotDataIntegrity: disabled
+    defaultBackupStore:
+      backupTarget: s3://longhorn-backup@garage/
+      backupTargetCredentialSecret: longhorn-backup-s3-key-merged
+  

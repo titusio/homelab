@@ -1,0 +1,113 @@
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: longhorn-backup
+  namespace: longhorn-system
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  keyPermissions:
+    - keyRef:
+        name: longhorn-backup-s3-key
+      read: true
+      write: true
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: longhorn-backup-s3-key
+  namespace: longhorn-system
+spec:
+  clusterRef:
+    name: scarif-depot
+    namespace: object-storage
+  name: longhorn-backup
+  secretTemplate:
+    name: longhorn-backup-s3-key
+    accessKeyIdKey: AWS_ACCESS_KEY_ID
+    secretAccessKeyKey: AWS_SECRET_ACCESS_KEY
+  bucketPermissions:
+    - bucketRef:
+        name: longhorn-backup
+      read: true
+      write: true
+---
+# ESO reads the GarageKey-generated secret (same namespace) via the Kubernetes
+# provider; the ServiceAccount below is what it authenticates as.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: longhorn-backup-secret-reader
+  namespace: longhorn-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: longhorn-backup-secret-reader
+  namespace: longhorn-system
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["authorization.k8s.io"]
+    resources: ["selfsubjectrulesreviews"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: longhorn-backup-secret-reader
+  namespace: longhorn-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: longhorn-backup-secret-reader
+subjects:
+  - kind: ServiceAccount
+    name: longhorn-backup-secret-reader
+    namespace: longhorn-system
+---
+apiVersion: external-secrets.io/v1
+kind: SecretStore
+metadata:
+  name: longhorn-backup-s3-key-merged
+  namespace: longhorn-system
+spec:
+  provider:
+    kubernetes:
+      remoteNamespace: longhorn-system
+      server:
+        caProvider:
+          type: ConfigMap
+          name: kube-root-ca.crt
+          key: ca.crt
+      auth:
+        serviceAccount:
+          name: longhorn-backup-secret-reader
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: longhorn-backup-s3-key-merged
+  namespace: longhorn-system
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: SecretStore
+    name: longhorn-backup-s3-key-merged
+  target:
+    name: longhorn-backup-s3-key-merged
+    creationPolicy: Owner
+    deletionPolicy: Retain
+    template:
+      engineVersion: v2
+      mergePolicy: Replace
+      data:
+        AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
+        AWS_ENDPOINTS: "http://scarif-depot.object-storage.svc.cluster.local:3900"
+        VIRTUAL_HOSTED_STYLE: "false"
+  dataFrom:
+    - extract:
+        key: longhorn-backup-s3-key
