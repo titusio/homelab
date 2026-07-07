@@ -1,0 +1,14 @@
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: daily-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 3 * * *"   # 03:00 every day
+  task: backup        # full backup to the S3 target (not just a local snapshot)
+  groups:
+    - default         # all volumes in Longhorn's default group
+  retain: 7           # keep the last 7 backups per volume, prune older
+  # One volume at a time: these SATA SSDs are shared with etcd, so a parallel
+  # backup fan-out would starve etcd I/O (same reasoning as the rebuild limits).
+  concurrency: 1
