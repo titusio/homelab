@@ -34,6 +34,10 @@ spec:
       concurrentReplicaRebuildPerNodeLimit: 1
       # Skip snapshot checksum reads (extra I/O amplification during rebuilds).
       snapshotDataIntegrity: disabled
+      # Even out replica count per node so one node (corellia) doesn't end up
+      # backing ~90% of volumes. Migrations honor the rebuild limit above
+      # (1/node), so rebalancing trickles instead of storming the shared SSD.
+      replicaAutoBalance: best-effort
     defaultBackupStore:
       backupTarget: s3://longhorn-backup@garage/
       backupTargetCredentialSecret: longhorn-backup-s3-key-merged
