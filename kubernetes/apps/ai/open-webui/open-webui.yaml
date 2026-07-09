@@ -46,6 +46,25 @@ spec:
     openaiApiKeyExistingSecret: "open-webui-secret"
     openaiApiKeyExistingSecretKey: "LITELLM_API_KEY"
 
+    # --- SSO via Pocket ID (OIDC) ---
+    # Register an OIDC client in Pocket ID with callback URL:
+    #   https://ai.tituslab.dev/oauth/oidc/callback
+    # clientId is not secret; the client secret lives in open-webui-oidc.
+    sso:
+      enabled: true
+      # Auto-provision new users from Pocket ID, and link them to an existing
+      # local account with the same email (e.g. the first-run admin account).
+      enableSignup: true
+      mergeAccountsByEmail: true
+      oidc:
+        enabled: true
+        providerName: "Pocket ID"
+        providerUrl: "https://id.titusio.net/.well-known/openid-configuration"
+        clientId: "62993696-2cb3-4d36-a7de-bd30ac59592e"
+        clientExistingSecret: "open-webui-oidc"
+        clientExistingSecretKey: "client-secret"
+        scopes: "openid email profile"
+
     # --- Shared state for HA ---
     # State is fully externalized so replicas are interchangeable and the pod's
     # local /app/backend/data can be an ephemeral emptyDir:
@@ -78,6 +97,9 @@ spec:
         enabled: false
 
     extraEnvVars:
+      # Public URL, so the OIDC redirect URI is correct behind traefik.
+      - name: WEBUI_URL
+        value: "https://ai.tituslab.dev"
       # Shared signing key so JWTs issued by one replica validate on the others.
       - name: WEBUI_SECRET_KEY
         valueFrom:

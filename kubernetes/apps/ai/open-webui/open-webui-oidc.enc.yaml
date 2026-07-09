@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: open-webui-oidc
+    namespace: ai
+type: Opaque
+stringData:
+    client-secret: ENC[AES256_GCM,data:1DWJaxC/41hMXe9VyXu34wzNZHgpL/ehqGEI/RTL8sk=,iv:ZrRnHzJX1K6UFHNjWIiUCjM+FprRHIqxQr9PdDuNuVY=,tag:P4mAQ9IeSvuZu5IqFUO7Vg==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZWUNsMGpOWG9jRlJsQ1hq
+            U2N2VlJzbUxHTkFzcUlhQlhrc0NLcm1SaUM0Cmdpa0tTMkZBMHNyRWlGUmEvaHRl
+            RnM4NDJid1E5M1lVbnNvamhqVG1ZdDQKLS0tIDhQalRFWFVhZzRKK1ZDdzl2eFNa
+            QVdaT01mZk9NOFhYcGFMekVGVE51ajgK4xlBMlCzjqkDVo58Zt8j+X11RUelL4Xb
+            sI4HNSNTapPtZohqQuubphEDVlM1n4GSUvHeOD+RPlx9MMbDjHSqjg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxakMzYWV5V3c5TFU3b2x3
+            UThwSWNLbit6ME1iTzZvUGhiUVpxakFHbURjCi8wb2ozMlREdVg2M2xYbHorRVBh
+            MHAvSWZiZk4wSEdzbVF0MkFMeTBkck0KLS0tIEl1eTc2em5lS0oxdEgxei9EUkpl
+            L2lQb3c5d0hna2QzS1RrSzdTWnN1dWcK7DCgJ+P+rHXEM75q4y2G4CkTok7tDIK2
+            2zTc7tGsdTGoMqnVdficGcjxkhpechcqk5r2gBgpLQLPdPB8ovIxaw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-07-09T11:34:07Z"
+    mac: ENC[AES256_GCM,data:Z/s664LzMIKugM6L6I0aHXNt67Oug7ds49EOy8mpj7M3ztKX3P5V1IYQNJWPqeGrjF33+EG9lDXVGpILOjONHZwoHU1J6D0wUazfDv7wU3xllRauOlhtSw5qCwlzxGC4ykYInFIRzak3Kzr0VUpQ/GHhWg1zZOcmC3APOOJFrtE=,iv:Mdfm00exUdedOYVBN9ZsLj1RZbRWmj2SjXmN7T1+0os=,tag:zInxmpGegfg9AGcHo2BXoQ==,type:str]
+    version: 3.13.1
