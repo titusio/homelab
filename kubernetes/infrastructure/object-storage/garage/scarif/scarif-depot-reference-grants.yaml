@@ -50,6 +50,11 @@ spec:
       namespace: longhorn-system
     - kind: GarageBucket
       namespace: longhorn-system
+    # ai
+    - kind: GarageKey
+      namespace: ai
+    - kind: GarageBucket
+      namespace: ai
   to:
     - kind: GarageCluster
       name: scarif-depot

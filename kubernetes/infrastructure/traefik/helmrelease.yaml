@@ -150,6 +150,9 @@ spec:
             - kind: Secret
               name: networking-tls
               group: ""
+            - kind: Secret
+              name: litellm-tls
+              group: ""
 
 
     service:
