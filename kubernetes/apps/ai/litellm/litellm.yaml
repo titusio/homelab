@@ -21,6 +21,7 @@ spec:
     environmentSecrets:
       - litellm-provider-keys
     db:
+      deployStandalone: false # disable the build in one
       useExisting: true
       endpoint: litellm-db-rw
       database: litellm
