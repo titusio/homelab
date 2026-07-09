@@ -1,0 +1,34 @@
+# Object storage for Open WebUI uploaded files (documents, images).
+# Lives on scarif-vector (SSD) rather than scarif-depot (HDD).
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageBucket
+metadata:
+  name: open-webui-data
+  namespace: ai
+spec:
+  clusterRef:
+    name: scarif-vector
+    namespace: object-storage
+  globalAlias: open-webui-data
+  quotas:
+    maxSize: 20Gi
+---
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageKey
+metadata:
+  name: open-webui-data-key
+  namespace: ai
+spec:
+  clusterRef:
+    name: scarif-vector
+    namespace: object-storage
+  bucketPermissions:
+    - bucketRef:
+        name: open-webui-data
+      read: true
+      write: true
+  secretTemplate:
+    name: open-webui-data-s3
+    accessKeyIdKey: ACCESS_KEY_ID
+    secretAccessKeyKey: ACCESS_SECRET_KEY
+    regionKey: REGION

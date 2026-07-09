@@ -1,0 +1,99 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: open-webui
+  namespace: ai
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: open-webui
+      version: 15.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: open-webui
+        namespace: ai
+  values:
+    fullnameOverride: open-webui
+    # --- HA: run multiple replicas, spread across nodes ---
+    replicaCount: 2
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: open-webui
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+
+    # No local Ollama; models are served through the litellm gateway below.
+    ollama:
+      enabled: false
+    pipelines:
+      enabled: false
+
+    # --- Model backend: litellm (OpenAI-compatible gateway in this namespace) ---
+    # Uses a litellm virtual key stored in the open-webui-secret template.
+    enableOpenaiApi: true
+    openaiBaseApiUrl: "http://litellm:4000/v1"
+    openaiApiKeyExistingSecret: "open-webui-secret"
+    openaiApiKeyExistingSecretKey: "LITELLM_API_KEY"
+
+    # --- Shared state for HA ---
+    # State is fully externalized so replicas are interchangeable and the pod's
+    # local /app/backend/data can be an ephemeral emptyDir:
+    #   - relational data  -> Postgres (DATABASE_URL, below)
+    #   - vector store      -> pgvector in the same Postgres (VECTOR_DB, below)
+    #   - uploaded files    -> S3 (scarif-vector), via persistence.provider
+    #   - websocket/session -> Redis (open-webui-valkey), via websocket.* below
+    persistence:
+      enabled: false
+      provider: s3
+      s3:
+        endpointUrl: "http://scarif-vector.object-storage.svc.cluster.local:3900"
+        region: "garage"
+        bucket: "open-webui-data"
+        accessKeyExistingSecret: "open-webui-data-s3"
+        accessKeyExistingAccessKey: "ACCESS_KEY_ID"
+        secretKeyExistingSecret: "open-webui-data-s3"
+        secretKeyExistingSecretKey: "ACCESS_SECRET_KEY"
+
+    # Redis-backed websocket manager, pointed at the external open-webui-valkey
+    # release. The bundled Redis is disabled. The full redis:// URL (with the
+    # ACL password) lives in the open-webui-valkey secret; the chart wires it
+    # into both REDIS_URL and WEBSOCKET_REDIS_URL.
+    websocket:
+      enabled: true
+      manager: redis
+      existingSecret: "open-webui-valkey"
+      existingSecretKey: "redis-url"
+      redis:
+        enabled: false
+
+    extraEnvVars:
+      # Shared signing key so JWTs issued by one replica validate on the others.
+      - name: WEBUI_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-secret
+            key: WEBUI_SECRET_KEY
+      # CNPG-generated connection URI for the open-webui-db cluster.
+      - name: DATABASE_URL
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-db-app
+            key: uri
+      # Keep the vector store in Postgres (pgvector) instead of per-pod ChromaDB
+      # so RAG/knowledge is consistent across replicas.
+      - name: VECTOR_DB
+        value: "pgvector"
+      - name: PGVECTOR_DB_URL
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-db-app
+            key: uri

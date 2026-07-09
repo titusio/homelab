@@ -151,7 +151,7 @@ spec:
               name: networking-tls
               group: ""
             - kind: Secret
-              name: litellm-tls
+              name: ai-tls
               group: ""
 
 

@@ -15,6 +15,11 @@ spec:
       namespace: cloud
     - kind: GarageBucket
       namespace: cloud
+    # ai
+    - kind: GarageKey
+      namespace: ai
+    - kind: GarageBucket
+      namespace: ai
   to:
     - kind: GarageCluster
       name: scarif-vector

@@ -1,12 +1,14 @@
+# Single certificate covering all hostnames served out of the ai namespace.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: litellm-tls
+  name: ai-tls
   namespace: traefik
 spec:
-  secretName: litellm-tls
+  secretName: ai-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
     - litellm.tituslab.dev
+    - ai.tituslab.dev
