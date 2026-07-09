@@ -27,9 +27,11 @@ spec:
     resources:
       requests:
         cpu: 100m
-        memory: 512Mi
-      limits:
         memory: 1Gi
+      limits:
+        # Open WebUI loads a sentence-transformers embedding model into RAM at
+        # startup; 1Gi OOMKills it during migration. 3Gi gives headroom.
+        memory: 3Gi
 
     # No local Ollama; models are served through the litellm gateway below.
     ollama:
