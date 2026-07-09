@@ -100,6 +100,10 @@ spec:
       # Public URL, so the OIDC redirect URI is correct behind traefik.
       - name: WEBUI_URL
         value: "https://ai.tituslab.dev"
+      # New accounts (incl. OIDC signups) are active immediately instead of
+      # landing in the default "pending" state that needs admin approval.
+      - name: DEFAULT_USER_ROLE
+        value: "user"
       # Shared signing key so JWTs issued by one replica validate on the others.
       - name: WEBUI_SECRET_KEY
         valueFrom:
