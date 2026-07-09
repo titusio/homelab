@@ -1,0 +1,17 @@
+---
+# Connection config for the TrueNAS CSI driver -> scarif (10.0.10.10)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: truenas-csi-config
+  namespace: truenas-csi
+data:
+  # WebSocket API endpoint on scarif
+  truenasURL: "wss://10.0.10.10/api/current"
+  # scarif uses a self-signed cert on its IP -> skip verification
+  truenasInsecure: "true"
+  # ZFS pool that backs these volumes
+  defaultPool: "applications"
+  # NFS + iSCSI service addresses (same host)
+  nfsServer: "10.0.10.10"
+  iscsiPortal: "10.0.10.10:3260"

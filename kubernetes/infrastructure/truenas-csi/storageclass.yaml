@@ -1,0 +1,35 @@
+---
+# Primary target for bulk + RWX volumes offloaded from Longhorn.
+# NFS gives native ReadWriteMany; ZFS handles redundancy/snapshots on scarif.
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: truenas-nfs
+provisioner: csi.truenas.io
+parameters:
+  protocol: "nfs"
+  compression: "LZ4"
+  # Restrict NFS export to the k8s node subnet
+  nfs.hosts: "10.0.40.0/24"
+# Retain so deleting a PVC never silently drops data on the NAS.
+# Flip to Delete once you trust the flow.
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+---
+# Optional block class. DBs stay on Longhorn for now, so this is unused today
+# but handy later. Talos already ships iscsi-tools (Longhorn needs it), so it
+# will work without extra node config.
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: truenas-iscsi
+provisioner: csi.truenas.io
+parameters:
+  protocol: "iscsi"
+  compression: "LZ4"
+  volblocksize: "16K"
+  iscsi.blocksize: "4096"
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
