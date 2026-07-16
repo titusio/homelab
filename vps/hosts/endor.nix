@@ -35,6 +35,11 @@ in {
     };
   };
 
+  services.caddy.virtualHosts."nextcloud.titusio.net".extraConfig = ''
+    # scarif tailscale ip
+    reverse_proxy 100.118.60.94:30027
+  '';
+
   networking.firewall.allowedTCPPorts = [22 80 443];
 
   boot.loader.grub = {
