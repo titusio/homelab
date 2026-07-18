@@ -36,6 +36,9 @@ in {
   };
 
   services.caddy.virtualHosts."nextcloud.titusio.net".extraConfig = ''
+    header {
+      Strict-Transport-Security "max-age=15552000; includeSubDomains"
+    }
     # scarif tailscale ip
     reverse_proxy 100.118.60.94:30027
   '';
