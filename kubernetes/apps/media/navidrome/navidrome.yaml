@@ -20,7 +20,7 @@ spec:
           main:
             image:
               repository: deluan/navidrome
-              tag: 0.62.0
+              tag: 0.63.2
             probes:
               liveness:
                 enabled: true
