@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./caddy.nix
+    ./proxy.nix
     ./hardware-configuration.nix
     ./disk-config.nix
     ./firewall.nix

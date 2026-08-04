@@ -33,6 +33,7 @@ in {
         ];
       };
     };
+    proxy.enable = true;
   };
 
   services.caddy.virtualHosts."nextcloud.titusio.net".extraConfig = ''
