@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./caddy.nix
     ./hardware-configuration.nix
     ./disk-config.nix
     ./firewall.nix
@@ -25,6 +26,7 @@
     webhook.enable = lib.mkDefault true;
     autoUpdate.enable = lib.mkDefault true;
     openssh.enable = lib.mkDefault true;
+    caddy.enable = lib.mkDefault true;
   };
 
   nixpkgs.config.allowUnfree = true;

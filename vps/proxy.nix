@@ -45,6 +45,9 @@ in {
         name = "${v.subdomain}.${v.domain}";
         value = {
           extraConfig = ''
+            tls {
+              dns hetzner {env.HZTOKEN}
+            }
             reverse_proxy ${v.ip}:${toString v.port}
           '';
         };
