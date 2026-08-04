@@ -18,7 +18,7 @@ jobs:
       - name: Build (expected to fail on stale hash)
         id: build
         continue-on-error: true
-        run: nix build .#nixosConfigurations.OTHERHOST.config.system.build.toplevel -L
+        run: nix build .#nixosConfigurations.endor.config.system.build.toplevel -L
 
       - name: Fix hash if build failed
         if: steps.build.outcome == 'failure'
