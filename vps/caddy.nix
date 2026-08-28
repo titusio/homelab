@@ -21,7 +21,7 @@ in {
         plugins = [
           "github.com/caddy-dns/hetzner/v2@v2.0.0"
         ];
-        hash = "sha256-4jKMnjm6rD+gCNlR6w5Y/qexUIr6X2qcWsLC9ly9dRs=";
+        hash = "sha256-EseUjOQ2wIvI/sHbP5pCFyTLKgfI989i44Mwe0qCikI=";
       };
     };
   };
