@@ -31,7 +31,8 @@ in {
 
     environment = {
       MEDIA_DIR = "/music";
-      ORIGIN = "${origin}"; # must match PUBLIC_ORIGIN
+      # parsed with new URL(), so the scheme is required
+      ORIGIN = "https://${origin}"; # must match PUBLIC_ORIGIN
     };
   };
 
