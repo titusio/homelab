@@ -29,6 +29,9 @@
     caddy.enable = lib.mkDefault true;
   };
 
+  # nh, system.autoUpgrade and the rebuild webhook all deploy from a flake
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
