@@ -1,3 +1,4 @@
+.DS_Store
 .deploy/
 secrets/*.key
 secrets/*.age

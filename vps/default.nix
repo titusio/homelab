@@ -14,7 +14,6 @@
     ./secrets.nix
     ./nix-storage.nix
     ./tailscale.nix
-    ./nginx.nix
     ./openssh.nix
     ./pocket-id.nix
     ./gatus.nix

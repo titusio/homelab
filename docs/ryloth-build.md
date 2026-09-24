@@ -5,7 +5,7 @@
 A GitHub Action joins your Tailscale network as an ephemeral node on every push to `main`, then fires an HTTP webhook at a server on your tailnet.
 
 ```
-GitHub Push → Action Runner joins tailnet (tag:ci) → curl → corellian:9000 → NixOS rebuild
+GitHub Push → Action Runner joins tailnet (tag:ci) → curl → ryloth:9000 → NixOS rebuild
 ```
 
 ## Setup
@@ -46,7 +46,7 @@ Create an OAuth client at **Settings → OAuth clients** with:
     tags: tag:ci
 
 - name: Trigger NixOS rebuild
-  run: curl -X POST http://corellian:9000/hooks/nixos-rebuild
+  run: curl -X POST http://ryloth:9000/hooks/nixos-rebuild
 ```
 
 ## Gotchas

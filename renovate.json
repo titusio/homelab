@@ -16,6 +16,18 @@
       "/kubernetes/.+\\.ya?ml$/"
     ]
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Container images pinned in NixOS host modules",
+      "managerFilePatterns": ["/^vps/.+\\.nix$/"],
+      "matchStrings": [
+        "image\\s*=\\s*\"(?<depName>[^\"\\s]+):(?<currentValue>[^\":\\s]+)\""
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
+  ],
   "packageRules": [
     {
       "description": "Disable nix — handled by update-flake.yml",
@@ -23,8 +35,16 @@
       "enabled": false
     },
     {
+      "description": "Auto-merge swiftster bumps; the rebuild webhook picks them up",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/titusio/swiftster"],
+      "automerge": true,
+      "automergeType": "pr",
+      "matchUpdateTypes": ["digest", "patch", "minor"]
+    },
+    {
       "description": "Group infrastructure chart updates into one PR",
-      "matchPaths": ["kubernetes/infrastructure/**"],
+      "matchFileNames": ["kubernetes/infrastructure/**"],
       "groupName": "infrastructure",
       "groupSlug": "infrastructure"
     },

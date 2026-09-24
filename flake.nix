@@ -22,18 +22,6 @@
     ...
   }:
     {
-      nixosConfigurations.corellian = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        specialArgs = {inherit inputs;};
-
-        modules = [
-          disko.nixosModules.disko
-          sops-nix.nixosModules.sops
-          ./vps
-          ./vps/hosts/corellian-run.nix
-        ];
-      };
       nixosConfigurations.endor = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
@@ -44,6 +32,18 @@
           sops-nix.nixosModules.sops
           ./vps
           ./vps/hosts/endor.nix
+        ];
+      };
+      nixosConfigurations.ryloth = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        specialArgs = {inherit inputs;};
+
+        modules = [
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          ./vps
+          ./vps/hosts/ryloth.nix
         ];
       };
     }
