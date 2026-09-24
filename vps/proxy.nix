@@ -41,6 +41,9 @@ in {
   options.vps.proxy.enable = lib.mkEnableOption "proxying for my parents";
 
   config = lib.mkIf cfg.enable {
+    # the vhosts below solve DNS-01 against Hetzner
+    vps.caddy.hetzner.enable = true;
+
     services.caddy.virtualHosts = builtins.listToAttrs (map (v: {
         name = "${v.subdomain}.${v.domain}";
         value = {
