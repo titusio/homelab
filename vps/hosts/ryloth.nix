@@ -5,7 +5,7 @@
   ...
 }: let
   sshKeys = import ../ssh-keys.nix;
-  mediaDir = "/mnt/media";
+  mediaDir = "/var/lib/swiftster/media";
   port = 3000;
   origin = "hitdeck.de";
 in {
@@ -34,6 +34,9 @@ in {
       ORIGIN = "${origin}"; # must match PUBLIC_ORIGIN
     };
   };
+
+  # podman refuses to start when a bind mount's source is missing
+  systemd.tmpfiles.rules = ["d ${mediaDir} 0755 root root -"];
 
   services.caddy.virtualHosts."${origin}".extraConfig = ''
     reverse_proxy 127.0.0.1:${toString port}
