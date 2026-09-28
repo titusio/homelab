@@ -33,6 +33,7 @@ in {
       MEDIA_DIR = "/music";
       # parsed with new URL(), so the scheme is required
       ORIGIN = "https://${origin}"; # must match PUBLIC_ORIGIN
+      APP_NAME = "Hitdeck";
     };
   };
 
