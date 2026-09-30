@@ -47,17 +47,17 @@
         ];
       };
       nixosConfigurations.mandalore = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
+        system = "x86_64-linux";
 
-              specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs;};
 
-              modules = [
-                disko.nixosModules.disko
-                sops-nix.nixosModules.sops
-                ./vps
-                ./vps/hosts/mandalore.nix
-              ];
-            };
+        modules = [
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          ./vps
+          ./vps/hosts/mandalore.nix
+        ];
+      };
     }
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
