@@ -1,5 +1,6 @@
 .DS_Store
 .deploy/
+.direnv/
 secrets/*.key
 secrets/*.age
 secrets/*.yaml

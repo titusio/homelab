@@ -116,8 +116,23 @@
           longhornctl
           k9s
           kubectl-cnpg
+
+          # nix tooling: nil is the language server, alejandra the formatter
+          # it shells out to (nil.formatting.command) and `nix fmt` runs.
+          nil
+          alejandra
         ];
-        shellHook = "exec zsh";
+        shellHook = ''
+          # Interactive `nix develop` lands in bash; hand over to zsh instead.
+          # Skipped for `nix develop -c ...`, builds and direnv, which are not
+          # interactive -- direnv evals this hook in a child shell that the
+          # exec would otherwise replace.
+          if [[ $- == *i* ]] && command -v zsh >/dev/null; then
+            exec zsh
+          fi
+        '';
       };
+
+      formatter = pkgs.alejandra;
     });
 }
