@@ -3,11 +3,17 @@ keys:
   - &titus age1ywn62vszqd5n9g4v3rphmqc620t7u852xzctzk80afp4vu57n45qdqhlem
   - &coreWorld age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
   - &endor age1j5ne52urxymg4kahawwv4z834rupxrgrrte7ts9k7uvzd04q5fqsfaynxy
+  - &mandalore age1ruuywqqac380gfpwhuddarttulqpty9l7u7tqaeewr4y30dt4fqqred3gv
 creation_rules:
   - path_regex: secrets/ryloth\.enc\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *ryloth
+      - *titus
+  - path_regex: secrets/mandalore\.enc\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *mandalore
       - *titus
   - path_regex: secrets/endor\.enc\.(yaml|json|env|ini)$
     key_groups:
@@ -24,6 +30,6 @@ creation_rules:
       - *titus
   - path_regex: kubernetes/.*\.enc.yaml$
     encrypted_regex: ^(data|stringData)$
-    age: 
+    age:
       - *coreWorld
       - *titus
