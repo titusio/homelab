@@ -13,13 +13,26 @@ in {
   };
 
   services.caddy = {
-      enable = true;
-      virtualHosts."pixelfed.whiled.net" = {
-        extraConfig = ''
-          reverse_proxy 127.0.0.1:8080
-        '';
-      };
+    enable = true;
+    virtualHosts."pixelfed.whiled.net" = {
+      extraConfig = ''
+        reverse_proxy 127.0.0.1:8080
+      '';
     };
+  };
+
+  # Pixelfed reads its mail and app credentials from this rendered env file.
+  # Both secrets live in the host's sops file (vps.secrets.sopsFile above).
+  sops.secrets = {
+    "mailgun/apiKey" = {};
+    "pixelfed/appKey" = {};
+  };
+
+  sops.templates."pixelfed.env".content = ''
+    MAIL_USERNAME=mail.whiled.net
+    MAIL_PASSWORD=${config.sops.placeholder."mailgun/apiKey"}
+    APP_KEY=${config.sops.placeholder."pixelfed/appKey"}
+  '';
 
   networking.firewall.allowedTCPPorts = [80 443];
 
@@ -47,12 +60,10 @@ in {
     linger = true;
   };
 
+  # lazygit, neovim and git come from vps/default.nix
   environment.systemPackages = with pkgs; [
-      lazygit
-      neovim
-      git
-      unixtools.netstat
-    ];
+    unixtools.netstat
+  ];
 
   system.stateVersion = "26.05";
 }
