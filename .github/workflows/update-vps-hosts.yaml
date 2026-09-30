@@ -1,4 +1,4 @@
-name: Update Endor
+name: Update VPS Hosts
 on:
   workflow_dispatch:
   push:
@@ -20,5 +20,9 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: tag:ci
-      - name: Trigger NixOS rebuild
+      - name: Trigger Endor rebuild
         run: curl -X POST http://endor:9000/hooks/nixos-rebuild
+      - name: Trigger Ryloth rebuild
+        run: curl -X POST http://ryloth:9000/hooks/nixos-rebuild
+      - name: Trigger Mandalore rebuild
+        run: curl -X POST http://mandalore:9000/hooks/nixos-rebuild
