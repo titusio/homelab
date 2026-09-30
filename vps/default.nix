@@ -17,6 +17,7 @@
     ./openssh.nix
     ./pocket-id.nix
     ./gatus.nix
+    ./podman.nix
   ];
 
   vps = {

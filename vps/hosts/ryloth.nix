@@ -13,10 +13,8 @@ in {
     nixosFlakeHost = "ryloth";
     secrets.sopsFile = ../../secrets/ryloth.enc.yaml;
     nixStorage.enable = true;
+    podman.enable = true;
   };
-
-  virtualisation.podman.enable = true;
-  virtualisation.oci-containers.backend = "podman";
 
   virtualisation.oci-containers.containers.swiftster = {
     # Pinned so a rebuild is reproducible; the customManager in

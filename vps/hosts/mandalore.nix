@@ -10,6 +10,8 @@ in {
     nixosFlakeHost = "mandalore";
     secrets.sopsFile = ../../secrets/mandalore.enc.yaml;
     nixStorage.enable = true;
+    # Pixelfed runs as a container behind the Caddy vhost below
+    podman.enable = true;
   };
 
   services.caddy = {
@@ -43,7 +45,7 @@ in {
     efiInstallAsRemovable = true;
   };
 
-  networking.hostName = "endor";
+  networking.hostName = "mandalore";
 
   users.users.root = {
     openssh.authorizedKeys.keys = sshKeys;
