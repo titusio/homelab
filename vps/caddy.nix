@@ -33,7 +33,7 @@ in {
           plugins = [
             "github.com/caddy-dns/hetzner/v2@v2.0.0"
           ];
-          hash = "sha256-EseUjOQ2wIvI/sHbP5pCFyTLKgfI989i44Mwe0qCikI=";
+          hash = "sha256-58TvyzSDPbcNDIarTkqM6yLVG7WnejbhiI4rN70RCtI=";
         };
       };
     })
