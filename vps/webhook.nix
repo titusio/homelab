@@ -10,6 +10,9 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.nixos-rebuild-webhook = {
       description = "NixOS rebuild triggered by webhook";
+      # the switch would otherwise stop and restart this unit while it's still
+      # running the switch, killing the rebuild and starting another one
+      restartIfChanged = false;
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake git+ssh://git@github.com/titusio/homelab#${config.vps.nixosFlakeHost} --refresh";

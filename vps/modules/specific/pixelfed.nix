@@ -233,6 +233,13 @@ in {
       };
     };
 
+    # arion talks to podman through the /run/docker.sock symlink, which only
+    # exists once podman.socket is up
+    systemd.services.arion-pixelfed = {
+      requires = ["podman.socket"];
+      after = ["podman.socket"];
+    };
+
     # bind mount sources have to exist; the pixelfed image runs as www-data (33)
     # and doesn't chown its storage, mysql and redis fix up their own dirs
     systemd.tmpfiles.rules = [
