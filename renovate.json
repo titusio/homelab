@@ -43,6 +43,14 @@
       "matchUpdateTypes": ["digest", "patch", "minor"]
     },
     {
+      "description": "Keep Pixelfed's mysql on the 8.4 LTS line and redis on 7; majors are manual",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["mysql", "redis"],
+      "matchFileNames": ["vps/**"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
       "description": "Group infrastructure chart updates into one PR",
       "matchFileNames": ["kubernetes/infrastructure/**"],
       "groupName": "infrastructure",

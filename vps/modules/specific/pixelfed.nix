@@ -147,7 +147,7 @@ in {
       package = (import arionSrc {inherit pkgs;}).arion;
       projects.pixelfed.settings.services = {
         db.service = {
-          image = "mysql:8";
+          image = "mysql:8.4.11";
           container_name = "pixelfed-db";
           restart = "unless-stopped";
           env_file = [config.sops.templates."pixelfed-db.env".path];
@@ -168,7 +168,7 @@ in {
         };
 
         redis.service = {
-          image = "redis:7-alpine";
+          image = "redis:7.4.11-alpine";
           container_name = "pixelfed-redis";
           restart = "unless-stopped";
           command = ["redis-server" "--appendonly" "yes"];
