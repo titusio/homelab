@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   inputs,
   ...
 }: let
@@ -103,6 +104,18 @@
   };
 
   secret = name: config.sops.placeholder."pixelfed/${name}";
+
+  # arion's NixOS container module still sets services.journald.console, which
+  # nixpkgs removed; the failed assertion breaks arion's test suite
+  arionSrc = pkgs.applyPatches {
+    name = "arion-src";
+    src = inputs.arion;
+    postPatch = ''
+      substituteInPlace src/nix/modules/nixos/container-systemd.nix \
+        --replace-fail 'services.journald.console = "/dev/console";' \
+          'services.journald.settings.Journal = { ForwardToConsole = true; TTYPath = "/dev/console"; };'
+    '';
+  };
 in {
   imports = [inputs.arion.nixosModules.arion];
 
@@ -131,6 +144,7 @@ in {
 
     virtualisation.arion = {
       backend = "podman-socket";
+      package = (import arionSrc {inherit pkgs;}).arion;
       projects.pixelfed.settings.services = {
         db.service = {
           image = "mysql:8";
