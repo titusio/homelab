@@ -133,7 +133,7 @@ in {
       backend = "podman-socket";
       projects.pixelfed.settings.services = {
         db.service = {
-          image = "mysql:8";
+          image = "mysql:26";
           container_name = "pixelfed-db";
           restart = "unless-stopped";
           env_file = [config.sops.templates."pixelfed-db.env".path];
