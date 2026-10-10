@@ -18,7 +18,7 @@
     ./pocket-id.nix
     ./gatus.nix
     ./podman.nix
-    ./modules/specific
+    ./specific
   ];
 
   vps = {
