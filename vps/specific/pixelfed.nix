@@ -147,7 +147,7 @@ in {
       package = (import arionSrc {inherit pkgs;}).arion;
       projects.pixelfed.settings.services = {
         db.service = {
-          image = "mysql:8.4.11";
+          image = "mysql:8.4.13";
           container_name = "pixelfed-db";
           restart = "unless-stopped";
           env_file = [config.sops.templates."pixelfed-db.env".path];
