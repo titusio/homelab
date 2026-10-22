@@ -9,7 +9,7 @@
   dataDir = "/var/lib/pixelfed";
   domain = "pixelfed.whiled.net";
   port = 8080;
-  image = "ghcr.io/pixelfed/pixelfed:v0.15.1";
+  image = "ghcr.io/pixelfed/pixelfed:v0.15.2";
 
   # non-secret part of the upstream .env; the secrets come in via the sops
   # templates below
