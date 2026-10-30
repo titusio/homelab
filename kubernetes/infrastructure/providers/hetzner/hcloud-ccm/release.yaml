@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  # Must stay "hccm" to match the release name of the manual `helm install`
+  # this replaces, so Flux adopts it in place instead of conflicting.
+  name: hccm
+  namespace: kube-system
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: hcloud-cloud-controller-manager
+      version: "1.39.2"
+      sourceRef:
+        kind: HelmRepository
+        name: hcloud
+        namespace: kube-system
+      interval: 1h
+  values:
+    env:
+      HCLOUD_TOKEN:
+        valueFrom:
+          secretKeyRef:
+            name: hetzner-cloud-key
+            key: token

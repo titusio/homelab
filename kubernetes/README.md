@@ -6,16 +6,30 @@ GitOps managed with [Flux](https://fluxcd.io/).
 
 ```
 kubernetes/
-├── flux-system/       # Flux components (generated, do not edit)
-└── infrastructure/    # Cluster infrastructure
-    └── kube-system/
-        └── cilium/    # CNI
+├── clusters/
+│   └── outerrim/
+│       ├── flux-system/       # Flux components (generated, do not edit)
+│       ├── secrets/            # SOPS-encrypted secrets for this cluster only
+│       ├── infrastructure.yaml # Kustomization -> infrastructure/outerrim
+│       └── apps.yaml           # Kustomization -> apps/outerrim
+├── infrastructure/
+│   ├── base/
+│   │   └── cilium/             # CNI, shared by every cluster
+│   ├── providers/
+│   │   └── hetzner/            # provider-specific infra, opt-in per cluster
+│   └── outerrim/                # per-cluster selection of base/ + providers/
+└── apps/
+    ├── <app>/                  # one folder per app, shared definition
+    └── outerrim/                # per-cluster selection of apps
 ```
 
 ## Bootstrapping
 
-After a fresh cluster (or full reset), Cilium must be installed manually before Flux can run —
-Flux pods need a working CNI, but Cilium is otherwise managed by Flux.
+After a fresh cluster (or full reset), Cilium and the Hetzner Cloud Controller Manager must be
+installed manually before Flux can run — Flux pods need a working CNI, and Talos nodes come up
+with the `node.cloudprovider.kubernetes.io/uninitialized` taint (from `externalCloudProvider` in
+`talconfig.yaml`) until hccm removes it, so nothing schedules until both are up. Both are
+otherwise managed by Flux afterwards.
 
 ### Prerequisites
 
@@ -33,7 +47,7 @@ helm repo add cilium https://helm.cilium.io/
 helm repo update
 
 helm install cilium cilium/cilium \
-  --version 1.18.0 \
+  --version 1.20.4 \
   --namespace kube-system \
   --set ipam.mode=kubernetes \
   --set kubeProxyReplacement=true \
@@ -53,21 +67,73 @@ Wait for Cilium to be ready before continuing:
 kubectl -n kube-system rollout status daemonset/cilium
 ```
 
-### 2. Bootstrap Flux
+### 2. Install the Hetzner Cloud Controller Manager manually
+
+The node stays tainted (`node.cloudprovider.kubernetes.io/uninitialized:NoSchedule`) until hccm
+runs and confirms the node with the Hetzner API, so this has to happen before anything else
+(including Flux) can schedule normally.
+
+Create the `hetzner-cloud-key` secret with a [Hetzner API token](https://console.hetzner.cloud/)
+(read+write, scoped to this project):
+
+```bash
+kubectl create secret generic hetzner-cloud-key \
+  --namespace kube-system \
+  --from-literal=token=<HCLOUD_TOKEN>
+```
+
+Then install hccm:
+
+```bash
+helm repo add hcloud https://charts.hetzner.cloud
+helm repo update
+
+helm install hccm hcloud/hcloud-cloud-controller-manager \
+  --version 1.39.2 \
+  --namespace kube-system
+```
+
+Wait for the taint to clear and the node to go `Ready`:
+
+```bash
+kubectl get nodes -o wide
+```
+
+### 3. Create the SOPS decryption secret
+
+Secrets for this cluster live SOPS-encrypted in git under
+`clusters/outerrim/secrets/` (only the `.sops.yaml` rule for this cluster's own path can decrypt
+them — other clusters can't), decrypted in-cluster by Flux. Only the `data`/`stringData` fields
+are encrypted; everything else (`apiVersion`, `kind`, `metadata`, ...) stays plaintext so diffs
+stay readable. Create the `sops-age` secret Flux decrypts them with:
+
+```bash
+just create-sops-secret
+```
+
+This decrypts `secrets/outerrim.enc.age` (the cluster's dedicated age identity, itself
+SOPS-encrypted with your personal key) and loads it into the `flux-system` namespace.
+
+### 4. Bootstrap Flux
 
 ```bash
 flux bootstrap github \
   --owner=titusio \
   --repository=homelab \
   --branch=main \
-  --path=kubernetes \
-  --token-auth
+  --path=kubernetes/clusters/outerrim \
+  --token-auth \
+  --decryption-provider=sops \
+  --decryption-secret=sops-age
 ```
 
 This creates the `flux-system` secret in the cluster with the GitHub token. If the manifests in
-`flux-system/` are unchanged, no new commit is made.
+`flux-system/` are unchanged, no new commit is made. The `--decryption-*` flags keep the
+decryption config in `flux-system/gotk-sync.yaml` across bootstrap reruns.
 
-Flux will then take over managing Cilium via the HelmRelease in `infrastructure/kube-system/cilium/`.
+Flux will then take over managing Cilium via the HelmRelease in `infrastructure/base/cilium/`,
+and any provider-specific infra (e.g. `infrastructure/providers/hetzner/`) along with the
+secrets it needs from `secrets.enc.yaml`.
 
 ### Verify
 
