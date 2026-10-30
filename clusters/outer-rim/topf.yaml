@@ -1,0 +1,10 @@
+kubernetesVersion: 1.37.1
+talosVersion: 1.15.4
+clusterEndpoint: https://k8s.tituscloud.dev:6443
+clusterName: outerrim
+secretsPath: secrets.enc.yaml
+
+nodes:
+  - host: hoth
+    ip: 46.224.143.97
+    role: control-plane
