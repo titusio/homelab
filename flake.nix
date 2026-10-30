@@ -18,18 +18,19 @@
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    flake-utils,
-    disko,
-    sops-nix,
-    ...
-  }:
+  outputs =
+    inputs@{
+      nixpkgs,
+      flake-utils,
+      disko,
+      sops-nix,
+      ...
+    }:
     {
       nixosConfigurations.endor = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
-        specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
 
         modules = [
           disko.nixosModules.disko
@@ -41,7 +42,7 @@
       nixosConfigurations.ryloth = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
-        specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
 
         modules = [
           disko.nixosModules.disko
@@ -53,7 +54,7 @@
       nixosConfigurations.mandalore = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
-        specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
 
         modules = [
           disko.nixosModules.disko
@@ -63,96 +64,132 @@
         ];
       };
       nixosConfigurations.kessel = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
+        system = "x86_64-linux";
 
-              specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
 
-              modules = [
-                disko.nixosModules.disko
-                sops-nix.nixosModules.sops
-                ./vps
-                ./vps/hosts/kessel.nix
-              ];
-            };
-    }
-    // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      longhornctl = let
-        version = "1.10.2";
-        rev = "v${version}";
-      in
-        pkgs.buildGoModule {
-          pname = "longhornctl";
-          inherit version;
-          src = pkgs.fetchFromGitHub {
-            owner = "longhorn";
-            repo = "cli";
-            inherit rev;
-            hash = "sha256-9A3GYiujRscoj1ivzBsCOQcqczgP1JS6u3KodRhgtPw=";
-          };
-          vendorHash = null;
-
-          # Mirror the upstream Makefile/dapper/build workflow: build both the
-          # remote (longhornctl) and local (longhornctl-local) commands with the
-          # same flags rather than buildGoModule's defaults.
-          subPackages = ["cmd/remote" "cmd/local"];
-
-          env.CGO_ENABLED = 0;
-
-          gcflags = ["all=-l"];
-
-          ldflags = [
-            "-X github.com/longhorn/cli/meta.Version=${rev}"
-            "-X github.com/longhorn/cli/meta.GitCommit=${rev}"
-            "-X github.com/longhorn/cli/meta.BuildDate=1970-01-01T00:00:00Z"
-            "-extldflags"
-            "-static"
-            "-s"
-          ];
-
-          # dapper/build emits longhornctl (cmd/remote) and longhornctl-local
-          # (cmd/local); buildGoModule installs them under their dir names.
-          postInstall = ''
-            mv $out/bin/remote $out/bin/longhornctl
-            mv $out/bin/local $out/bin/longhornctl-local
-          '';
-
-          meta.mainProgram = "longhornctl";
-        };
-    in {
-      devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          talosctl
-          # kubernetes-helm
-          cilium-cli
-          kubectl
-          talhelper
-          fluxcd
-          just
-          longhornctl
-          k9s
-          kubectl-cnpg
-
-          # tools
-          age
-          sops
-
-          # nix tooling: nil is the language server, alejandra the formatter
-          # it shells out to (nil.formatting.command) and `nix fmt` runs.
-          nil
-          alejandra
+        modules = [
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          ./vps
+          ./vps/hosts/kessel.nix
         ];
-        shellHook = ''
-          # Interactive `nix develop` lands in bash; hand over to zsh instead.
-          # Skipped for `nix develop -c ...`, builds and direnv, which are not
-          # interactive -- direnv evals this hook in a child shell that the
-          # exec would otherwise replace.
-          if [[ $- == *i* ]] && command -v zsh >/dev/null; then
-            exec zsh
-          fi
-        '';
       };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        longhornctl =
+          let
+            version = "1.10.2";
+            rev = "v${version}";
+          in
+          pkgs.buildGoModule {
+            pname = "longhornctl";
+            inherit version;
+            src = pkgs.fetchFromGitHub {
+              owner = "longhorn";
+              repo = "cli";
+              inherit rev;
+              hash = "sha256-9A3GYiujRscoj1ivzBsCOQcqczgP1JS6u3KodRhgtPw=";
+            };
+            vendorHash = null;
 
-      formatter = pkgs.alejandra;
-    });
+            # Mirror the upstream Makefile/dapper/build workflow: build both the
+            # remote (longhornctl) and local (longhornctl-local) commands with the
+            # same flags rather than buildGoModule's defaults.
+            subPackages = [
+              "cmd/remote"
+              "cmd/local"
+            ];
+
+            env.CGO_ENABLED = 0;
+
+            gcflags = [ "all=-l" ];
+
+            ldflags = [
+              "-X github.com/longhorn/cli/meta.Version=${rev}"
+              "-X github.com/longhorn/cli/meta.GitCommit=${rev}"
+              "-X github.com/longhorn/cli/meta.BuildDate=1970-01-01T00:00:00Z"
+              "-extldflags"
+              "-static"
+              "-s"
+            ];
+
+            # dapper/build emits longhornctl (cmd/remote) and longhornctl-local
+            # (cmd/local); buildGoModule installs them under their dir names.
+            postInstall = ''
+              mv $out/bin/remote $out/bin/longhornctl
+              mv $out/bin/local $out/bin/longhornctl-local
+            '';
+
+            meta.mainProgram = "longhornctl";
+          };
+        topf =
+          let
+            version = "0.6.2";
+            rev = "v${version}";
+          in
+          pkgs.buildGo127Module {
+            pname = "topf";
+            inherit version;
+            src = pkgs.fetchFromGitHub {
+              owner = "postfinance";
+              repo = "topf";
+              inherit rev;
+              hash = "sha256-frUyZtpA0iyFwHxlN5SqZ0WFfU4sMalmdkHtulg+B3I=";
+            };
+            vendorHash = "sha256-VLZLPM1/a1Lf5ggk4pwB/AL+Drrdfmm3f9DYjvpBKcA=";
+
+            subPackages = [ "cmd/topf" ];
+
+            env.CGO_ENABLED = 0;
+
+            ldflags = [
+              "-w"
+              "-X main.version=${version}"
+            ];
+
+            meta.mainProgram = "topf";
+          };
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            talosctl
+            # kubernetes-helm
+            cilium-cli
+            kubectl
+            talhelper
+            fluxcd
+            just
+            longhornctl
+            k9s
+            kubectl-cnpg
+            topf
+
+            # tools
+            age
+            sops
+
+            # nix tooling: nil is the language server, alejandra the formatter
+            # it shells out to (nil.formatting.command) and `nix fmt` runs.
+            nil
+            alejandra
+          ];
+          shellHook = ''
+            # Interactive `nix develop` lands in bash; hand over to zsh instead.
+            # Skipped for `nix develop -c ...`, builds and direnv, which are not
+            # interactive -- direnv evals this hook in a child shell that the
+            # exec would otherwise replace.
+            if [[ $- == *i* ]] && command -v zsh >/dev/null; then
+              exec zsh
+            fi
+          '';
+        };
+
+        formatter = pkgs.alejandra;
+      }
+    );
 }
