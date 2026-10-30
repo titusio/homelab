@@ -1,8 +1,0 @@
-apiVersion: "cilium.io/v2"
-kind: CiliumLoadBalancerIPPool
-metadata:
-  name: "localpool"
-spec:
-  blocks:
-    - start: "10.0.40.100"
-      stop: "10.0.40.200"

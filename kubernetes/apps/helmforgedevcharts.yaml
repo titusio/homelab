@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: helmforgedev
-  namespace: apps
-spec:
-  interval: 1m0s
-  url: https://repo.helmforge.dev
