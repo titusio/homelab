@@ -1,7 +1,0 @@
-machine:
-  certSANs:
-    - cluster.tituslab.dev
-cluster:
-  apiServer:
-    certSANs:
-      - cluster.tituslab.dev
