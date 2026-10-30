@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -8,10 +9,11 @@ let
 in
 {
   options.vps.pangolin.enable = lib.mkEnableOption "Pangolin";
-
+  # PER-831E6EC9-AAEE-4E18-BF79-1E4182BE472D
   config = lib.mkIf cfg.enable {
     services.pangolin = {
         enable = true;
+        package = pkgs.fosrl-pangolin.override { edition = "enterprise"; };
         settings = {
           flags = {
             disable_signup_without_invite = true;
