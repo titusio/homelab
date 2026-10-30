@@ -11,7 +11,10 @@ in {
     nixosFlakeHost = "kessel";
     secrets.sopsFile = ../../secrets/kessel.enc.yaml;
     nixStorage.enable = true;
+    pangolin.enable = true;
   };
+
+  sops.secrets."pangolin/env" = {};
 
   networking.firewall.allowedTCPPorts = [22 80 443];
 

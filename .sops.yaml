@@ -4,11 +4,17 @@ keys:
   - &coreWorld age1nudm99kz5ha33pz2e7h5qfe6zeth7mnh39luyjfr7kpzj32k392qpd4jff
   - &endor age1j5ne52urxymg4kahawwv4z834rupxrgrrte7ts9k7uvzd04q5fqsfaynxy
   - &mandalore age1ruuywqqac380gfpwhuddarttulqpty9l7u7tqaeewr4y30dt4fqqred3gv
+  - &kessel age17rgrd4wstm595zjtxyt4phjpqtxry9pep450jra69p9lgrjew5kqjmj9xp
 creation_rules:
   - path_regex: secrets/ryloth\.enc\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *ryloth
+      - *titus
+  - path_regex: secrets/kessel\.enc\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *kessel
       - *titus
   - path_regex: secrets/mandalore\.enc\.(yaml|json|env|ini)$
     key_groups:

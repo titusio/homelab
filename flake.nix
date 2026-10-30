@@ -62,6 +62,18 @@
           ./vps/hosts/mandalore.nix
         ];
       };
+      nixosConfigurations.kessel = nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+
+              specialArgs = {inherit inputs;};
+
+              modules = [
+                disko.nixosModules.disko
+                sops-nix.nixosModules.sops
+                ./vps
+                ./vps/hosts/kessel.nix
+              ];
+            };
     }
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -120,6 +132,10 @@
           longhornctl
           k9s
           kubectl-cnpg
+
+          # tools
+          age
+          sops
 
           # nix tooling: nil is the language server, alejandra the formatter
           # it shells out to (nil.formatting.command) and `nix fmt` runs.
