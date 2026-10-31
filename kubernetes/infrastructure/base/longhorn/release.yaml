@@ -16,4 +16,4 @@ spec:
       interval: 1h
   values:
     defaultSettings:
-      defaultDataPath: /var/mnt/longhorn
+      defaultDataPath: /var/lib/longhorn
