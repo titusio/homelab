@@ -9,3 +9,9 @@ nodes:
   - host: hoth
     ip: 46.224.143.97
     role: control-plane
+  - host: bespin
+    ip: 49.13.52.209
+    role: control-plane
+  - host: kessel
+    ip: 204.168.137.124
+    role: control-plane
