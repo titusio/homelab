@@ -1,0 +1,16 @@
+talosconfig:
+    @mkdir -p ~/.talos
+    topf talosconfig > ~/.talos/config
+
+kubeconfig:
+    @mkdir -p ~/.kube
+    topf kubeconfig > ~/.kube/config
+
+
+reboot:
+    #!/usr/bin/env bash
+    mapfile -t ips < <(yq '.nodes[].ip' topf.yaml)
+    for ip in "${ips[@]}"; do
+      echo "Rebooting node: $ip"
+      talosctl reboot --nodes "$ip"
+    done
