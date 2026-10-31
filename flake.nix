@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Pinned to the latest stable release so the dev shell doesn't rebuild
+    # constantly like it would tracking nixos-unstable.
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     flake-utils.url = "github:numtide/flake-utils";
     disko = {
       url = "github:nix-community/disko";
@@ -21,6 +24,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      nixpkgs-stable,
       flake-utils,
       disko,
       sops-nix,
@@ -79,7 +83,7 @@
     // flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = nixpkgs-stable.legacyPackages.${system};
         longhornctl =
           let
             version = "1.10.2";
