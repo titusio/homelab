@@ -13,3 +13,7 @@ encrypt secret:
 # Decrypts a secret in place
 decrypt secret:
     @sops -i -d {{secret}}
+
+# pushes changes and reconciles flux
+update:
+    git push && flux reconcile kustomization -n flux-system flux-system --with-source
