@@ -4,5 +4,6 @@ resources:
   - ../base/cilium
   - ../base/longhorn
   - ../base/cert-manager
+  - ../base/gateway-api
   - ../base/traefik
   - ../providers/hetzner
