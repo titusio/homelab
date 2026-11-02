@@ -20,6 +20,7 @@ nodes:
   - host: bespin
     ip: 49.13.52.209
     role: control-plane
-  - host: kessel
-    ip: 204.168.137.124
+  - host: yavin4
+    ip: 2.31.165.22
     role: control-plane
+
