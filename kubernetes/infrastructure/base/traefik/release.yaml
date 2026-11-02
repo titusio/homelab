@@ -15,6 +15,12 @@ spec:
         namespace: traefik
       interval: 1h
   values:
+    # Names the Hetzner Load Balancer created for the traefik Service
+    # (otherwise it gets an auto-generated name in the Hetzner Console).
+    service:
+      annotations:
+        load-balancer.hetzner.cloud/name: "traefik-${domain}"
+
     # Configure Network Ports and EntryPoints
     # EntryPoints are the network listeners for incoming traffic.
     ports:
