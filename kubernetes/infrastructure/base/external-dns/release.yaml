@@ -1,0 +1,41 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: external-dns
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: external-dns
+      version: "1.23.0"
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+        namespace: external-dns
+      interval: 1h
+  values:
+    # Picks up Gateway API HTTPRoutes (our apps route through Traefik's
+    # Gateway, not Ingress) and Traefik's own IngressRoute CRD (used by
+    # the dashboard, which needs an explicit target annotation since
+    # IngressRoute doesn't publish a load-balancer address in its status).
+    sources:
+      - gateway-httproute
+      - traefik-proxy
+    policy: sync
+    registry: txt
+    txtOwnerId: "${domain}"
+    domainFilters:
+      - "${domain}"
+    provider:
+      name: webhook
+      webhook:
+        image:
+          repository: docker.io/hetzner/external-dns-hetzner-webhook
+          tag: v0.5.1
+        env:
+          - name: HETZNER_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: hetzner-externaldns-key
+                key: token

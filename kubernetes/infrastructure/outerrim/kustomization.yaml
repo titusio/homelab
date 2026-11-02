@@ -6,4 +6,5 @@ resources:
   - ../base/cert-manager
   - ../base/gateway-api
   - ../base/traefik
+  - ../base/external-dns
   - ../providers/hetzner
