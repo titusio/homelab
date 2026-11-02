@@ -16,12 +16,12 @@ spec:
       interval: 1h
   values:
     # Picks up Gateway API HTTPRoutes (our apps route through Traefik's
-    # Gateway, not Ingress) and Traefik's own IngressRoute CRD (used by
-    # the dashboard, which needs an explicit target annotation since
-    # IngressRoute doesn't publish a load-balancer address in its status).
+    # Gateway, not Ingress). The dashboard uses Traefik's own IngressRoute
+    # CRD instead, which doesn't publish a load-balancer address in its
+    # status, so its DNS record is managed by hand rather than adding a
+    # hardcoded target annotation here.
     sources:
       - gateway-httproute
-      - traefik-proxy
     policy: sync
     registry: txt
     txtOwnerId: "${domain}"
