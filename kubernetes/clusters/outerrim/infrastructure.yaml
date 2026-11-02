@@ -4,7 +4,7 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 1m
   path: ./kubernetes/infrastructure/outerrim
   prune: true
   wait: true
