@@ -11,3 +11,5 @@ sync
 
 reboot
 ```
+
+Then topf upgrade (not only apply since that won't pull the new image) - or just use the correct one in the command above...
