@@ -7,4 +7,5 @@ resources:
   - ../base/gateway-api
   - ../base/traefik
   - ../base/external-dns
+  - ../base/cnpg
   - ../providers/hetzner
