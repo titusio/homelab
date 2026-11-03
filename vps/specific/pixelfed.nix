@@ -168,7 +168,7 @@ in {
         };
 
         redis.service = {
-          image = "redis:7.4.11-alpine";
+          image = "redis:7.4.12-alpine";
           container_name = "pixelfed-redis";
           restart = "unless-stopped";
           command = ["redis-server" "--appendonly" "yes"];
