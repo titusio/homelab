@@ -8,4 +8,5 @@ resources:
   - ../base/traefik
   - ../base/external-dns
   - ../base/cnpg
+  - ../base/reflector
   - ../providers/hetzner

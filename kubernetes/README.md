@@ -55,7 +55,7 @@ apps/<app>/
 apps/outerrim/
 ├── kustomization.yaml          # resources: [../<app>, secrets/<app>-db.enc.yaml]
 └── secrets/
-    └── <app>-db.enc.yaml       # basic-auth Secret, one copy in ns databases + one in ns <app>
+    └── <app>-db.enc.yaml       # basic-auth Secret in ns databases, mirrored to ns <app>
 ```
 
 ```yaml
@@ -86,17 +86,19 @@ spec:
   databaseReclaimPolicy: retain   # removing the manifest must not drop the data
 ```
 
-Create the credentials (the same password in both namespaces), then encrypt:
+Create the credentials (from the repo root):
 
 ```bash
-PW=$(openssl rand -base64 32 | tr -d '/+=')
-for ns in databases <app>; do
-  kubectl create secret generic <app>-db -n $ns --type=kubernetes.io/basic-auth \
-    --from-literal=username=<app> --from-literal=password=$PW --dry-run=client -o yaml
-  echo ---
-done > apps/outerrim/secrets/<app>-db.enc.yaml
-sops -e -i apps/outerrim/secrets/<app>-db.enc.yaml
+just db-secret <app> [cluster=outerrim] [namespace=<app>]
 ```
+
+This writes `apps/<cluster>/secrets/<app>-db.enc.yaml`: a single SOPS-encrypted
+basic-auth Secret `<app>-db` in ns `databases`, used by the `DatabaseRole`. Its
+[Reflector](https://github.com/emberstack/kubernetes-reflector) annotations mirror it
+into the app's namespace (as soon as that namespace exists), so the app can reference
+`<app>-db` locally. Only the source copy lives in git; edits and deletion propagate to
+the mirror. The password never touches disk in plaintext. To rotate, delete the file and
+rerun — CNPG updates the role's password from the secret.
 
 The app connects to `pg-shared-rw.databases.svc:5432`. Keep that host in a single
 value (Helm value / secret key) so moving the app to another cluster is a one-line change.
