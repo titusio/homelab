@@ -8,11 +8,11 @@ spec:
   interval: 1h
   chart:
     spec:
-      chart: hcloud-cloud-controller-manager
+      chart: hcloud-csi
       version: "1.39.2"
       sourceRef:
         kind: HelmRepository
-        name: hcloud-csi
+        name: hcloud
         namespace: kube-system
       interval: 1h
   values:
