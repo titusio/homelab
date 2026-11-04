@@ -8,3 +8,4 @@ resources:
   - secrets/mas-db.enc.yaml
   - secrets/mas-oidc-config.enc.yaml
   - secrets/mas-smtp-config.enc.yaml
+  - secrets/grafana-db.enc.yaml
