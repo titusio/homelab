@@ -3,9 +3,7 @@ kind: Kustomization
 # Per-cluster selection of apps, plus their cluster-specific secrets.
 resources:
   - ../matrix
-  - ../monitoring
   - secrets/synapse-db.enc.yaml
   - secrets/mas-db.enc.yaml
   - secrets/mas-oidc-config.enc.yaml
   - secrets/mas-smtp-config.enc.yaml
-  - secrets/grafana-db.enc.yaml
