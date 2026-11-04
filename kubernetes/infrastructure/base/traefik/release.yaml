@@ -103,6 +103,9 @@ spec:
             - kind: Secret
               name: matrix-tls # kubernetes/apps/matrix/certificate.yaml
               group: ""
+            - kind: Secret
+              name: grafana-tls # kubernetes/apps/monitoring/certificate.yaml
+              group: ""
 
     # Enable Observability
     log:
