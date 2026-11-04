@@ -18,14 +18,8 @@ spec:
     storageClass: hcloud-volumes
     size: 10Gi # Hetzner minimum; volume expansion is allowed
 
-  bootstrap:
-    initdb:
-      # C collation as the cluster default: required by some apps (e.g.
-      # Synapse) and immune to glibc collation changes on image updates.
-      # The throwaway "app" database CNPG creates here is unused.
-      encoding: UTF8
-      localeCollate: C
-      localeCType: C
+  # Locale is left at CNPG's initdb default (UTF8, C/C). Apps with locale
+  # requirements (e.g. Synapse) set them explicitly on their Database.
 
   resources:
     requests:
