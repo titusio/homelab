@@ -17,7 +17,7 @@ spec:
 
     wellKnownDelegation:
       additional:
-        client: '{"org.matrix.msc2965.authentication": {"issuer": "https://maccount./", "account": "https://maccount.${publicDomain}/account/"}}'
+        client: '{"org.matrix.msc2965.authentication": {"issuer": "https://maccount.${publicDomain}/", "account": "https://maccount.${publicDomain}/account/"}}'
 
     synapse:
       resources:
@@ -51,10 +51,17 @@ spec:
         oidc:
           configSecret: mas-oidc-config
           configSecretKey: config.yaml
-        passwords:
+        # passwords:
+        #   config: |
+        #     passwords:
+        #       enabled: false
+        account:
           config: |
-            passwords:
-              enabled: false
+            # Explicitly closed (MAS's own default, stated here on purpose).
+            # Only covers the password/self-service signup form; SSO login
+            # via the upstream OIDC provider is intentionally left open.
+            account:
+              password_registration_enabled: false
         smtp:
           configSecret: mas-smtp-config
           configSecretKey: config.yaml
