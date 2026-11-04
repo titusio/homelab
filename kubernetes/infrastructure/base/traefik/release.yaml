@@ -94,9 +94,14 @@ spec:
           namespacePolicy:
             from: All
           mode: Terminate
+          # Traefik picks the certificate by SNI. Apps add their own Certificate
+          # (in ns traefik) and list its secret here.
           certificateRefs:
             - kind: Secret
               name: traefik-tls # populated by cert-manager via the letsencrypt ClusterIssuer
+              group: ""
+            - kind: Secret
+              name: matrix-tls # kubernetes/apps/matrix/certificate.yaml
               group: ""
 
     # Enable Observability

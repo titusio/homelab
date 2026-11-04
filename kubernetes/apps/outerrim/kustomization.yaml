@@ -1,5 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-# Per-cluster selection of apps, e.g.:
-#   - ../some-app
-resources: []
+# Per-cluster selection of apps, plus their cluster-specific secrets.
+resources:
+  - ../matrix
+  - secrets/synapse-db.enc.yaml
+  - secrets/mas-db.enc.yaml
+  - secrets/mas-oidc-config.enc.yaml
+  - secrets/mas-smtp-config.enc.yaml

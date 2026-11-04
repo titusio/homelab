@@ -1,0 +1,25 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: mas-db
+  namespace: databases
+spec:
+  cluster:
+    name: pg-shared
+  name: mas
+  owner: mas
+  databaseReclaimPolicy: retain   # removing the manifest must not drop the data
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: mas-db
+  namespace: databases
+spec:
+  cluster:
+    name: pg-shared
+  name: mas
+  login: true
+  passwordSecret:
+    name: mas-db          # type kubernetes.io/basic-auth, keys: username, password
+  databaseRoleReclaimPolicy: retain

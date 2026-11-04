@@ -1,0 +1,18 @@
+# Served by the shared Traefik gateway (listed in its websecure certificateRefs),
+# so it lives in the traefik namespace.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-tls
+  namespace: traefik
+spec:
+  secretName: matrix-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - ${publicDomain} # /.well-known/matrix delegation
+    - matrix.${publicDomain}
+    - maccount.${publicDomain}
+    - chat.${publicDomain}
+    - madmin.${publicDomain}

@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: matrix
+  namespace: matrix
+spec:
+  interval: 15m
+  url: oci://ghcr.io/element-hq/ess-helm/matrix-stack
+  ref:
+    tag: 26.11.0

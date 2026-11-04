@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: synapse-db
+  namespace: databases
+spec:
+  cluster:
+    name: pg-shared
+  name: synapse
+  owner: synapse
+  # Synapse refuses to start unless the database uses C collation. Set it here
+  # instead of relying on the cluster default; template0 is required so the
+  # locale can differ from template1's. Immutable after creation.
+  encoding: UTF8
+  localeCollate: C
+  localeCType: C
+  template: template0
+  databaseReclaimPolicy: retain   # removing the manifest must not drop the data
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: synapse-db
+  namespace: databases
+spec:
+  cluster:
+    name: pg-shared
+  name: synapse
+  login: true
+  passwordSecret:
+    name: synapse-db          # type kubernetes.io/basic-auth, keys: username, password
+  databaseRoleReclaimPolicy: retain
