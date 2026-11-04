@@ -75,7 +75,7 @@ spec:
       grafana.ini:
         database:
           type: postgres
-          host: pg-shared-rw
+          host: pg-shared-rw.databases.svc.cluster.local
           port: 5432
           name: grafana
           user: grafana
