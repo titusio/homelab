@@ -25,6 +25,10 @@ spec:
     policy: sync
     registry: txt
     txtOwnerId: "${domain}"
+    # Global default TTL for managed records (used when no
+    # external-dns.alpha.kubernetes.io/ttl annotation is set).
+    extraArgs:
+      - --min-ttl=60s
     domainFilters:
       - "${domain}"
       - "${publicDomain}"
