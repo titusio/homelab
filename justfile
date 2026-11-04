@@ -1,4 +1,4 @@
-# Creates the Flux SOPS secret inside the cluster. 
+# Creates the Flux SOPS secret inside the cluster.
 create-sops-secret:
     @sops -d ./secrets/outerrim.enc.age | \
         kubectl create secret generic sops-age \
@@ -16,4 +16,14 @@ decrypt secret:
 
 # pushes changes and reconciles flux
 update:
-    git push && flux reconcile kustomization -n flux-system flux-system --with-source
+    git push
+    flux reconcile kustomization -n flux-system flux-system --with-source
+    flux reconcile kustomization -n flux-system infrastructure --with-source
+
+talosconfig:
+    @mkdir -p ~/.talos
+    topf talosconfig --topfconfig ./clusters/outer-rim/topf.yaml > ~/.talos/config
+
+kubeconfig:
+    @mkdir -p ~/.kube
+    topf kubeconfig --topfconfig ./clusters/outer-rim/topf.yaml > ~/.kube/config
