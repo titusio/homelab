@@ -4,3 +4,4 @@ resources:
   - repository.yaml
   - hcloud-ccm
   - hetzner-webhook
+  - hetzner-csi
