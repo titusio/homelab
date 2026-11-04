@@ -46,7 +46,7 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-        replicas: 3
+        replicas: 1
         storage:
           volumeClaimTemplate:
             spec:
@@ -64,7 +64,7 @@ spec:
         limits:
           cpu: 500m
           memory: 512Mi
-      replicas: 2
+      replicas: 1
       persistence:
         enabled: false
       envValueFrom:
