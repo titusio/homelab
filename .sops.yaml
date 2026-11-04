@@ -11,6 +11,14 @@ creation_rules:
     age:
       - *outerrim
       - *titus
+  # App/platform secrets live in the per-cluster selection folder, never in the
+  # shared app/platform definitions, so only this cluster's key can decrypt them.
+  # Files matching no rule can't be encrypted at all (sops errors out).
+  - path_regex: ^kubernetes/(apps|platform)/outerrim/.*\.enc\.yaml$
+    encrypted_regex: ^(data|stringData)$
+    age:
+      - *outerrim
+      - *titus
   - path_regex: ^clusters/[^/]+/secrets\.enc\.yaml$
     key_groups:
     - age:

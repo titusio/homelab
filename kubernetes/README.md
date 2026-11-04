@@ -11,17 +11,95 @@ kubernetes/
 │       ├── flux-system/       # Flux components (generated, do not edit)
 │       ├── secrets/            # SOPS-encrypted secrets for this cluster only
 │       ├── infrastructure.yaml # Kustomization -> infrastructure/outerrim
-│       └── apps.yaml           # Kustomization -> apps/outerrim
+│       ├── platform.yaml       # Kustomization -> platform/outerrim (dependsOn infrastructure)
+│       └── apps.yaml           # Kustomization -> apps/outerrim     (dependsOn platform)
 ├── infrastructure/
 │   ├── base/
 │   │   └── cilium/             # CNI, shared by every cluster
 │   ├── providers/
 │   │   └── hetzner/            # provider-specific infra, opt-in per cluster
 │   └── outerrim/                # per-cluster selection of base/ + providers/
+├── platform/
+│   ├── base/
+│   │   └── postgres/           # shared CNPG cluster "pg-shared" in ns databases
+│   └── outerrim/                # per-cluster selection of platform services
 └── apps/
     ├── <app>/                  # one folder per app, shared definition
     └── outerrim/                # per-cluster selection of apps
 ```
+
+The layers exist because Flux dry-runs a whole Kustomization before applying it:
+custom resources (e.g. a CNPG `Cluster`) can't live in the same Kustomization as the
+operator that installs their CRDs.
+
+Secrets are never stored in the shared `apps/<app>/` or `platform/base/` definitions —
+those are used by every cluster. They go in the per-cluster folder
+(`apps/outerrim/secrets/`, `platform/outerrim/secrets/`), which `.sops.yaml` encrypts for
+that cluster's key only (plus yours). Flux applies them in the same Kustomization as the
+app, after its namespace exists. Anything outside a cluster path matches no SOPS rule and
+can't be encrypted, so a misplaced secret fails loudly instead of leaking to other clusters.
+
+## Giving an app a database on the shared Postgres cluster
+
+Each app owns its database. Put the DB objects in a `db/` subfolder of the app so a
+cluster can later swap it for a dedicated CNPG `Cluster` without touching anything else:
+
+```
+apps/<app>/
+├── kustomization.yaml          # resources: [..., db/]
+└── db/
+    ├── kustomization.yaml
+    ├── role.yaml               # DatabaseRole  (ns: databases)
+    └── database.yaml           # Database      (ns: databases)
+
+apps/outerrim/
+├── kustomization.yaml          # resources: [../<app>, secrets/<app>-db.enc.yaml]
+└── secrets/
+    └── <app>-db.enc.yaml       # basic-auth Secret, one copy in ns databases + one in ns <app>
+```
+
+```yaml
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: <app>
+  namespace: databases
+spec:
+  cluster:
+    name: pg-shared
+  name: <app>
+  login: true
+  passwordSecret:
+    name: <app>-db          # type kubernetes.io/basic-auth, keys: username, password
+  databaseRoleReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: <app>
+  namespace: databases
+spec:
+  cluster:
+    name: pg-shared
+  name: <app>
+  owner: <app>
+  databaseReclaimPolicy: retain   # removing the manifest must not drop the data
+```
+
+Create the credentials (the same password in both namespaces), then encrypt:
+
+```bash
+PW=$(openssl rand -base64 32 | tr -d '/+=')
+for ns in databases <app>; do
+  kubectl create secret generic <app>-db -n $ns --type=kubernetes.io/basic-auth \
+    --from-literal=username=<app> --from-literal=password=$PW --dry-run=client -o yaml
+  echo ---
+done > apps/outerrim/secrets/<app>-db.enc.yaml
+sops -e -i apps/outerrim/secrets/<app>-db.enc.yaml
+```
+
+The app connects to `pg-shared-rw.databases.svc:5432`. Keep that host in a single
+value (Helm value / secret key) so moving the app to another cluster is a one-line change.
 
 ## Bootstrapping
 

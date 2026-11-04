@@ -1,0 +1,38 @@
+# Shared Postgres cluster for apps. Each app declares its own DatabaseRole +
+# Database (in this namespace) from its app folder — see kubernetes/README.md.
+#
+# Apps connect via: pg-shared-rw.databases.svc:5432
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-shared
+  namespace: databases
+spec:
+  instances: 2
+  # Pin the major version: every app on this cluster upgrades together.
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.6-system-trixie
+
+  # Hetzner volumes, not Longhorn: CNPG replicates between instances itself,
+  # so a replicated volume underneath would only multiply writes.
+  storage:
+    storageClass: hcloud-volumes
+    size: 10Gi # Hetzner minimum; volume expansion is allowed
+
+  bootstrap:
+    initdb:
+      # C collation as the cluster default: required by some apps (e.g.
+      # Synapse) and immune to glibc collation changes on image updates.
+      # The throwaway "app" database CNPG creates here is unused.
+      encoding: UTF8
+      localeCollate: C
+      localeCType: C
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+  # TODO: backups. Add a barman-cloud ObjectStore + ScheduledBackup once an
+  # S3 bucket (e.g. Hetzner Object Storage / garage) is available.
