@@ -14,6 +14,52 @@ spec:
     kubeProxy:
       enabled: false
 
+    # These run unbounded by default, which on a tiny 2 vCPU/4GB-per-node
+    # cluster lets one spike starve the node. Pin all of them down.
+    prometheusOperator:
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
+      admissionWebhooks:
+        patch:
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 50m
+            memory: 32Mi
+
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi
+
+    prometheus-node-exporter:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 50m
+          memory: 32Mi
+
     prometheus:
       prometheusSpec:
         retention: 3d
@@ -23,11 +69,11 @@ spec:
         serviceMonitorNamespaceSelector: {}
         resources:
           requests:
-            cpu: 200m
-            memory: 1Gi
+            cpu: 100m
+            memory: 512Mi
           limits:
-            cpu: 2000m
-            memory: 2Gi
+            cpu: 500m
+            memory: 768Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -41,11 +87,11 @@ spec:
       alertmanagerSpec:
         resources:
           requests:
-            cpu: 50m
-            memory: 64Mi
+            cpu: 20m
+            memory: 32Mi
           limits:
-            cpu: 200m
-            memory: 256Mi
+            cpu: 100m
+            memory: 128Mi
         replicas: 1
         storage:
           volumeClaimTemplate:
@@ -59,11 +105,19 @@ spec:
     grafana:
       resources:
         requests:
-          cpu: 100m
-          memory: 128Mi
+          cpu: 50m
+          memory: 96Mi
         limits:
-          cpu: 500m
-          memory: 512Mi
+          cpu: 200m
+          memory: 256Mi
+      sidecar:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 50m
+            memory: 64Mi
       replicas: 1
       persistence:
         enabled: false
