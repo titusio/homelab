@@ -27,6 +27,7 @@ spec:
     txtOwnerId: "${domain}"
     domainFilters:
       - "${domain}"
+      - "${publicDomain}"
     provider:
       name: webhook
       webhook:
