@@ -103,6 +103,9 @@ spec:
             - kind: Secret
               name: matrix-tls # kubernetes/apps/matrix/certificate.yaml
               group: ""
+            - kind: Secret
+              name: swiftster-tls
+              group: ""
 
     # Enable Observability
     log:
