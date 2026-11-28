@@ -20,7 +20,7 @@ in {
     # Pinned so a rebuild is reproducible; the customManager in
     # ../../renovate.json bumps this tag and auto-merges the PR, which in
     # turn fires .github/workflows/update-ryloth.yaml to rebuild.
-    image = "ghcr.io/titusio/swiftster:0.1.3";
+    image = "ghcr.io/titusio/swiftster:0.1.4";
     autoStart = true;
 
     ports = ["127.0.0.1:${toString port}:3000"];
